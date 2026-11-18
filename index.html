@@ -3,451 +3,305 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ukeah — Um Kasal Em Alta Harmonia</title>
+  <title>ukeah</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --fundo: #FAF8FC; --branco: #FFFFFF; --texto: #2D3142; --texto-suave: #6E748A;
-      --lilas-fundo: #F1EBFF; --lilas-borda: #D9C9FF; --lilas-forte: #5B3CC4;
-      --verde-fundo: #E7F8EE; --verde-forte: #1F7A4D;
-      --coral-fundo: #FFEBE9; --coral-forte: #A83232;
-      --amarelo-fundo: #FFF7DC; --amarelo-borda: #F5DF98; --amarelo-forte: #7A5901;
-      --sombra: 0 10px 26px rgba(95, 90, 135, 0.08);
+      --fundo: #FAF8FC; --branco: #FFFFFF; --texto: #2D3142; --suave: #6E748A;
+      --lilas: #F1EBFF; --lilas-b: #D9C9FF; --lilas-f: #5B3CC4;
+      --verde: #E7F8EE; --verde-f: #1F7A4D; --coral: #FFEBE9; --coral-f: #A83232;
+      --sombra: 0 8px 22px rgba(95, 90, 135, 0.08);
     }
     * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
-    body { font-family: 'Nunito', sans-serif; font-weight: 400; background: var(--fundo); color: var(--texto); line-height: 1.5; min-height: 100vh; }
+    body { font-family: 'Nunito', sans-serif; font-weight: 400; background: var(--fundo); color: var(--texto); line-height: 1.45; min-height: 100vh; }
     .escondido { display: none !important; }
-
-    .status-dot { display: inline-flex; align-items: center; gap: 5px; background: var(--lilas-fundo); color: var(--lilas-forte); padding: 5px 11px; border-radius: 14px; font-size: 0.78rem; }
-    .status-dot.ok { background: var(--verde-fundo); color: var(--verde-forte); }
-    .status-dot.erro { background: var(--coral-fundo); color: var(--coral-forte); }
+    .logo-ukeah { font-size: 1.85rem; font-weight: 800; letter-spacing: -0.5px; color: #FFF7E6; -webkit-text-stroke: 2.6px #1E3A5F; paint-order: stroke fill; line-height: 1; }
+    .status-dot { display: inline-flex; align-items: center; background: var(--lilas); color: var(--lilas-f); padding: 4px 10px; border-radius: 12px; font-size: 0.76rem; }
+    .status-dot.ok { background: var(--verde); color: var(--verde-f); }
+    .status-dot.erro { background: var(--coral); color: var(--coral-f); }
 
     /* TELA 1: ENTRADA */
-    .tela-entrada { max-width: 640px; margin: 0 auto; padding: 28px 18px 40px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
-    .marca-entrada { margin-bottom: 24px; }
-    .logo-pilula { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #E6F2FF, #F1EBFF, #FFEAF2); padding: 8px 16px; border-radius: 30px; font-size: 0.9rem; font-weight: 700; margin-bottom: 12px; box-shadow: var(--sombra); }
-    .marca-entrada h1 { font-size: 1.85rem; font-weight: 800; margin-top: 8px; }
-    .perfis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%; margin-bottom: 22px; }
-    .card-perfil { background: var(--branco); border-radius: 26px; padding: 24px 14px 20px; box-shadow: var(--sombra); border: 2px solid transparent; cursor: pointer; display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .tela-entrada { max-width: 620px; margin: 0 auto; padding: 28px 18px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+    .tela-entrada h1 { font-size: 1.5rem; font-weight: 800; margin: 12px 0 22px; }
+    .perfis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; width: 100%; margin-bottom: 20px; }
+    .card-perfil { background: var(--branco); border-radius: 24px; padding: 22px 12px 18px; box-shadow: var(--sombra); border: 2px solid transparent; cursor: pointer; display: flex; flex-direction: column; align-items: center; }
     .card-perfil:active { transform: scale(0.97); }
-    .foto-perfil { width: 96px; height: 96px; border-radius: 50%; background: var(--branco); display: flex; align-items: center; justify-content: center; font-size: 46px; margin-bottom: 14px; box-shadow: 0 6px 16px rgba(0,0,0,0.08); overflow: hidden; border: 4px solid var(--branco); }
+    .foto-perfil { width: 92px; height: 92px; border-radius: 50%; background: var(--branco); display: flex; align-items: center; justify-content: center; font-size: 44px; margin-bottom: 12px; box-shadow: 0 6px 16px rgba(0,0,0,0.08); overflow: hidden; border: 4px solid var(--branco); }
     .foto-perfil img { width: 100%; height: 100%; object-fit: cover; }
-    .perfil-apelido { font-size: 1.08rem; font-weight: 700; margin-bottom: 4px; }
-    .perfil-sub { font-size: 0.85rem; color: var(--texto-suave); }
-    .lembrar-box { display: inline-flex; align-items: center; gap: 10px; background: var(--branco); padding: 10px 18px; border-radius: 18px; box-shadow: var(--sombra); margin-bottom: 16px; cursor: pointer; font-size: 0.92rem; }
-    .lembrar-box input { width: 18px; height: 18px; accent-color: var(--lilas-forte); }
-    .btn-casal-direto { background: var(--lilas-fundo); color: var(--lilas-forte); border: 1px solid var(--lilas-borda); border-radius: 20px; padding: 12px 22px; font-family: inherit; font-size: 0.95rem; font-weight: 600; cursor: pointer; width: 100%; max-width: 340px; margin-bottom: 14px; }
-    .link-admin-entrada { color: var(--texto-suave); text-decoration: none; font-size: 0.88rem; padding: 8px 14px; }
+    .perfil-apelido { font-size: 1.04rem; font-weight: 700; margin-bottom: 3px; }
+    .perfil-sub { font-size: 0.84rem; color: var(--suave); }
+    .lembrar-box { display: inline-flex; align-items: center; gap: 9px; background: var(--branco); padding: 10px 16px; border-radius: 16px; box-shadow: var(--sombra); margin-bottom: 14px; cursor: pointer; font-size: 0.9rem; }
+    .lembrar-box input { width: 18px; height: 18px; accent-color: var(--lilas-f); }
+    .btn-casal-direto { background: var(--lilas); color: var(--lilas-f); border: 1px solid var(--lilas-b); border-radius: 18px; padding: 12px 20px; font-family: inherit; font-size: 0.94rem; font-weight: 600; cursor: pointer; width: 100%; max-width: 320px; margin-bottom: 12px; }
+    .link-admin { color: var(--suave); text-decoration: none; font-size: 0.86rem; padding: 6px 12px; }
 
     /* TELA 2: PAINEL */
-    .tela-painel { max-width: 680px; margin: 0 auto; padding: 18px 16px 115px; }
+    .tela-painel { max-width: 680px; margin: 0 auto; padding: 16px 16px 110px; }
     .topo-painel { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; gap: 8px; }
-    .usuario-logado { display: flex; align-items: center; gap: 10px; min-width: 0; }
-    .mini-avatar { width: 44px; height: 44px; border-radius: 50%; background: var(--branco); display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: var(--sombra); overflow: hidden; flex-shrink: 0; border: 2px solid var(--branco); }
-    .mini-avatar img { width: 100%; height: 100%; object-fit: cover; }
-    .usuario-logado h2 { font-size: 1.05rem; font-weight: 700; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .topo-acoes { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
-    .btn-topo { background: var(--branco); border: 1px solid #E5E2EE; border-radius: 14px; padding: 7px 11px; font-family: inherit; font-size: 0.8rem; font-weight: 600; color: var(--texto); cursor: pointer; }
+    .topo-acoes { display: flex; align-items: center; gap: 6px; }
+    .btn-topo { background: var(--branco); border: 1px solid #E5E2EE; border-radius: 13px; padding: 6px 11px; font-family: inherit; font-size: 0.8rem; font-weight: 600; color: var(--texto); cursor: pointer; }
 
-    .abas-visao { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; background: var(--branco); padding: 6px; border-radius: 20px; box-shadow: var(--sombra); margin-bottom: 12px; }
-    .aba-btn { border: none; background: transparent; border-radius: 15px; padding: 10px 6px; font-family: inherit; font-size: 0.84rem; color: var(--texto-suave); cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .abas-visao { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; background: var(--branco); padding: 6px; border-radius: 18px; box-shadow: var(--sombra); margin-bottom: 12px; }
+    .aba-btn { border: none; background: transparent; border-radius: 14px; padding: 9px 6px; font-family: inherit; font-size: 0.83rem; color: var(--suave); cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
     .aba-btn.ativa { font-weight: 700; }
 
-    /* Seletor de Mês */
-    .barra-mes { display: flex; align-items: center; justify-content: space-between; background: var(--branco); border-radius: 18px; padding: 6px 10px; box-shadow: var(--sombra); margin-bottom: 14px; }
-    .btn-mes { width: 34px; height: 34px; border-radius: 12px; border: none; background: var(--lilas-fundo); color: var(--lilas-forte); font-size: 1rem; font-weight: 700; cursor: pointer; }
-    .mes-label { font-size: 0.94rem; font-weight: 700; color: var(--texto); }
+    .barra-mes { display: flex; align-items: center; justify-content: space-between; background: var(--branco); border-radius: 16px; padding: 6px 10px; box-shadow: var(--sombra); margin-bottom: 14px; }
+    .btn-mes { width: 32px; height: 32px; border-radius: 10px; border: none; background: var(--lilas); color: var(--lilas-f); font-weight: 700; cursor: pointer; }
+    .mes-label { font-size: 0.92rem; font-weight: 700; }
 
-    .banner-humor { background: var(--amarelo-fundo); border: 1px solid var(--amarelo-borda); border-radius: 20px; padding: 13px 16px; margin-bottom: 14px; font-size: 0.92rem; color: var(--amarelo-forte); }
-    .card-saldo { border-radius: 24px; padding: 20px; margin-bottom: 12px; box-shadow: var(--sombra); border: 1px solid transparent; transition: background 0.25s ease; }
-    .saldo-titulo { font-size: 0.88rem; color: var(--texto-suave); margin-bottom: 2px; }
-    .saldo-numero { font-size: 2rem; font-weight: 800; margin-bottom: 6px; }
-    .saldo-previsto { display: inline-block; background: rgba(255,255,255,0.75); padding: 4px 12px; border-radius: 12px; font-size: 0.82rem; color: var(--texto); }
+    .card-saldo { border-radius: 24px; padding: 20px; margin-bottom: 12px; box-shadow: var(--sombra); border: 1px solid transparent; }
+    .saldo-titulo { font-size: 0.86rem; color: var(--suave); }
+    .saldo-numero { font-size: 2rem; font-weight: 800; margin: 2px 0 8px; }
+    .saldo-badges { display: flex; flex-wrap: wrap; gap: 6px; align-items: center; }
+    .pill-saldo { background: rgba(255,255,255,0.82); padding: 4px 11px; border-radius: 11px; font-size: 0.8rem; color: var(--texto); border: none; font-family: inherit; }
+    .pill-btn { cursor: pointer; font-weight: 600; color: var(--lilas-f); }
 
-    .grid-resumo { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 22px; }
+    .grid-resumo { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px; }
     .box-resumo { border-radius: 20px; padding: 14px 16px; box-shadow: var(--sombra); }
-    .box-resumo.entradas { background: var(--verde-fundo); color: var(--verde-forte); }
-    .box-resumo.saidas { background: var(--coral-fundo); color: var(--coral-forte); }
-    .box-resumo p { font-size: 0.86rem; margin-bottom: 2px; }
-    .box-resumo strong { font-size: 1.18rem; font-weight: 700; }
+    .box-resumo.entradas { background: var(--verde); color: var(--verde-f); }
+    .box-resumo.saidas { background: var(--coral); color: var(--coral-f); }
+    .box-resumo p { font-size: 0.85rem; margin-bottom: 2px; }
+    .box-resumo strong { font-size: 1.16rem; font-weight: 700; }
 
-    .secao-cabecalho { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 0 4px; gap: 10px; }
-    .secao-cabecalho h3 { font-size: 1.06rem; font-weight: 700; }
-    .btn-add-sec { background: var(--lilas-fundo); color: var(--lilas-forte); border: 1px solid var(--lilas-borda); border-radius: 14px; padding: 5px 12px; font-family: inherit; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
+    .sec-head { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; padding: 0 4px; }
+    .sec-head h3 { font-size: 1.04rem; font-weight: 700; }
+    .btn-add-sec { background: var(--lilas); color: var(--lilas-f); border: 1px solid var(--lilas-b); border-radius: 13px; padding: 5px 12px; font-family: inherit; font-size: 0.82rem; font-weight: 700; cursor: pointer; }
 
-    .lista-cards { display: flex; flex-direction: column; gap: 10px; margin-bottom: 22px; }
-    .card-item { background: var(--branco); border-radius: 20px; padding: 13px 14px; box-shadow: var(--sombra); display: flex; align-items: center; justify-content: space-between; gap: 10px; }
-    .item-esq { display: flex; align-items: center; gap: 11px; min-width: 0; }
-    .item-ico { width: 40px; height: 40px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 19px; flex-shrink: 0; }
+    .lista-cards { display: flex; flex-direction: column; gap: 9px; margin-bottom: 20px; }
+    .card-item { background: var(--branco); border-radius: 18px; padding: 12px 14px; box-shadow: var(--sombra); display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .item-esq { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .item-ico { width: 40px; height: 40px; border-radius: 13px; display: flex; align-items: center; justify-content: center; font-size: 19px; flex-shrink: 0; }
     .item-info { min-width: 0; }
     .item-nome { font-size: 0.94rem; font-weight: 700; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-    .item-detalhe { font-size: 0.77rem; color: var(--texto-suave); display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-top: 2px; }
-    .etiqueta { display: inline-block; font-size: 0.72rem; padding: 1px 8px; border-radius: 10px; }
+    .item-detalhe { font-size: 0.76rem; color: var(--suave); display: flex; align-items: center; flex-wrap: wrap; gap: 5px; margin-top: 2px; }
+    .etiqueta { display: inline-block; font-size: 0.72rem; padding: 1px 8px; border-radius: 9px; }
+    .tag-oculta { background: #F0EEF5; color: var(--suave); }
     .item-dir { display: flex; align-items: center; gap: 6px; flex-shrink: 0; }
-    .item-valor { font-size: 0.95rem; font-weight: 700; white-space: nowrap; }
-    .val-pos { color: var(--verde-forte); }
-    .val-neg { color: var(--coral-forte); }
-    .val-transf { color: var(--lilas-forte); }
-    .btn-mini { width: 34px; height: 34px; border-radius: 11px; border: 1px solid #EAE6F3; background: #FAF8FC; font-size: 0.9rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-    .btn-pagar { border: none; background: var(--verde-fundo); color: var(--verde-forte); padding: 6px 10px; border-radius: 11px; font-family: inherit; font-size: 0.78rem; font-weight: 700; cursor: pointer; }
-    .badge-pago { background: var(--verde-fundo); color: var(--verde-forte); padding: 4px 9px; border-radius: 10px; font-size: 0.76rem; font-weight: 700; }
-    .vazio-aviso { text-align: center; color: var(--texto-suave); padding: 16px 12px; background: var(--branco); border-radius: 18px; box-shadow: var(--sombra); font-size: 0.88rem; }
+    .item-valor { font-size: 0.94rem; font-weight: 700; white-space: nowrap; }
+    .val-pos { color: var(--verde-f); } .val-neg { color: var(--coral-f); } .val-transf { color: var(--lilas-f); }
+    .btn-mini { width: 33px; height: 33px; border-radius: 10px; border: 1px solid #EAE6F3; background: #FAF8FC; font-size: 0.88rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .btn-pagar { border: none; background: var(--verde); color: var(--verde-f); padding: 6px 10px; border-radius: 10px; font-family: inherit; font-size: 0.78rem; font-weight: 700; cursor: pointer; }
+    .vazio-aviso { text-align: center; color: var(--suave); padding: 14px; background: var(--branco); border-radius: 16px; box-shadow: var(--sombra); font-size: 0.86rem; }
+    .aviso-futuro { text-align: center; color: var(--lilas-f); background: var(--lilas); padding: 8px 12px; border-radius: 13px; font-size: 0.8rem; cursor: pointer; }
 
-    /* Pendentes da IA */
-    .card-pendente { background: #FFFDF5; border: 1.5px solid var(--amarelo-borda); border-radius: 20px; padding: 14px; box-shadow: var(--sombra); }
-    .pend-topo { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 6px; }
-    .pend-frase { font-size: 0.78rem; color: var(--texto-suave); font-style: italic; margin-bottom: 10px; }
-    .pend-acoes { display: flex; gap: 8px; }
-    .btn-pend-ok { flex: 1; border: none; background: var(--verde-fundo); color: var(--verde-forte); padding: 9px; border-radius: 13px; font-family: inherit; font-size: 0.86rem; font-weight: 700; cursor: pointer; }
+    .card-pendente { background: #FFFDF5; border: 1.5px solid #F5DF98; border-radius: 18px; padding: 13px; box-shadow: var(--sombra); }
+    .pend-topo { display: flex; justify-content: space-between; align-items: flex-start; gap: 8px; margin-bottom: 5px; }
+    .pend-frase { font-size: 0.78rem; color: var(--suave); font-style: italic; margin-bottom: 9px; }
+    .pend-acoes { display: flex; gap: 7px; }
+    .btn-pend-ok { flex: 1; border: none; background: var(--verde); color: var(--verde-f); padding: 8px; border-radius: 12px; font-family: inherit; font-size: 0.85rem; font-weight: 700; cursor: pointer; }
 
     /* MODAIS */
-    .modal-fundo { position: fixed; inset: 0; background: rgba(45,49,66,0.45); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 300; overflow-y: auto; }
-    .modal-caixa { background: var(--branco); width: 100%; max-width: 450px; border-radius: 26px; padding: 22px 20px; box-shadow: 0 20px 50px rgba(45,49,66,0.25); max-height: 92vh; overflow-y: auto; }
-    .modal-topo { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
-    .modal-topo h3 { font-size: 1.15rem; font-weight: 800; }
-    .btn-fechar-modal { width: 36px; height: 36px; border-radius: 50%; border: none; background: #F4F1FA; color: var(--texto); font-size: 1.1rem; cursor: pointer; }
-    .campo-modal { margin-bottom: 13px; }
-    .campo-modal label { display: block; font-size: 0.84rem; color: var(--texto-suave); margin-bottom: 5px; }
-    .campo-modal input, .campo-modal select, .campo-modal textarea { width: 100%; padding: 11px 14px; border-radius: 16px; border: 1px solid #DFDAEC; background: #FAF9FD; font-family: inherit; font-size: 16px; color: var(--texto); outline: none; }
-    .campo-modal input:focus, .campo-modal select:focus, .campo-modal textarea:focus { border-color: var(--lilas-forte); background: var(--branco); }
+    .modal-fundo { position: fixed; inset: 0; background: rgba(45,49,66,0.45); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 300; }
+    .modal-caixa { background: var(--branco); width: 100%; max-width: 440px; border-radius: 24px; padding: 20px 18px; box-shadow: 0 20px 50px rgba(45,49,66,0.25); max-height: 92vh; overflow-y: auto; }
+    .modal-topo { display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px; }
+    .modal-topo h3 { font-size: 1.12rem; font-weight: 800; }
+    .btn-fechar { width: 34px; height: 34px; border-radius: 50%; border: none; background: #F4F1FA; font-size: 1rem; cursor: pointer; }
+    .campo { margin-bottom: 12px; }
+    .campo label { display: block; font-size: 0.83rem; color: var(--suave); margin-bottom: 4px; }
+    .campo input, .campo select, .campo textarea { width: 100%; padding: 11px 13px; border-radius: 15px; border: 1px solid #DFDAEC; background: #FAF9FD; font-family: inherit; font-size: 16px; color: var(--texto); outline: none; }
     .linha-dupla { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
-    .icones-grid { display: flex; flex-wrap: wrap; gap: 8px; }
-    .ico-opcao { width: 40px; height: 40px; border-radius: 13px; border: 2px solid #EFEBF7; background: var(--branco); font-size: 19px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-    .ico-opcao.selecionado { border-color: var(--lilas-forte); background: var(--lilas-fundo); }
+    .check-linha { display: flex; align-items: center; gap: 9px; font-size: 0.9rem; margin: 6px 0 12px; cursor: pointer; }
+    .check-linha input { width: 18px; height: 18px; accent-color: var(--lilas-f); }
+    .icones-grid { display: flex; flex-wrap: wrap; gap: 7px; }
+    .ico-op { width: 38px; height: 38px; border-radius: 12px; border: 2px solid #EFEBF7; background: var(--branco); font-size: 18px; cursor: pointer; }
+    .ico-op.sel { border-color: var(--lilas-f); background: var(--lilas); }
+    .tipos-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 7px; margin-bottom: 13px; }
+    .tipos-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; margin-bottom: 13px; }
+    .btn-tipo { padding: 9px 6px; border-radius: 14px; border: 2px solid #EFEBF7; background: var(--branco); font-family: inherit; font-size: 0.84rem; font-weight: 600; color: var(--suave); cursor: pointer; }
+    .btn-tipo.ativo-saida { background: var(--coral); border-color: #F5B8B8; color: var(--coral-f); }
+    .btn-tipo.ativo-entrada { background: var(--verde); border-color: #B5E8CB; color: var(--verde-f); }
+    .btn-tipo.ativo-transf { background: var(--lilas); border-color: var(--lilas-b); color: var(--lilas-f); }
+    .btn-mic { width: 100%; padding: 15px; border-radius: 18px; border: 2px solid var(--lilas-b); background: var(--lilas); color: var(--lilas-f); font-family: inherit; font-size: 0.98rem; font-weight: 700; cursor: pointer; margin-bottom: 12px; }
+    .btn-mic.ouvindo { background: var(--coral); border-color: #F5B8B8; color: var(--coral-f); }
+    .btn-salvar { width: 100%; padding: 13px; border: none; border-radius: 16px; background: linear-gradient(135deg, #7C5CE6, #9E7BF5); color: var(--branco); font-family: inherit; font-size: 0.98rem; font-weight: 700; cursor: pointer; margin-top: 6px; }
+    .btn-salvar:disabled { opacity: 0.65; }
+    .btn-excluir { width: 100%; padding: 10px; border: none; border-radius: 15px; background: var(--coral); color: var(--coral-f); font-family: inherit; font-size: 0.88rem; font-weight: 600; cursor: pointer; margin-top: 8px; }
 
-    .tipos-lanc-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 14px; }
-    .tipos-dois-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 14px; }
-    .btn-tipo-lanc { padding: 10px 6px; border-radius: 16px; border: 2px solid #EFEBF7; background: var(--branco); font-family: inherit; font-size: 0.85rem; font-weight: 600; color: var(--texto-suave); cursor: pointer; }
-    .btn-tipo-lanc.ativo-saida { background: var(--coral-fundo); border-color: #F5B8B8; color: var(--coral-forte); }
-    .btn-tipo-lanc.ativo-entrada { background: var(--verde-fundo); border-color: #B5E8CB; color: var(--verde-forte); }
-    .btn-tipo-lanc.ativo-transf { background: var(--lilas-fundo); border-color: var(--lilas-borda); color: var(--lilas-forte); }
+    .nav-inferior { position: fixed; bottom: 14px; left: 14px; right: 14px; max-width: 652px; margin: 0 auto; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-radius: 22px; padding: 7px 6px; box-shadow: 0 10px 28px rgba(80,70,120,0.14); display: flex; justify-content: space-around; z-index: 100; }
+    .nav-btn { border: none; background: transparent; text-decoration: none; font-family: inherit; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 7px 10px; border-radius: 15px; font-size: 0.75rem; color: var(--suave); cursor: pointer; }
+    .nav-btn .ico { font-size: 1.2rem; }
+    .nav-btn.ativo { background: var(--lilas); color: var(--lilas-f); font-weight: 700; }
 
-    .btn-mic-grande { width: 100%; padding: 16px; border-radius: 20px; border: 2px solid var(--lilas-borda); background: var(--lilas-fundo); color: var(--lilas-forte); font-family: inherit; font-size: 1rem; font-weight: 700; cursor: pointer; margin-bottom: 14px; }
-    .btn-mic-grande.ouvindo { background: var(--coral-fundo); border-color: #F5B8B8; color: var(--coral-forte); }
-
-    .modal-botoes { display: flex; flex-direction: column; gap: 8px; margin-top: 14px; }
-    .btn-modal-salvar { width: 100%; padding: 14px; border: none; border-radius: 18px; background: linear-gradient(135deg, #7C5CE6, #9E7BF5); color: var(--branco); font-family: inherit; font-size: 1rem; font-weight: 700; cursor: pointer; }
-    .btn-modal-salvar:disabled { opacity: 0.65; cursor: wait; }
-    .btn-modal-excluir { width: 100%; padding: 11px; border: none; border-radius: 16px; background: var(--coral-fundo); color: var(--coral-forte); font-family: inherit; font-size: 0.9rem; font-weight: 600; cursor: pointer; }
-
-    /* BARRA INFERIOR */
-    .nav-inferior { position: fixed; bottom: 14px; left: 14px; right: 14px; max-width: 652px; margin: 0 auto; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-radius: 24px; padding: 8px 6px; box-shadow: 0 10px 30px rgba(80,70,120,0.14); display: flex; justify-content: space-around; z-index: 100; }
-    .nav-btn { border: none; background: transparent; text-decoration: none; font-family: inherit; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 10px; border-radius: 16px; font-size: 0.76rem; color: var(--texto-suave); cursor: pointer; }
-    .nav-btn .ico { font-size: 1.25rem; }
-    .nav-btn.ativo { background: var(--lilas-fundo); color: var(--lilas-forte); font-weight: 700; }
-
-    .toast { position: fixed; bottom: 94px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--texto); color: var(--branco); padding: 10px 18px; border-radius: 16px; font-size: 0.88rem; opacity: 0; pointer-events: none; transition: all 0.25s ease; z-index: 400; text-align: center; max-width: 90%; }
+    .toast { position: fixed; bottom: 90px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--texto); color: var(--branco); padding: 9px 16px; border-radius: 14px; font-size: 0.86rem; opacity: 0; pointer-events: none; transition: all 0.25s ease; z-index: 400; text-align: center; max-width: 90%; }
     .toast.visivel { opacity: 1; transform: translateX(-50%) translateY(0); }
-
-    @media (max-width: 420px) {
-      .perfis-grid { gap: 12px; }
-      .foto-perfil { width: 80px; height: 80px; font-size: 38px; }
-      .perfil-apelido { font-size: 0.98rem; }
-      .aba-btn { font-size: 0.78rem; padding: 9px 4px; }
-    }
+    @media (max-width: 420px) { .foto-perfil { width: 78px; height: 78px; font-size: 36px; } .aba-btn { font-size: 0.78rem; } }
   </style>
 </head>
 <body>
 
   <!-- TELA 1: ENTRADA -->
   <section id="tela-entrada" class="tela-entrada">
-    <div class="marca-entrada">
-      <div class="logo-pilula">💜 Ukeah • Um Kasal Em Alta Harmonia</div><br>
-      <div id="status-entrada" class="status-dot">☁️ ...</div>
-      <h1>Quem está entrando?</h1>
-    </div>
-
+    <div class="logo-ukeah" style="font-size:2.35rem; margin-bottom:10px;">ukeah</div>
+    <span id="status-entrada" class="status-dot">☁️</span>
+    <h1>Quem está entrando?</h1>
     <div class="perfis-grid">
-      <div class="card-perfil" id="card-entrada-p1" onclick="entrarNoPerfil('p1')">
+      <div class="card-perfil" id="card-entrada-p1" onclick="entrar('p1')">
         <div class="foto-perfil" id="foto-entrada-p1">🎩</div>
         <p class="perfil-apelido" id="nome-entrada-p1">Ministro da Economia</p>
         <p class="perfil-sub" id="sub-entrada-p1">Fiscal do orçamento</p>
       </div>
-      <div class="card-perfil" id="card-entrada-p2" onclick="entrarNoPerfil('p2')">
+      <div class="card-perfil" id="card-entrada-p2" onclick="entrar('p2')">
         <div class="foto-perfil" id="foto-entrada-p2">👑</div>
         <p class="perfil-apelido" id="nome-entrada-p2">Dona Encrenca</p>
         <p class="perfil-sub" id="sub-entrada-p2">Aprovação presidencial</p>
       </div>
     </div>
-
-    <label class="lembrar-box">
-      <input type="checkbox" id="lembrar-escolha">
-      <span>Lembrar neste aparelho</span>
-    </label>
-
-    <button class="btn-casal-direto" onclick="entrarNoPerfil('casal')">📊 Somatório do Casal</button>
-    <a href="admin.html" class="link-admin-entrada">⚙️ Ajustes de fotos, apelidos e cores</a>
+    <label class="lembrar-box"><input type="checkbox" id="lembrar-escolha"><span>Lembrar neste aparelho</span></label>
+    <button class="btn-casal-direto" onclick="entrar('casal')">📊 Somatório do Casal</button>
+    <a href="admin.html" class="link-admin">⚙️ Ajustes</a>
   </section>
 
   <!-- TELA 2: PAINEL -->
   <section id="tela-painel" class="tela-painel escondido">
     <header class="topo-painel">
-      <div class="usuario-logado">
-        <div class="mini-avatar" id="topo-avatar">🎩</div>
-        <div style="min-width:0;">
-          <h2 id="topo-saudacao">Olá!</h2>
-        </div>
-      </div>
+      <div class="logo-ukeah">ukeah</div>
       <div class="topo-acoes">
         <span id="status-painel" class="status-dot">☁️</span>
-        <button class="btn-topo" onclick="sincronizarComPlanilha(true)">🔄</button>
-        <button class="btn-topo" onclick="voltarParaEntrada()">Trocar</button>
+        <button class="btn-topo" onclick="sincronizar(true)">🔄</button>
+        <button class="btn-topo" onclick="sair()">Trocar</button>
       </div>
     </header>
 
     <div class="abas-visao">
-      <button class="aba-btn" id="aba-p1" onclick="mudarVisao('p1')">🎩 Ministro</button>
-      <button class="aba-btn" id="aba-p2" onclick="mudarVisao('p2')">👑 Dona Encrenca</button>
+      <button class="aba-btn" id="aba-p1" onclick="mudarVisao('p1')"></button>
+      <button class="aba-btn" id="aba-p2" onclick="mudarVisao('p2')"></button>
       <button class="aba-btn" id="aba-casal" onclick="mudarVisao('casal')">💜 Casal</button>
     </div>
 
     <div class="barra-mes">
       <button type="button" class="btn-mes" onclick="mudarMes(-1)">◀</button>
-      <span class="mes-label" id="mes-label">Novembro 2026</span>
+      <span class="mes-label" id="mes-label"></span>
       <button type="button" class="btn-mes" onclick="mudarMes(1)">▶</button>
     </div>
 
-    <div class="banner-humor" id="banner-humor">"O casal está enriquecendo. Ou pelo menos tentando."</div>
-
     <div class="card-saldo" id="card-saldo">
-      <p class="saldo-titulo" id="saldo-titulo">Saldo atual</p>
+      <p class="saldo-titulo" id="saldo-titulo">Saldo</p>
       <p class="saldo-numero" id="saldo-numero">R$ 0,00</p>
-      <span class="saldo-previsto escondido" id="saldo-previsto"></span>
+      <div class="saldo-badges">
+        <span class="pill-saldo escondido" id="saldo-previsto"></span>
+        <button type="button" class="pill-saldo pill-btn escondido" id="btn-toggle-ocultas" onclick="alternarOcultas()"></button>
+      </div>
     </div>
 
     <div class="grid-resumo">
-      <div class="box-resumo entradas">
-        <p>📈 Entrou</p>
-        <strong id="valor-entradas">R$ 0,00</strong>
-      </div>
-      <div class="box-resumo saidas">
-        <p>🛍️ Saiu</p>
-        <strong id="valor-saidas">R$ 0,00</strong>
-      </div>
+      <div class="box-resumo entradas"><p>📈 Entrou</p><strong id="valor-entradas">R$ 0,00</strong></div>
+      <div class="box-resumo saidas"><p>🛍️ Saiu</p><strong id="valor-saidas">R$ 0,00</strong></div>
     </div>
 
-    <!-- PENDENTES DA IA (só aparece quando houver itens) -->
     <div id="secao-pendentes" class="escondido">
-      <div class="secao-cabecalho">
-        <h3>⏳ Aguardando confirmação (IA)</h3>
-      </div>
+      <div class="sec-head"><h3>⏳ Aguardando confirmação</h3></div>
       <div class="lista-cards" id="lista-pendentes"></div>
     </div>
 
-    <!-- CARTEIRAS -->
-    <div class="secao-cabecalho">
-      <h3>💳 Carteiras</h3>
-      <button type="button" class="btn-add-sec" id="btn-nova-carteira" onclick="abrirModalNovaCarteira()">➕ Nova</button>
-    </div>
+    <div class="sec-head"><h3>💳 Carteiras</h3><button type="button" class="btn-add-sec" id="btn-nova-cart" onclick="abrirModalCart()">➕ Nova</button></div>
     <div class="lista-cards" id="lista-carteiras"></div>
 
-    <!-- CONTAS FIXAS, PARCELAS E FATURAS -->
-    <div class="secao-cabecalho">
-      <h3>📅 Fixas, Parcelas &amp; Previstos</h3>
-      <button type="button" class="btn-add-sec" id="btn-nova-fixa" onclick="abrirModalNovaFixa()">➕ Nova</button>
-    </div>
+    <div class="sec-head"><h3>📅 Fixas &amp; Parcelas</h3><button type="button" class="btn-add-sec" id="btn-nova-fixa" onclick="abrirModalFixa()">➕ Nova</button></div>
     <div class="lista-cards" id="lista-fixas"></div>
 
-    <!-- MOVIMENTAÇÕES -->
-    <div class="secao-cabecalho">
-      <h3>📝 Movimentações</h3>
-    </div>
-    <div class="lista-cards" id="lista-movimentacoes"></div>
+    <div class="sec-head"><h3>📝 Movimentações</h3></div>
+    <div class="lista-cards" id="lista-movs"></div>
 
     <nav class="nav-inferior">
-      <button class="nav-btn ativo" onclick="window.scrollTo({top:0, behavior:'smooth'})">
-        <span class="ico">🏠</span><span>Painel</span>
-      </button>
-      <button class="nav-btn" onclick="abrirModalLancar()">
-        <span class="ico">➕</span><span>Lançar</span>
-      </button>
-      <button class="nav-btn" onclick="abrirModalVoz()">
-        <span class="ico">🎙️</span><span>Falar</span>
-      </button>
-      <a href="admin.html" class="nav-btn">
-        <span class="ico">⚙️</span><span>Ajustes</span>
-      </a>
+      <button class="nav-btn ativo" onclick="window.scrollTo({top:0,behavior:'smooth'})"><span class="ico">🏠</span><span>Painel</span></button>
+      <button class="nav-btn" onclick="abrirModalLancar()"><span class="ico">➕</span><span>Lançar</span></button>
+      <button class="nav-btn" onclick="abrirModalVoz()"><span class="ico">🎙️</span><span>Falar</span></button>
+      <a href="admin.html" class="nav-btn"><span class="ico">⚙️</span><span>Ajustes</span></a>
     </nav>
   </section>
 
-  <!-- MODAL 1: CARTEIRA -->
-  <div id="modal-carteira" class="modal-fundo escondido" onclick="if(event.target===this) fecharModal('modal-carteira')">
+  <!-- MODAL CARTEIRA -->
+  <div id="modal-cart" class="modal-fundo escondido" onclick="if(event.target===this) fechar('modal-cart')">
     <div class="modal-caixa">
-      <div class="modal-topo">
-        <h3 id="modal-titulo">Carteira</h3>
-        <button type="button" class="btn-fechar-modal" onclick="fecharModal('modal-carteira')">✕</button>
-      </div>
-      <div class="campo-modal">
-        <label for="select-dono-carteira">De quem é?</label>
-        <select id="select-dono-carteira"></select>
-      </div>
-      <div class="campo-modal">
-        <label for="input-nome-carteira">Nome</label>
-        <input type="text" id="input-nome-carteira" placeholder="Ex: Nubank, Cofrinho...">
-      </div>
-      <div class="campo-modal">
-        <label for="input-saldo-carteira">Saldo (R$)</label>
-        <input type="text" inputmode="decimal" id="input-saldo-carteira" placeholder="0,00">
-      </div>
-      <div class="campo-modal">
-        <label>Ícone</label>
-        <div class="icones-grid" id="grid-icones-carteira"></div>
-      </div>
-      <div class="modal-botoes">
-        <button type="button" class="btn-modal-salvar" onclick="salvarCarteiraModal()">💾 Salvar</button>
-        <button type="button" class="btn-modal-excluir escondido" id="btn-excluir-carteira" onclick="excluirCarteiraModal()">🗑️ Excluir</button>
-      </div>
+      <div class="modal-topo"><h3 id="tit-cart">Carteira</h3><button class="btn-fechar" onclick="fechar('modal-cart')">✕</button></div>
+      <div class="campo"><label>Perfil</label><select id="cart-dono"></select></div>
+      <div class="campo"><label>Nome</label><input type="text" id="cart-nome" placeholder="Ex: Nubank, Cofrinho..."></div>
+      <div class="campo"><label>Saldo (R$)</label><input type="text" inputmode="decimal" id="cart-saldo" placeholder="0,00"></div>
+      <label class="check-linha"><input type="checkbox" id="cart-oculta"><span>Ocultar do saldo total (ex: cofrinho)</span></label>
+      <div class="campo"><label>Ícone</label><div class="icones-grid" id="grid-icos"></div></div>
+      <button class="btn-salvar" onclick="salvarCart()">💾 Salvar</button>
+      <button class="btn-excluir escondido" id="btn-del-cart" onclick="excluirCart()">🗑️ Excluir</button>
     </div>
   </div>
 
-  <!-- MODAL 2: LANÇAR -->
-  <div id="modal-lancar" class="modal-fundo escondido" onclick="if(event.target===this) fecharModal('modal-lancar')">
+  <!-- MODAL LANÇAR -->
+  <div id="modal-lanc" class="modal-fundo escondido" onclick="if(event.target===this) fechar('modal-lanc')">
     <div class="modal-caixa">
-      <div class="modal-topo">
-        <h3>💸 Lançar</h3>
-        <button type="button" class="btn-fechar-modal" onclick="fecharModal('modal-lancar')">✕</button>
+      <div class="modal-topo"><h3>💸 Lançar</h3><button class="btn-fechar" onclick="fechar('modal-lanc')">✕</button></div>
+      <div class="tipos-3">
+        <button class="btn-tipo" id="t-saida" onclick="setTipoLanc('saida')">💸 Despesa</button>
+        <button class="btn-tipo" id="t-entrada" onclick="setTipoLanc('entrada')">💰 Receita</button>
+        <button class="btn-tipo" id="t-transferencia" onclick="setTipoLanc('transferencia')">🔄 Transferir</button>
       </div>
-      <div class="tipos-lanc-grid">
-        <button type="button" class="btn-tipo-lanc" id="btn-tipo-saida" onclick="mudarTipoLanc('saida')">💸 Despesa</button>
-        <button type="button" class="btn-tipo-lanc" id="btn-tipo-entrada" onclick="mudarTipoLanc('entrada')">💰 Receita</button>
-        <button type="button" class="btn-tipo-lanc" id="btn-tipo-transferencia" onclick="mudarTipoLanc('transferencia')">🔄 Transferir</button>
+      <div id="g-normal">
+        <div class="campo"><label>Perfil</label><select id="lanc-dono" onchange="atualizarCartsLanc()"></select></div>
+        <div class="campo"><label>Carteira</label><select id="lanc-cart"></select></div>
+        <div class="campo"><label>Categoria</label><select id="lanc-cat"></select></div>
       </div>
-      <div id="grupo-lanc-normal">
-        <div class="campo-modal">
-          <label for="lanc-dono">Perfil</label>
-          <select id="lanc-dono" onchange="atualizarCarteirasLanc()"></select>
-        </div>
-        <div class="campo-modal">
-          <label for="lanc-carteira">Carteira</label>
-          <select id="lanc-carteira"></select>
-        </div>
-        <div class="campo-modal">
-          <label for="lanc-categoria">Categoria</label>
-          <select id="lanc-categoria"></select>
-        </div>
+      <div id="g-transf" class="escondido">
+        <div class="campo"><label>Saiu de</label><select id="lanc-orig"></select></div>
+        <div class="campo"><label>Entrou em</label><select id="lanc-dest"></select></div>
       </div>
-      <div id="grupo-lanc-transf" class="escondido">
-        <div class="campo-modal">
-          <label for="lanc-origem">Saiu de</label>
-          <select id="lanc-origem"></select>
-        </div>
-        <div class="campo-modal">
-          <label for="lanc-destino">Entrou em</label>
-          <select id="lanc-destino"></select>
-        </div>
+      <div class="campo"><label>Valor (R$)</label><input type="text" inputmode="decimal" id="lanc-val" placeholder="0,00"></div>
+      <div class="campo"><label>Descrição</label><input type="text" id="lanc-desc" placeholder="Motivo..."></div>
+      <div class="linha-dupla">
+        <div class="campo"><label>Data</label><input type="date" id="lanc-data"></div>
+        <div class="campo"><label>Hora</label><input type="time" step="1" id="lanc-hora"></div>
       </div>
-      <div class="campo-modal">
-        <label for="lanc-valor">Valor (R$)</label>
-        <input type="text" inputmode="decimal" id="lanc-valor" placeholder="0,00">
+      <button class="btn-salvar" onclick="salvarLanc()">✅ Confirmar</button>
+    </div>
+  </div>
+
+  <!-- MODAL FIXA -->
+  <div id="modal-fixa" class="modal-fundo escondido" onclick="if(event.target===this) fechar('modal-fixa')">
+    <div class="modal-caixa">
+      <div class="modal-topo"><h3 id="tit-fixa">Conta / Parcela</h3><button class="btn-fechar" onclick="fechar('modal-fixa')">✕</button></div>
+      <div class="tipos-2">
+        <button class="btn-tipo" id="f-saida" onclick="setTipoFixa('saida')">💸 A Pagar</button>
+        <button class="btn-tipo" id="f-entrada" onclick="setTipoFixa('entrada')">💰 A Receber</button>
       </div>
-      <div class="campo-modal">
-        <label for="lanc-desc">Descrição</label>
-        <input type="text" id="lanc-desc" placeholder="Ex: Pizza de sexta...">
+      <div class="campo"><label>Perfil</label><select id="fixa-dono"></select></div>
+      <div class="campo"><label>Nome</label><input type="text" id="fixa-tit" placeholder="Ex: Faculdade, Fatura Cartão"></div>
+      <div class="linha-dupla">
+        <div class="campo"><label>Valor (R$)</label><input type="text" inputmode="decimal" id="fixa-val" placeholder="0,00"></div>
+        <div class="campo"><label>Dia venc.</label><input type="number" min="1" max="31" id="fixa-dia" value="10"></div>
       </div>
       <div class="linha-dupla">
-        <div class="campo-modal">
-          <label for="lanc-data">Data</label>
-          <input type="date" id="lanc-data">
-        </div>
-        <div class="campo-modal">
-          <label for="lanc-hora">Hora (seg.)</label>
-          <input type="time" step="1" id="lanc-hora">
-        </div>
+        <div class="campo"><label>Começa em</label><select id="fixa-mes-ini"></select></div>
+        <div class="campo"><label>Ano</label><select id="fixa-ano-ini"></select></div>
       </div>
-      <div class="modal-botoes">
-        <button type="button" class="btn-modal-salvar" onclick="salvarLancamento()">✅ Confirmar</button>
-      </div>
-    </div>
-  </div>
-
-  <!-- MODAL 3: CONTA FIXA / PARCELA / FATURA -->
-  <div id="modal-fixa" class="modal-fundo escondido" onclick="if(event.target===this) fecharModal('modal-fixa')">
-    <div class="modal-caixa">
-      <div class="modal-topo">
-        <h3 id="modal-fixa-titulo">Conta Fixa / Prevista</h3>
-        <button type="button" class="btn-fechar-modal" onclick="fecharModal('modal-fixa')">✕</button>
-      </div>
-      <div class="tipos-dois-grid">
-        <button type="button" class="btn-tipo-lanc" id="btn-fixa-saida" onclick="mudarTipoFixa('saida')">💸 A Pagar</button>
-        <button type="button" class="btn-tipo-lanc" id="btn-fixa-entrada" onclick="mudarTipoFixa('entrada')">💰 A Receber</button>
-      </div>
-      <div class="campo-modal">
-        <label for="fixa-dono">Perfil</label>
-        <select id="fixa-dono"></select>
-      </div>
-      <div class="campo-modal">
-        <label for="fixa-titulo">Nome (Ex: Faculdade, Fatura Cartão, Salário)</label>
-        <input type="text" id="fixa-titulo" placeholder="Ex: Faculdade">
-      </div>
+      <div class="campo"><label>Categoria</label><select id="fixa-cat"></select></div>
       <div class="linha-dupla">
-        <div class="campo-modal">
-          <label for="fixa-valor">Valor previsto (R$)</label>
-          <input type="text" inputmode="decimal" id="fixa-valor" placeholder="0,00">
-        </div>
-        <div class="campo-modal">
-          <label for="fixa-dia">Dia vencimento</label>
-          <input type="number" min="1" max="31" id="fixa-dia" placeholder="10">
-        </div>
+        <div class="campo"><label>Parcela inicial</label><input type="number" min="0" id="fixa-p-atu" placeholder="Opc."></div>
+        <div class="campo"><label>Total parcelas</label><input type="number" min="0" id="fixa-p-tot" placeholder="Opc."></div>
       </div>
-      <div class="campo-modal">
-        <label for="fixa-categoria">Categoria</label>
-        <select id="fixa-categoria"></select>
-      </div>
-      <div class="linha-dupla">
-        <div class="campo-modal">
-          <label for="fixa-parc-atual">Parcela atual (opcional)</label>
-          <input type="number" min="0" id="fixa-parc-atual" placeholder="Ex: 3">
-        </div>
-        <div class="campo-modal">
-          <label for="fixa-parc-total">Total parcelas (opcional)</label>
-          <input type="number" min="0" id="fixa-parc-total" placeholder="Ex: 12">
-        </div>
-      </div>
-      <div class="modal-botoes">
-        <button type="button" class="btn-modal-salvar" onclick="salvarFixaModal()">💾 Salvar</button>
-        <button type="button" class="btn-modal-excluir escondido" id="btn-excluir-fixa" onclick="excluirFixaModal()">🗑️ Excluir</button>
-      </div>
+      <button class="btn-salvar" onclick="salvarFixa()">💾 Salvar</button>
+      <button class="btn-excluir escondido" id="btn-del-fixa" onclick="excluirFixa()">🗑️ Excluir</button>
     </div>
   </div>
 
-  <!-- MODAL 4: PAGAR / RECEBER CONTA FIXA -->
-  <div id="modal-pagar-fixa" class="modal-fundo escondido" onclick="if(event.target===this) fecharModal('modal-pagar-fixa')">
+  <!-- MODAL PAGAR FIXA -->
+  <div id="modal-pagar" class="modal-fundo escondido" onclick="if(event.target===this) fechar('modal-pagar')">
     <div class="modal-caixa">
-      <div class="modal-topo">
-        <h3 id="pagar-fixa-titulo">Confirmar Pagamento</h3>
-        <button type="button" class="btn-fechar-modal" onclick="fecharModal('modal-pagar-fixa')">✕</button>
-      </div>
-      <div class="campo-modal">
-        <label for="pagar-fixa-carteira">Qual carteira usar?</label>
-        <select id="pagar-fixa-carteira"></select>
-      </div>
-      <div class="campo-modal">
-        <label for="pagar-fixa-valor">Valor exato pago/recebido (R$)</label>
-        <input type="text" inputmode="decimal" id="pagar-fixa-valor">
-      </div>
-      <div class="modal-botoes">
-        <button type="button" class="btn-modal-salvar" onclick="confirmarPagamentoFixa()">✅ Confirmar e Lançar</button>
-      </div>
+      <div class="modal-topo"><h3 id="tit-pagar">Confirmar</h3><button class="btn-fechar" onclick="fechar('modal-pagar')">✕</button></div>
+      <div class="campo"><label>Carteira</label><select id="pagar-cart"></select></div>
+      <div class="campo"><label>Valor exato (R$)</label><input type="text" inputmode="decimal" id="pagar-val"></div>
+      <button class="btn-salvar" onclick="confirmarPagFixa()">✅ Confirmar</button>
     </div>
   </div>
 
-  <!-- MODAL 5: MICROFONE + IA GEMINI -->
-  <div id="modal-voz" class="modal-fundo escondido" onclick="if(event.target===this) fecharModalVoz()">
+  <!-- MODAL VOZ / IA -->
+  <div id="modal-voz" class="modal-fundo escondido" onclick="if(event.target===this) fecharVoz()">
     <div class="modal-caixa">
-      <div class="modal-topo">
-        <h3>🎙️ Falar com o Ukeah (IA)</h3>
-        <button type="button" class="btn-fechar-modal" onclick="fecharModalVoz()">✕</button>
+      <div class="modal-topo"><h3>🎙️ Falar</h3><button class="btn-fechar" onclick="fecharVoz()">✕</button></div>
+      <button class="btn-mic" id="btn-mic" onclick="alternarMic()">🎙️ Tocar para Falar</button>
+      <div class="campo">
+        <label>Descrição por voz ou texto</label>
+        <textarea id="voz-txt" rows="4" placeholder="Fale ou escreva o que aconteceu para a IA transcrever e organizar (gastos, ganhos ou transferências)..."></textarea>
       </div>
-      <button type="button" class="btn-mic-grande" id="btn-mic-ouvir" onclick="alternarMicrofone()">🎙️ Tocar para Falar</button>
-      <div class="campo-modal">
-        <label for="voz-texto">O que aconteceu? (fale ou digite)</label>
-        <textarea id="voz-texto" rows="4" placeholder="Ex: Mandei 250 do meu Nubank pro Kennedy e ele me deu 250 em dinheiro físico..."></textarea>
-      </div>
-      <div class="modal-botoes">
-        <button type="button" class="btn-modal-salvar" id="btn-enviar-ia" onclick="enviarParaGemini()">✨ Interpretar com Gemini</button>
-      </div>
+      <button class="btn-salvar" id="btn-ia" onclick="enviarIA()">✨ Interpretar</button>
     </div>
   </div>
 
@@ -455,898 +309,531 @@
 
   <script>
     const API_URL = 'https://script.google.com/macros/s/AKfycbznLrLxLa2-3PUecTKSc--px_y41hxUoF44L0yP5N1gPMWnujYiWkkFsbDbv6q-9kHV2A/exec';
-
     const PALETA = {
-      azul:    { fundo: '#E6F2FF', borda: '#B8DCFF', texto: '#2B6CB0' },
-      rosa:    { fundo: '#FFEAF2', borda: '#FFC2D9', texto: '#B83268' },
-      lilas:   { fundo: '#F1EBFF', borda: '#D9C9FF', texto: '#5B3CC4' },
-      verde:   { fundo: '#E7F8EE', borda: '#B5E8CB', texto: '#1F7A4D' },
-      amarelo: { fundo: '#FFF7DC', borda: '#F5DF98', texto: '#8A6500' },
-      pessego: { fundo: '#FFF0E5', borda: '#FFD1B3', texto: '#A84B18' }
+      azul: { fundo: '#E6F2FF', borda: '#B8DCFF', texto: '#2B6CB0' }, rosa: { fundo: '#FFEAF2', borda: '#FFC2D9', texto: '#B83268' },
+      lilas: { fundo: '#F1EBFF', borda: '#D9C9FF', texto: '#5B3CC4' }, verde: { fundo: '#E7F8EE', borda: '#B5E8CB', texto: '#1F7A4D' },
+      amarelo: { fundo: '#FFF7DC', borda: '#F5DF98', texto: '#8A6500' }, pessego: { fundo: '#FFF0E5', borda: '#FFD1B3', texto: '#A84B18' }
     };
-
-    const PADRAO_CONFIG = {
+    const PADRAO = {
       p1: { nome: 'Ministro da Economia', subtitulo: 'Fiscal do orçamento', cor: 'azul', icone: '🎩', foto: '' },
       p2: { nome: 'Dona Encrenca', subtitulo: 'Aprovação presidencial', cor: 'rosa', icone: '👑', foto: '' },
       categorias: ['🛒 Mercado', '💳 Cartão', '☕ Lazer & Mimos', '🏠 Casa', '💼 Salário', '🎓 Faculdade']
     };
-
-    const CARTEIRAS_PADRAO = [
-      { id: 'c1', dono: 'p1', nome: 'Nubank', icone: '💜', saldo: 1200.00 },
-      { id: 'c2', dono: 'p1', nome: 'Mercado Pago', icone: '💙', saldo: 540.00 },
-      { id: 'c3', dono: 'p1', nome: 'PicPay', icone: '💚', saldo: 300.00 },
-      { id: 'c4', dono: 'p1', nome: 'InfinitePay', icone: '⚡', saldo: 400.00 },
-      { id: 'c5', dono: 'p1', nome: 'Cofrinho físico', icone: '🐷', saldo: 200.00 },
-      { id: 'c6', dono: 'p2', nome: 'Nubank', icone: '💜', saldo: 1100.00 },
-      { id: 'c7', dono: 'p2', nome: 'Banco Inter', icone: '🧡', saldo: 880.50 },
-      { id: 'c8', dono: 'p2', nome: 'Dinheiro físico', icone: '💵', saldo: 200.00 }
+    const CARTEIRAS_INIT = [
+      { id: 'c1', dono: 'p1', nome: 'Nubank', icone: '💜', saldo: 1200, oculta: false },
+      { id: 'c2', dono: 'p1', nome: 'Mercado Pago', icone: '💙', saldo: 540, oculta: false },
+      { id: 'c3', dono: 'p1', nome: 'PicPay', icone: '💚', saldo: 300, oculta: false },
+      { id: 'c4', dono: 'p1', nome: 'InfinitePay', icone: '⚡', saldo: 400, oculta: false },
+      { id: 'c5', dono: 'p1', nome: 'Cofrinho físico', icone: '🐷', saldo: 200, oculta: true },
+      { id: 'c6', dono: 'p2', nome: 'Nubank', icone: '💜', saldo: 1100, oculta: false },
+      { id: 'c7', dono: 'p2', nome: 'Banco Inter', icone: '🧡', saldo: 880.5, oculta: false },
+      { id: 'c8', dono: 'p2', nome: 'Dinheiro físico', icone: '💵', saldo: 200, oculta: false }
     ];
+    const ICOS = ['💜', '🧡', '💙', '💚', '⚡', '🐷', '💵', '💳', '🏦', '🪙'];
+    const MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
 
-    const ICONES_CARTEIRA = ['💜', '🧡', '💙', '💚', '⚡', '🐷', '💵', '💳', '🏦', '🪙'];
-    const NOMES_MESES = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+    const $ = id => document.getElementById(id);
+    const el = (tag, cls, txt) => { const n = document.createElement(tag); if (cls) n.className = cls; if (txt !== undefined) n.textContent = txt; return n; };
+    const fmt = v => Number(v || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    const fechar = id => $(id).classList.add('escondido');
+    const salvarLoc = (k, d) => { try { localStorage.setItem(k, JSON.stringify(d)); } catch (e) {} };
+    const lerLoc = k => { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } };
 
-    let config = {}, carteiras = [], movimentacoes = [], fixas = [], pendentes = [];
-    let perfilLogado = null, visaoAtual = 'casal', mesAtual = '';
-    let idCarteiraEditando = null, iconeSelecionadoModal = '💳', tipoLancAtual = 'saida';
-    let idFixaEditando = null, tipoFixaAtual = 'saida', idFixaPagando = null, idPendenteEditando = null;
-    let reconhecimentoVoz = null, ouvindoAgora = false;
+    let config = {}, carteiras = [], movs = [], fixas = [], pendentes = [];
+    let visaoAtual = 'casal', mesAtual = '', mostrarOcultas = false;
+    let editCartId = null, icoModal = '💳', tipoLanc = 'saida', editFixaId = null, tipoFixa = 'saida', pagFixaId = null, pagParc = 0, pendEditId = null;
+    let recVoz = null, ouvindo = false, tToast;
 
-    const formatarReal = v => Number(v || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-
-    function setStatusNuvem(texto, tipo) {
-      ['status-entrada', 'status-painel'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) { el.textContent = texto; el.className = 'status-dot' + (tipo ? ' ' + tipo : ''); }
-      });
+    function pegarEmoji(cat, padrao) {
+      const m = String(cat || '').trim().match(/^(\p{Extended_Pictographic}|\p{Emoji_Presentation})/u);
+      return m ? m[0] : padrao;
     }
 
-    function lerValorMonetario(txt) {
+    function lerVal(txt) {
       let s = String(txt || '').replace(/[^\d.,-]/g, '').trim();
       if (!s) return 0;
       if (s.includes(',') && s.includes('.')) s = s.replace(/\./g, '').replace(',', '.');
       else if (s.includes(',')) s = s.replace(',', '.');
-      const n = parseFloat(s);
-      return isNaN(n) ? 0 : n;
+      return parseFloat(s) || 0;
     }
 
-    function hojeISO() {
-      const d = new Date();
-      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    function hoje() { const d = new Date(); return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`; }
+    function agora() { const d = new Date(); return `${String(d.getHours()).padStart(2,'0')}:${String(d.getMinutes()).padStart(2,'0')}:${String(d.getSeconds()).padStart(2,'0')}`; }
+    function fmtDataBR(s) {
+      if (!s) return '';
+      const [dp, hp] = String(s).trim().split(' ');
+      const br = dp.includes('-') ? dp.split('-').reverse().join('/') : dp;
+      return hp ? `${br} • ${hp}` : br;
+    }
+    function diffMes(a, b) {
+      const [a1, m1] = String(a || '').split('-').map(Number), [a2, m2] = String(b || '').split('-').map(Number);
+      return (!a1 || !m1 || !a2 || !m2) ? 0 : (a2 - a1) * 12 + (m2 - m1);
     }
 
-    function horaAgoraSegundos() {
-      const d = new Date();
-      return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0') + ':' + String(d.getSeconds()).padStart(2, '0');
+    function setStatus(txt, cls) {
+      ['status-entrada', 'status-painel'].forEach(id => { $(id).textContent = txt; $(id).className = 'status-dot' + (cls ? ' ' + cls : ''); });
     }
 
-    function formatarDataHoraBR(str) {
-      if (!str) return '';
-      const partes = String(str).trim().split(' ');
-      let dataBR = partes[0] || '';
-      if (dataBR.includes('-')) { const [a, m, d] = dataBR.split('-'); dataBR = `${d}/${m}/${a}`; }
-      return partes[1] ? `${dataBR} • ${partes[1]}` : dataBR;
+    function toast(msg) {
+      $('toast').textContent = msg; $('toast').classList.add('visivel');
+      clearTimeout(tToast); tToast = setTimeout(() => $('toast').classList.remove('visivel'), 2600);
     }
 
-    function mudarMes(delta) {
-      const [ano, mes] = mesAtual.split('-').map(Number);
-      const nova = new Date(ano, mes - 1 + delta, 1);
-      mesAtual = nova.getFullYear() + '-' + String(nova.getMonth() + 1).padStart(2, '0');
-      atualizarLabelMes();
-      mudarVisao(visaoAtual);
-    }
-
-    function atualizarLabelMes() {
-      const [ano, mes] = mesAtual.split('-').map(Number);
-      document.getElementById('mes-label').textContent = `${NOMES_MESES[mes - 1]} ${ano}`;
-    }
-
-    function carregarDadosLocais() {
-      const ler = (k) => { try { return JSON.parse(localStorage.getItem(k)); } catch (e) { return null; } };
-      const cSalvo = ler('ukeah_config'), cartS = ler('ukeah_carteiras'), movS = ler('ukeah_movimentacoes'), fixS = ler('ukeah_fixas'), pendS = ler('ukeah_pendentes');
-
+    function carregarLocais() {
+      const c = lerLoc('ukeah_config'), cs = lerLoc('ukeah_carteiras'), ms = lerLoc('ukeah_movimentacoes'), fs = lerLoc('ukeah_fixas'), ps = lerLoc('ukeah_pendentes');
       config = {
-        p1: { ...PADRAO_CONFIG.p1, ...(cSalvo && cSalvo.p1 ? cSalvo.p1 : {}) },
-        p2: { ...PADRAO_CONFIG.p2, ...(cSalvo && cSalvo.p2 ? cSalvo.p2 : {}) },
-        categorias: cSalvo && Array.isArray(cSalvo.categorias) && cSalvo.categorias.length ? cSalvo.categorias : PADRAO_CONFIG.categorias
+        p1: { ...PADRAO.p1, ...(c && c.p1 || {}) }, p2: { ...PADRAO.p2, ...(c && c.p2 || {}) },
+        categorias: c && Array.isArray(c.categorias) && c.categorias.length ? c.categorias : PADRAO.categorias
       };
-      carteiras = Array.isArray(cartS) && cartS.length ? cartS : JSON.parse(JSON.stringify(CARTEIRAS_PADRAO));
-      movimentacoes = Array.isArray(movS) ? movS : [];
-      fixas = Array.isArray(fixS) ? fixS : [];
-      pendentes = Array.isArray(pendS) ? pendS : [];
+      carteiras = Array.isArray(cs) && cs.length ? cs : JSON.parse(JSON.stringify(CARTEIRAS_INIT));
+      movs = Array.isArray(ms) ? ms : []; fixas = Array.isArray(fs) ? fs : []; pendentes = Array.isArray(ps) ? ps : [];
     }
 
-    function salvarLocal(chave, dados) {
-      try { localStorage.setItem(chave, JSON.stringify(dados)); } catch (e) {}
-    }
-
-    async function sincronizarComPlanilha(mostrarToast) {
-      setStatusNuvem('☁️ ...', '');
+    async function sincronizar(aviso) {
+      setStatus('☁️ ...', '');
       try {
-        const resp = await fetch(API_URL);
-        const dados = await resp.json();
-        if (!dados.ok) throw new Error('Erro');
-
-        if (dados.config && Object.keys(dados.config).length > 0) {
-          const c = dados.config;
-          let cats = PADRAO_CONFIG.categorias;
+        const d = await (await fetch(API_URL)).json();
+        if (!d.ok) throw 0;
+        if (d.config && Object.keys(d.config).length) {
+          const c = d.config; let cats = PADRAO.categorias;
           try { if (c.categorias) cats = JSON.parse(c.categorias); } catch (e) {}
           config = {
-            p1: { nome: c.p1_nome || PADRAO_CONFIG.p1.nome, subtitulo: c.p1_subtitulo || PADRAO_CONFIG.p1.subtitulo, cor: c.p1_cor || PADRAO_CONFIG.p1.cor, icone: c.p1_icone || PADRAO_CONFIG.p1.icone, foto: c.p1_foto || '' },
-            p2: { nome: c.p2_nome || PADRAO_CONFIG.p2.nome, subtitulo: c.p2_subtitulo || PADRAO_CONFIG.p2.subtitulo, cor: c.p2_cor || PADRAO_CONFIG.p2.cor, icone: c.p2_icone || PADRAO_CONFIG.p2.icone, foto: c.p2_foto || '' },
-            categorias: Array.isArray(cats) ? cats : PADRAO_CONFIG.categorias
+            p1: { nome: c.p1_nome || PADRAO.p1.nome, subtitulo: c.p1_subtitulo || PADRAO.p1.subtitulo, cor: c.p1_cor || PADRAO.p1.cor, icone: c.p1_icone || PADRAO.p1.icone, foto: c.p1_foto || '' },
+            p2: { nome: c.p2_nome || PADRAO.p2.nome, subtitulo: c.p2_subtitulo || PADRAO.p2.subtitulo, cor: c.p2_cor || PADRAO.p2.cor, icone: c.p2_icone || PADRAO.p2.icone, foto: c.p2_foto || '' },
+            categorias: Array.isArray(cats) ? cats : PADRAO.categorias
           };
-          salvarLocal('ukeah_config', config);
+          salvarLoc('ukeah_config', config);
         }
-
         let subir = false;
-        if (Array.isArray(dados.carteiras) && dados.carteiras.length) { carteiras = dados.carteiras; salvarLocal('ukeah_carteiras', carteiras); }
-        else if (carteiras.length) subir = true;
+        if (Array.isArray(d.carteiras) && d.carteiras.length) { carteiras = d.carteiras; salvarLoc('ukeah_carteiras', carteiras); } else if (carteiras.length) subir = true;
+        if (Array.isArray(d.movimentacoes) && d.movimentacoes.length) { movs = d.movimentacoes; salvarLoc('ukeah_movimentacoes', movs); } else if (movs.length) subir = true;
+        if (Array.isArray(d.fixas) && d.fixas.length) { fixas = d.fixas; salvarLoc('ukeah_fixas', fixas); } else if (fixas.length) subir = true;
+        if (Array.isArray(d.pendentes)) { pendentes = d.pendentes; salvarLoc('ukeah_pendentes', pendentes); }
 
-        if (Array.isArray(dados.movimentacoes) && dados.movimentacoes.length) { movimentacoes = dados.movimentacoes; salvarLocal('ukeah_movimentacoes', movimentacoes); }
-        else if (movimentacoes.length) subir = true;
-
-        if (Array.isArray(dados.fixas) && dados.fixas.length) { fixas = dados.fixas; salvarLocal('ukeah_fixas', fixas); }
-        else if (fixas.length) subir = true;
-
-        if (Array.isArray(dados.pendentes)) { pendentes = dados.pendentes; salvarLocal('ukeah_pendentes', pendentes); }
-
-        montarTelaEntrada();
-        if (perfilLogado) atualizarCabecalhoPainel();
-        if (!document.getElementById('tela-painel').classList.contains('escondido')) mudarVisao(visaoAtual);
-
-        if (subir) await enviarPainelParaPlanilha();
-        else setStatusNuvem('☁️ ✅', 'ok');
-
-        if (mostrarToast) mostrarAviso('🔄 Atualizado!');
-      } catch (e) {
-        setStatusNuvem('⚠️ Offline', 'erro');
-        if (mostrarToast) mostrarAviso('⚠️ Sem conexão agora.');
-      }
+        montarEntrada();
+        if (!$('tela-painel').classList.contains('escondido')) mudarVisao(visaoAtual);
+        if (subir) await enviarPainel(); else setStatus('☁️ ✅', 'ok');
+        if (aviso) toast('🔄 Atualizado!');
+      } catch (e) { setStatus('⚠️ Offline', 'erro'); if (aviso) toast('⚠️ Sem conexão'); }
     }
 
-    async function enviarPainelParaPlanilha() {
-      setStatusNuvem('☁️ ⏳', '');
+    async function enviarPainel() {
+      setStatus('☁️ ⏳', '');
       try {
-        const resp = await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({ acao: 'salvarPainel', carteiras, movimentacoes, fixas, pendentes })
-        });
-        const res = await resp.json();
-        if (res.ok) setStatusNuvem('☁️ ✅', 'ok');
-        else throw new Error('Falha');
-      } catch (e) {
-        setStatusNuvem('⚠️ Erro', 'erro');
-      }
+        const res = await (await fetch(API_URL, {
+          method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ acao: 'salvarPainel', carteiras, movimentacoes: movs, fixas, pendentes })
+        })).json();
+        setStatus(res.ok ? '☁️ ✅' : '⚠️ Erro', res.ok ? 'ok' : 'erro');
+      } catch (e) { setStatus('⚠️ Erro', 'erro'); }
     }
 
-    function aplicarAvatar(el, p) {
-      if (p.foto) {
-        el.innerHTML = '';
-        const img = document.createElement('img'); img.src = p.foto; img.alt = p.nome;
-        el.appendChild(img);
-      } else { el.textContent = p.icone; }
-    }
-
-    function montarTelaEntrada() {
+    function montarEntrada() {
       ['p1', 'p2'].forEach(k => {
         const p = config[k], t = PALETA[p.cor] || PALETA.azul;
-        const card = document.getElementById(`card-entrada-${k}`);
-        card.style.backgroundColor = t.fundo; card.style.borderColor = t.borda;
-        const n = document.getElementById(`nome-entrada-${k}`);
-        n.textContent = p.nome; n.style.color = t.texto;
-        document.getElementById(`sub-entrada-${k}`).textContent = p.subtitulo;
-        aplicarAvatar(document.getElementById(`foto-entrada-${k}`), p);
-        document.getElementById(`aba-${k}`).textContent = `${p.icone} ${p.nome}`;
+        $('card-entrada-' + k).style.backgroundColor = t.fundo; $('card-entrada-' + k).style.borderColor = t.borda;
+        $('nome-entrada-' + k).textContent = p.nome; $('nome-entrada-' + k).style.color = t.texto;
+        $('sub-entrada-' + k).textContent = p.subtitulo;
+        const fEl = $('foto-entrada-' + k);
+        if (p.foto) { fEl.innerHTML = ''; const img = el('img'); img.src = p.foto; fEl.appendChild(img); } else fEl.textContent = p.icone;
+        $('aba-' + k).textContent = `${p.icone} ${p.nome}`;
       });
     }
 
-    function atualizarCabecalhoPainel() {
-      const av = document.getElementById('topo-avatar'), saud = document.getElementById('topo-saudacao');
-      if (perfilLogado === 'casal') { av.textContent = '💜'; saud.textContent = 'Visão do Casal'; }
-      else if (config[perfilLogado]) { aplicarAvatar(av, config[perfilLogado]); saud.textContent = `Olá, ${config[perfilLogado].nome}!`; }
-    }
-
-    function entrarNoPerfil(perfil) {
-      perfilLogado = perfil;
-      if (document.getElementById('lembrar-escolha').checked) {
-        try { localStorage.setItem('ukeah_perfil', perfil); } catch (e) {}
-      }
-      atualizarCabecalhoPainel();
-      document.getElementById('tela-entrada').classList.add('escondido');
-      document.getElementById('tela-painel').classList.remove('escondido');
+    function entrar(perfil) {
+      if ($('lembrar-escolha').checked) try { localStorage.setItem('ukeah_perfil', perfil); } catch (e) {}
+      $('tela-entrada').classList.add('escondido'); $('tela-painel').classList.remove('escondido');
       mudarVisao(perfil);
     }
 
-    function voltarParaEntrada() {
-      perfilLogado = null;
+    function sair() {
       try { localStorage.removeItem('ukeah_perfil'); } catch (e) {}
-      document.getElementById('lembrar-escolha').checked = false;
-      document.getElementById('tela-painel').classList.add('escondido');
-      document.getElementById('tela-entrada').classList.remove('escondido');
+      $('lembrar-escolha').checked = false;
+      $('tela-painel').classList.add('escondido'); $('tela-entrada').classList.remove('escondido');
     }
+
+    function mudarMes(delta) {
+      const [a, m] = mesAtual.split('-').map(Number), d = new Date(a, m - 1 + delta, 1);
+      mesAtual = `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}`;
+      $('mes-label').textContent = `${MESES[d.getMonth()]} ${d.getFullYear()}`;
+      mudarVisao(visaoAtual);
+    }
+
+    function alternarOcultas() { mostrarOcultas = !mostrarOcultas; mudarVisao(visaoAtual); }
 
     function mudarVisao(visao) {
       visaoAtual = visao;
-      const t1 = PALETA[config.p1.cor] || PALETA.azul, t2 = PALETA[config.p2.cor] || PALETA.rosa;
-      const somenteLeitura = (visao === 'casal');
+      const t1 = PALETA[config.p1.cor] || PALETA.azul, t2 = PALETA[config.p2.cor] || PALETA.rosa, ro = (visao === 'casal');
+      ['p1', 'p2', 'casal'].forEach(id => { $('aba-' + id).className = 'aba-btn' + (visao === id ? ' ativa' : ''); $('aba-' + id).style.cssText = ''; });
+      const tA = visao === 'p1' ? t1 : (visao === 'p2' ? t2 : PALETA.lilas);
+      $('aba-' + visao).style.backgroundColor = tA.fundo; $('aba-' + visao).style.color = tA.texto;
 
-      ['p1', 'p2', 'casal'].forEach(id => {
-        const b = document.getElementById(`aba-${id}`);
-        b.className = 'aba-btn' + (visao === id ? ' ativa' : '');
-        b.style.backgroundColor = ''; b.style.color = '';
+      $('btn-nova-cart').classList.toggle('escondido', ro);
+      $('btn-nova-fixa').classList.toggle('escondido', ro);
+
+      const carts = ro ? carteiras : carteiras.filter(c => c.dono === visao);
+      const temOcultas = carts.some(c => c.oculta);
+      const saldo = (mostrarOcultas ? carts : carts.filter(c => !c.oculta)).reduce((s, c) => s + Number(c.saldo || 0), 0);
+
+      const movsM = movs.filter(m => String(m.data || '').startsWith(mesAtual));
+      const movsV = ro ? movsM : movsM.filter(m => m.dono === visao || m.donoDestino === visao);
+      $('valor-entradas').textContent = fmt(movsV.filter(m => m.tipo === 'entrada' && (ro || m.dono === visao)).reduce((s, m) => s + Number(m.valor), 0));
+      $('valor-saidas').textContent = fmt(movsV.filter(m => m.tipo === 'saida' && (ro || m.dono === visao)).reduce((s, m) => s + Number(m.valor), 0));
+
+      const fVisao = ro ? fixas : fixas.filter(f => f.dono === visao), mesPad = hoje().slice(0, 7);
+      const fixasMes = []; let futuras = 0;
+      fVisao.forEach(f => {
+        const diff = diffMes(f.mesInicio || mesPad, mesAtual);
+        if (diff < 0) { futuras++; return; }
+        if (f.parcelaTotal > 0) {
+          const p = (Number(f.parcelaAtual) || 1) + diff;
+          if (p <= Number(f.parcelaTotal)) fixasMes.push({ ...f, parcNoMes: p });
+        } else fixasMes.push({ ...f, parcNoMes: 0 });
       });
-      const aba = document.getElementById(`aba-${visao}`);
-      const tAtivo = visao === 'p1' ? t1 : (visao === 'p2' ? t2 : PALETA.lilas);
-      aba.style.backgroundColor = tAtivo.fundo; aba.style.color = tAtivo.texto;
 
-      document.getElementById('btn-nova-carteira').classList.toggle('escondido', somenteLeitura);
-      document.getElementById('btn-nova-fixa').classList.toggle('escondido', somenteLeitura);
+      const pagoEm = (f, m) => String(f.ultimoMesPago || '').split(',').map(x => x.trim()).includes(m);
+      const aRec = fixasMes.filter(f => f.tipo === 'entrada' && !pagoEm(f, mesAtual)).reduce((s, f) => s + Number(f.valor), 0);
+      const aPag = fixasMes.filter(f => f.tipo === 'saida' && !pagoEm(f, mesAtual)).reduce((s, f) => s + Number(f.valor), 0);
 
-      const carts = somenteLeitura ? carteiras : carteiras.filter(c => c.dono === visao);
-      const saldoTotal = carts.reduce((s, c) => s + Number(c.saldo || 0), 0);
+      const cs = $('card-saldo');
+      cs.style.background = ro ? `linear-gradient(135deg,${t1.fundo},#F1EBFF 50%,${t2.fundo})` : `linear-gradient(135deg,${tA.fundo},#FFF)`;
+      cs.style.borderColor = tA.borda;
+      $('saldo-titulo').textContent = ro ? `Total (${config.p1.nome} + ${config.p2.nome})` : `Saldo — ${config[visao].nome}`;
+      $('saldo-numero').textContent = fmt(saldo);
 
-      const movsMes = movimentacoes.filter(m => String(m.data || '').startsWith(mesAtual));
-      const movs = somenteLeitura ? movsMes : movsMes.filter(m => m.dono === visao || m.donoDestino === visao);
+      const sp = $('saldo-previsto');
+      if (aRec > 0 || aPag > 0) { sp.textContent = `Previsto no mês: ${fmt(saldo + aRec - aPag)}`; sp.classList.remove('escondido'); } else sp.classList.add('escondido');
 
-      const totEntradas = movs.filter(m => m.tipo === 'entrada' && (somenteLeitura || m.dono === visao)).reduce((s, m) => s + Number(m.valor), 0);
-      const totSaidas = movs.filter(m => m.tipo === 'saida' && (somenteLeitura || m.dono === visao)).reduce((s, m) => s + Number(m.valor), 0);
+      const btO = $('btn-toggle-ocultas');
+      if (temOcultas) { btO.textContent = mostrarOcultas ? '🙈 Ocultar cofrinhos' : '👁️ Incluir cofrinhos'; btO.classList.remove('escondido'); } else btO.classList.add('escondido');
 
-      const fixasVisao = somenteLeitura ? fixas : fixas.filter(f => f.dono === visao);
-      const aReceber = fixasVisao.filter(f => f.tipo === 'entrada' && f.ultimoMesPago !== mesAtual).reduce((s, f) => s + Number(f.valor), 0);
-      const aPagar = fixasVisao.filter(f => f.tipo === 'saida' && f.ultimoMesPago !== mesAtual).reduce((s, f) => s + Number(f.valor), 0);
-      const saldoPrevisto = saldoTotal + aReceber - aPagar;
-
-      const cardSaldo = document.getElementById('card-saldo');
-      document.getElementById('saldo-numero').textContent = formatarReal(saldoTotal);
-      document.getElementById('valor-entradas').textContent = formatarReal(totEntradas);
-      document.getElementById('valor-saidas').textContent = formatarReal(totSaidas);
-
-      const prevEl = document.getElementById('saldo-previsto');
-      if (aReceber > 0 || aPagar > 0) {
-        prevEl.textContent = `Previsto após contas do mês: ${formatarReal(saldoPrevisto)}`;
-        prevEl.classList.remove('escondido');
-      } else {
-        prevEl.classList.add('escondido');
-      }
-
-      if (visao === 'p1') {
-        document.getElementById('banner-humor').textContent = `"${config.p1.nome}, precisamos conversar sobre esse cartão..."`;
-        cardSaldo.style.background = `linear-gradient(135deg, ${t1.fundo} 0%, #FFFFFF 100%)`; cardSaldo.style.borderColor = t1.borda;
-        document.getElementById('saldo-titulo').textContent = `Saldo — ${config.p1.nome}`;
-      } else if (visao === 'p2') {
-        document.getElementById('banner-humor').textContent = `"${config.p2.nome}: se estava na promoção, tecnicamente foi economia."`;
-        cardSaldo.style.background = `linear-gradient(135deg, ${t2.fundo} 0%, #FFFFFF 100%)`; cardSaldo.style.borderColor = t2.borda;
-        document.getElementById('saldo-titulo').textContent = `Saldo — ${config.p2.nome}`;
-      } else {
-        document.getElementById('banner-humor').textContent = '"O casal está enriquecendo. Ou pelo menos tentando."';
-        cardSaldo.style.background = `linear-gradient(135deg, ${t1.fundo} 0%, #F1EBFF 50%, ${t2.fundo} 100%)`; cardSaldo.style.borderColor = PALETA.lilas.borda;
-        document.getElementById('saldo-titulo').textContent = `Somatório (${config.p1.nome} + ${config.p2.nome})`;
-      }
-
-      const pendsVisao = somenteLeitura ? pendentes : pendentes.filter(p => p.dono === visao || p.donoDestino === visao);
-      desenharPendentes(pendsVisao, somenteLeitura);
-      desenharCarteiras(carts, somenteLeitura);
-      desenharFixas(fixasVisao, somenteLeitura);
-      desenharMovimentacoes(movs, somenteLeitura);
+      renderPend(ro ? pendentes : pendentes.filter(p => p.dono === visao || p.donoDestino === visao), ro);
+      renderCarts(carts, ro);
+      renderFixas(fixasMes, futuras, ro, pagoEm);
+      renderMovs(movsV, ro);
     }
 
-    function desenharPendentes(lista, somenteLeitura) {
-      const sec = document.getElementById('secao-pendentes');
-      const cont = document.getElementById('lista-pendentes');
-      cont.innerHTML = '';
-      if (!lista.length) { sec.classList.add('escondido'); return; }
+    function renderPend(lista, ro) {
+      const sec = $('secao-pendentes'), cont = $('lista-pendentes'); cont.innerHTML = '';
+      if (!lista.length) return sec.classList.add('escondido');
       sec.classList.remove('escondido');
-
       lista.forEach(p => {
-        const pDono = config[p.dono] || config.p1, t = PALETA[pDono.cor] || PALETA.azul;
-        const card = document.createElement('div'); card.className = 'card-pendente';
-
-        const topo = document.createElement('div'); topo.className = 'pend-topo';
-        const info = document.createElement('div');
-        const titulo = document.createElement('p'); titulo.className = 'item-nome'; titulo.textContent = p.descricao || p.categoria;
-        const sub = document.createElement('div'); sub.className = 'item-detalhe';
-        const tag = document.createElement('span'); tag.className = 'etiqueta'; tag.style.backgroundColor = t.fundo; tag.style.color = t.texto;
-        tag.textContent = p.tipo === 'transferencia' ? `🔄 ${p.carteiraNome} → ${p.carteiraDestinoNome}` : `${pDono.nome} • ${p.carteiraNome}`;
-        sub.appendChild(tag);
-        info.append(titulo, sub);
-
-        const val = document.createElement('span');
-        val.className = 'item-valor ' + (p.tipo === 'entrada' ? 'val-pos' : (p.tipo === 'saida' ? 'val-neg' : 'val-transf'));
-        val.textContent = formatarReal(p.valor);
-        topo.append(info, val);
-
-        const frase = document.createElement('p'); frase.className = 'pend-frase';
-        frase.textContent = p.fraseOriginal ? `"${p.fraseOriginal}"` : '';
-        card.append(topo, frase);
-
-        if (!somenteLeitura) {
-          const acoes = document.createElement('div'); acoes.className = 'pend-acoes';
-          const bOk = document.createElement('button'); bOk.type = 'button'; bOk.className = 'btn-pend-ok'; bOk.textContent = '✅ Confirmar';
-          bOk.onclick = () => confirmarPendente(p.id);
-          const bEd = document.createElement('button'); bEd.type = 'button'; bEd.className = 'btn-mini'; bEd.textContent = '✏️';
-          bEd.onclick = () => editarPendenteAntes(p.id);
-          const bDel = document.createElement('button'); bDel.type = 'button'; bDel.className = 'btn-mini'; bDel.textContent = '🗑️';
-          bDel.onclick = () => descartarPendente(p.id);
-          acoes.append(bOk, bEd, bDel); card.appendChild(acoes);
+        const pd = config[p.dono] || config.p1, t = PALETA[pd.cor] || PALETA.azul, card = el('div', 'card-pendente');
+        const topo = el('div', 'pend-topo'), info = el('div');
+        info.appendChild(el('p', 'item-nome', p.descricao || p.categoria));
+        const sub = el('div', 'item-detalhe'), tag = el('span', 'etiqueta', p.tipo === 'transferencia' ? `🔄 ${p.carteiraNome} → ${p.carteiraDestinoNome}` : `${pd.nome} • ${p.carteiraNome}`);
+        tag.style.backgroundColor = t.fundo; tag.style.color = t.texto; sub.appendChild(tag); info.appendChild(sub);
+        const val = el('span', 'item-valor ' + (p.tipo === 'entrada' ? 'val-pos' : (p.tipo === 'saida' ? 'val-neg' : 'val-transf')), fmt(p.valor));
+        topo.append(info, val); card.append(topo, el('p', 'pend-frase', p.fraseOriginal ? `"${p.fraseOriginal}"` : ''));
+        if (!ro) {
+          const ac = el('div', 'pend-acoes'), ok = el('button', 'btn-pend-ok', '✅ Confirmar'), ed = el('button', 'btn-mini', '✏️'), dl = el('button', 'btn-mini', '🗑️');
+          ok.onclick = () => confirmarPend(p.id); ed.onclick = () => editarPend(p.id); dl.onclick = () => descartarPend(p.id);
+          ac.append(ok, ed, dl); card.appendChild(ac);
         }
         cont.appendChild(card);
       });
     }
 
-    function desenharCarteiras(lista, somenteLeitura) {
-      const cont = document.getElementById('lista-carteiras'); cont.innerHTML = '';
-      if (!lista.length) { cont.innerHTML = '<div class="vazio-aviso">Nenhuma carteira ainda.</div>'; return; }
+    function renderCarts(lista, ro) {
+      const cont = $('lista-carteiras'); cont.innerHTML = '';
+      if (!lista.length) return cont.appendChild(el('div', 'vazio-aviso', 'Nenhuma carteira.'));
       lista.forEach(c => {
-        const pDono = config[c.dono] || config.p1, t = PALETA[pDono.cor] || PALETA.azul;
-        const card = document.createElement('div'); card.className = 'card-item';
-        const esq = document.createElement('div'); esq.className = 'item-esq';
-        const ico = document.createElement('div'); ico.className = 'item-ico'; ico.style.backgroundColor = t.fundo; ico.textContent = c.icone || '💳';
-        const info = document.createElement('div'); info.className = 'item-info';
-        const nome = document.createElement('p'); nome.className = 'item-nome'; nome.textContent = c.nome;
-        const tag = document.createElement('span'); tag.className = 'etiqueta'; tag.style.backgroundColor = t.fundo; tag.style.color = t.texto; tag.textContent = pDono.nome;
-        info.append(nome, tag); esq.append(ico, info);
-
-        const dir = document.createElement('div'); dir.className = 'item-dir';
-        const saldo = document.createElement('span'); saldo.className = 'item-valor'; saldo.textContent = formatarReal(c.saldo);
-        dir.appendChild(saldo);
-        if (!somenteLeitura) {
-          const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'btn-mini'; btn.textContent = '✏️';
-          btn.onclick = () => abrirModalEditarCarteira(c.id);
-          dir.appendChild(btn);
-        }
+        const pd = config[c.dono] || config.p1, t = PALETA[pd.cor] || PALETA.azul, card = el('div', 'card-item');
+        const esq = el('div', 'item-esq'), ico = el('div', 'item-ico', c.icone || '💳');
+        ico.style.backgroundColor = t.fundo;
+        const info = el('div', 'item-info');
+        info.appendChild(el('p', 'item-nome', c.nome));
+        const det = el('div', 'item-detalhe'), tag = el('span', 'etiqueta', pd.nome);
+        tag.style.backgroundColor = t.fundo; tag.style.color = t.texto; det.appendChild(tag);
+        if (c.oculta) det.appendChild(el('span', 'etiqueta tag-oculta', '🙈 Oculta'));
+        info.appendChild(det); esq.append(ico, info);
+        const dir = el('div', 'item-dir'); dir.appendChild(el('span', 'item-valor', fmt(c.saldo)));
+        if (!ro) { const b = el('button', 'btn-mini', '✏️'); b.onclick = () => abrirModalCart(c.id); dir.appendChild(b); }
         card.append(esq, dir); cont.appendChild(card);
       });
     }
 
-    function desenharFixas(lista, somenteLeitura) {
-      const cont = document.getElementById('lista-fixas'); cont.innerHTML = '';
-      if (!lista.length) { cont.innerHTML = '<div class="vazio-aviso">Nenhuma conta fixa ou prevista cadastrada.</div>'; return; }
-      const ordenadas = [...lista].sort((a, b) => Number(a.diaVencimento || 1) - Number(b.diaVencimento || 1));
+    function renderFixas(lista, futuras, ro, pagoEm) {
+      const cont = $('lista-fixas'); cont.innerHTML = '';
+      if (!lista.length && !futuras) return cont.appendChild(el('div', 'vazio-aviso', 'Nenhuma conta fixa ou parcela neste mês.'));
+      [...lista].sort((a, b) => Number(a.diaVencimento || 1) - Number(b.diaVencimento || 1)).forEach(f => {
+        const pd = config[f.dono] || config.p1, t = PALETA[pd.cor] || PALETA.azul, pago = pagoEm(f, mesAtual), card = el('div', 'card-item');
+        const esq = el('div', 'item-esq'), ico = el('div', 'item-ico', pegarEmoji(f.categoria, '📅'));
+        ico.style.backgroundColor = t.fundo;
+        const info = el('div', 'item-info'); info.appendChild(el('p', 'item-nome', f.titulo));
+        const det = el('div', 'item-detalhe'), tag = el('span', 'etiqueta', pd.nome);
+        tag.style.backgroundColor = t.fundo; tag.style.color = t.texto;
+        det.append(tag, el('span', '', `Dia ${f.diaVencimento}` + (f.parcelaTotal > 0 ? ` • ${f.parcNoMes}/${f.parcelaTotal}` : '')));
+        info.appendChild(det); esq.append(ico, info);
 
-      ordenadas.forEach(f => {
-        const pDono = config[f.dono] || config.p1, t = PALETA[pDono.cor] || PALETA.azul;
-        const pago = f.ultimoMesPago === mesAtual;
-        const card = document.createElement('div'); card.className = 'card-item';
-        const esq = document.createElement('div'); esq.className = 'item-esq';
-        const ico = document.createElement('div'); ico.className = 'item-ico'; ico.style.backgroundColor = t.fundo;
-        ico.textContent = f.categoria ? f.categoria.split(' ')[0] : '📅';
-
-        const info = document.createElement('div'); info.className = 'item-info';
-        const nome = document.createElement('p'); nome.className = 'item-nome'; nome.textContent = f.titulo;
-        const det = document.createElement('div'); det.className = 'item-detalhe';
-        const tag = document.createElement('span'); tag.className = 'etiqueta'; tag.style.backgroundColor = t.fundo; tag.style.color = t.texto; tag.textContent = pDono.nome;
-        const venc = document.createElement('span');
-        let txtVenc = `Dia ${f.diaVencimento}`;
-        if (f.parcelaTotal > 0) txtVenc += ` • ${f.parcelaAtual}/${f.parcelaTotal}`;
-        venc.textContent = txtVenc;
-        det.append(tag, venc); info.append(nome, det); esq.append(ico, info);
-
-        const dir = document.createElement('div'); dir.className = 'item-dir';
-        const val = document.createElement('span');
-        val.className = 'item-valor ' + (f.tipo === 'entrada' ? 'val-pos' : 'val-neg');
-        val.textContent = formatarReal(f.valor);
-        dir.appendChild(val);
-
-        if (pago) {
-          const b = document.createElement('span'); b.className = 'badge-pago';
-          b.textContent = f.tipo === 'entrada' ? '✅' : '✅';
-          dir.appendChild(b);
-        } else if (!somenteLeitura) {
-          const btnPagar = document.createElement('button'); btnPagar.type = 'button'; btnPagar.className = 'btn-pagar';
-          btnPagar.textContent = f.tipo === 'entrada' ? 'Receber' : 'Pagar';
-          btnPagar.onclick = () => abrirModalPagarFixa(f.id);
-          dir.appendChild(btnPagar);
-        }
-
-        if (!somenteLeitura) {
-          const btnEd = document.createElement('button'); btnEd.type = 'button'; btnEd.className = 'btn-mini'; btnEd.textContent = '✏️';
-          btnEd.onclick = () => abrirModalEditarFixa(f.id);
-          dir.appendChild(btnEd);
-        }
+        const dir = el('div', 'item-dir');
+        dir.appendChild(el('span', 'item-valor ' + (f.tipo === 'entrada' ? 'val-pos' : 'val-neg'), fmt(f.valor)));
+        if (pago) dir.appendChild(el('span', 'etiqueta', '✅'));
+        else if (!ro) { const bp = el('button', 'btn-pagar', f.tipo === 'entrada' ? 'Receber' : 'Pagar'); bp.onclick = () => abrirModalPagar(f.id, f.parcNoMes); dir.appendChild(bp); }
+        if (!ro) { const be = el('button', 'btn-mini', '✏️'); be.onclick = () => abrirModalFixa(f.id); dir.appendChild(be); }
         card.append(esq, dir); cont.appendChild(card);
       });
+      if (futuras) {
+        const av = el('div', 'aviso-futuro', `📅 +${futuras} prevista(s) para os próximos meses ▶`);
+        av.onclick = () => mudarMes(1); cont.appendChild(av);
+      }
     }
 
-    function desenharMovimentacoes(lista, somenteLeitura) {
-      const cont = document.getElementById('lista-movimentacoes'); cont.innerHTML = '';
-      if (!lista.length) { cont.innerHTML = '<div class="vazio-aviso">Sem movimentações neste mês.</div>'; return; }
-      const ordenadas = [...lista].sort((a, b) => (b.data || '').localeCompare(a.data || '') || (b.criadoEm || 0) - (a.criadoEm || 0));
-
-      ordenadas.forEach(m => {
-        const pDono = config[m.dono] || config.p1, t = PALETA[pDono.cor] || PALETA.azul;
-        const row = document.createElement('div'); row.className = 'card-item';
-        const esq = document.createElement('div'); esq.className = 'item-esq';
-        const ico = document.createElement('div'); ico.className = 'item-ico';
+    function renderMovs(lista, ro) {
+      const cont = $('lista-movs'); cont.innerHTML = '';
+      if (!lista.length) return cont.appendChild(el('div', 'vazio-aviso', 'Sem movimentações neste mês.'));
+      [...lista].sort((a, b) => (b.data || '').localeCompare(a.data || '') || (b.criadoEm || 0) - (a.criadoEm || 0)).forEach(m => {
+        const pd = config[m.dono] || config.p1, t = PALETA[pd.cor] || PALETA.azul, card = el('div', 'card-item');
+        const esq = el('div', 'item-esq'), ico = el('div', 'item-ico', m.tipo === 'transferencia' ? '🔄' : pegarEmoji(m.categoria, '💸'));
         ico.style.backgroundColor = m.tipo === 'transferencia' ? PALETA.lilas.fundo : t.fundo;
-        ico.textContent = m.tipo === 'transferencia' ? '🔄' : (m.categoria ? m.categoria.split(' ')[0] : '💸');
+        const info = el('div', 'item-info'); info.appendChild(el('p', 'item-nome', m.descricao || m.categoria));
+        const det = el('div', 'item-detalhe'), tag = el('span', 'etiqueta', m.tipo === 'transferencia' ? `${m.carteiraNome} → ${m.carteiraDestinoNome}` : `${pd.nome} • ${m.carteiraNome}`);
+        tag.style.backgroundColor = t.fundo; tag.style.color = t.texto;
+        det.append(tag, el('span', '', fmtDataBR(m.data))); info.appendChild(det); esq.append(ico, info);
 
-        const info = document.createElement('div'); info.className = 'item-info';
-        const titulo = document.createElement('p'); titulo.className = 'item-nome'; titulo.textContent = m.descricao || m.categoria;
-        const det = document.createElement('div'); det.className = 'item-detalhe';
-        const tag = document.createElement('span'); tag.className = 'etiqueta'; tag.style.backgroundColor = t.fundo; tag.style.color = t.texto;
-        tag.textContent = m.tipo === 'transferencia' ? `${m.carteiraNome} → ${m.carteiraDestinoNome}` : `${pDono.nome} • ${m.carteiraNome}`;
-        const dataTxt = document.createElement('span'); dataTxt.textContent = formatarDataHoraBR(m.data);
-        det.append(tag, dataTxt); info.append(titulo, det); esq.append(ico, info);
-
-        const dir = document.createElement('div'); dir.className = 'item-dir';
-        const val = document.createElement('span');
+        const dir = el('div', 'item-dir');
         const sinal = m.tipo === 'entrada' ? '+ ' : (m.tipo === 'saida' ? '- ' : '');
-        val.className = 'item-valor ' + (m.tipo === 'entrada' ? 'val-pos' : (m.tipo === 'saida' ? 'val-neg' : 'val-transf'));
-        val.textContent = sinal + formatarReal(m.valor);
-        dir.appendChild(val);
-
-        if (!somenteLeitura) {
-          const btnDel = document.createElement('button'); btnDel.type = 'button'; btnDel.className = 'btn-mini'; btnDel.textContent = '🗑️';
-          btnDel.onclick = () => excluirMovimentacao(m.id);
-          dir.appendChild(btnDel);
-        }
-        row.append(esq, dir); cont.appendChild(row);
+        dir.appendChild(el('span', 'item-valor ' + (m.tipo === 'entrada' ? 'val-pos' : (m.tipo === 'saida' ? 'val-neg' : 'val-transf')), sinal + fmt(m.valor)));
+        if (!ro) { const bd = el('button', 'btn-mini', '🗑️'); bd.onclick = () => excluirMov(m.id); dir.appendChild(bd); }
+        card.append(esq, dir); cont.appendChild(card);
       });
     }
 
-    function fecharModal(id) { document.getElementById(id).classList.add('escondido'); }
-
-    function preencherSelectDonos(selId, padrao) {
-      const sel = document.getElementById(selId); sel.innerHTML = '';
-      ['p1', 'p2'].forEach(k => {
-        const o = document.createElement('option'); o.value = k; o.textContent = `${config[k].icone} ${config[k].nome}`;
-        if (k === padrao) o.selected = true;
-        sel.appendChild(o);
-      });
+    function fillDonos(id, pad) {
+      const s = $(id); s.innerHTML = '';
+      ['p1', 'p2'].forEach(k => { const o = el('option', '', `${config[k].icone} ${config[k].nome}`); o.value = k; if (k === pad) o.selected = true; s.appendChild(o); });
+    }
+    function fillCats(id, pad) {
+      const s = $(id); s.innerHTML = '';
+      config.categorias.forEach(c => { const o = el('option', '', c); o.value = c; if (c === pad) o.selected = true; s.appendChild(o); });
     }
 
-    function preencherSelectCategorias(selId, padrao) {
-      const sel = document.getElementById(selId); sel.innerHTML = '';
-      config.categorias.forEach(cat => {
-        const o = document.createElement('option'); o.value = cat; o.textContent = cat;
-        if (cat === padrao) o.selected = true;
-        sel.appendChild(o);
-      });
+    /* MODAL CARTEIRA */
+    function desenharIcos() {
+      const g = $('grid-icos'); g.innerHTML = '';
+      ICOS.forEach(i => { const b = el('button', 'ico-op' + (icoModal === i ? ' sel' : ''), i); b.type = 'button'; b.onclick = () => { icoModal = i; desenharIcos(); }; g.appendChild(b); });
+    }
+    function abrirModalCart(id) {
+      const c = id ? carteiras.find(x => x.id === id) : null;
+      editCartId = c ? c.id : null;
+      $('tit-cart').textContent = c ? '✏️ Editar Carteira' : '➕ Nova Carteira';
+      fillDonos('cart-dono', c ? c.dono : (visaoAtual === 'p2' ? 'p2' : 'p1'));
+      $('cart-nome').value = c ? c.nome : '';
+      $('cart-saldo').value = c ? Number(c.saldo || 0).toFixed(2).replace('.', ',') : '0,00';
+      $('cart-oculta').checked = c ? Boolean(c.oculta) : false;
+      icoModal = c ? (c.icone || '💳') : '💳'; desenharIcos();
+      $('btn-del-cart').classList.toggle('escondido', !c);
+      $('modal-cart').classList.remove('escondido');
+    }
+    function salvarCart() {
+      const dono = $('cart-dono').value, nome = $('cart-nome').value.trim(), saldo = lerVal($('cart-saldo').value), oculta = $('cart-oculta').checked;
+      if (!nome) return toast('Digite o nome');
+      if (editCartId) { const i = carteiras.findIndex(x => x.id === editCartId); if (i !== -1) carteiras[i] = { ...carteiras[i], dono, nome, saldo, oculta, icone: icoModal }; }
+      else carteiras.push({ id: 'c_' + Date.now(), dono, nome, saldo, oculta, icone: icoModal });
+      salvarLoc('ukeah_carteiras', carteiras); fechar('modal-cart'); mudarVisao(visaoAtual); enviarPainel();
+    }
+    function excluirCart() {
+      if (!editCartId || !confirm('Excluir carteira?')) return;
+      carteiras = carteiras.filter(c => c.id !== editCartId);
+      salvarLoc('ukeah_carteiras', carteiras); fechar('modal-cart'); mudarVisao(visaoAtual); enviarPainel();
     }
 
-    /* CARTEIRAS */
-    function desenharIconesModal() {
-      const g = document.getElementById('grid-icones-carteira'); g.innerHTML = '';
-      ICONES_CARTEIRA.forEach(ico => {
-        const b = document.createElement('button'); b.type = 'button';
-        b.className = 'ico-opcao' + (iconeSelecionadoModal === ico ? ' selecionado' : '');
-        b.textContent = ico; b.onclick = () => { iconeSelecionadoModal = ico; desenharIconesModal(); };
-        g.appendChild(b);
-      });
-    }
-
-    function abrirModalNovaCarteira() {
-      idCarteiraEditando = null;
-      document.getElementById('modal-titulo').textContent = '➕ Nova Carteira';
-      preencherSelectDonos('select-dono-carteira', visaoAtual === 'p2' ? 'p2' : 'p1');
-      document.getElementById('input-nome-carteira').value = '';
-      document.getElementById('input-saldo-carteira').value = '0,00';
-      iconeSelecionadoModal = '💳'; desenharIconesModal();
-      document.getElementById('btn-excluir-carteira').classList.add('escondido');
-      document.getElementById('modal-carteira').classList.remove('escondido');
-    }
-
-    function abrirModalEditarCarteira(id) {
-      const c = carteiras.find(x => x.id === id); if (!c) return;
-      idCarteiraEditando = id;
-      document.getElementById('modal-titulo').textContent = '✏️ Editar Carteira';
-      preencherSelectDonos('select-dono-carteira', c.dono);
-      document.getElementById('input-nome-carteira').value = c.nome;
-      document.getElementById('input-saldo-carteira').value = Number(c.saldo || 0).toFixed(2).replace('.', ',');
-      iconeSelecionadoModal = c.icone || '💳'; desenharIconesModal();
-      document.getElementById('btn-excluir-carteira').classList.remove('escondido');
-      document.getElementById('modal-carteira').classList.remove('escondido');
-    }
-
-    function salvarCarteiraModal() {
-      const dono = document.getElementById('select-dono-carteira').value;
-      const nome = document.getElementById('input-nome-carteira').value.trim();
-      const saldo = lerValorMonetario(document.getElementById('input-saldo-carteira').value);
-      if (!nome) return mostrarAviso('Digite o nome da carteira');
-      if (idCarteiraEditando) {
-        const i = carteiras.findIndex(c => c.id === idCarteiraEditando);
-        if (i !== -1) carteiras[i] = { ...carteiras[i], dono, nome, saldo, icone: iconeSelecionadoModal };
-      } else {
-        carteiras.push({ id: 'c_' + Date.now(), dono, nome, saldo, icone: iconeSelecionadoModal });
-      }
-      salvarLocal('ukeah_carteiras', carteiras);
-      fecharModal('modal-carteira'); mudarVisao(visaoAtual); enviarPainelParaPlanilha();
-    }
-
-    function excluirCarteiraModal() {
-      if (!idCarteiraEditando || !confirm('Excluir esta carteira?')) return;
-      carteiras = carteiras.filter(c => c.id !== idCarteiraEditando);
-      salvarLocal('ukeah_carteiras', carteiras);
-      fecharModal('modal-carteira'); mudarVisao(visaoAtual); enviarPainelParaPlanilha();
-    }
-
-    /* LANÇAR */
-    function abrirModalLancar(preencher) {
-      if (!carteiras.length) return mostrarAviso('Crie uma carteira primeiro');
-      idPendenteEditando = preencher ? preencher.idPendente : null;
-      preencherSelectDonos('lanc-dono', (preencher && preencher.dono) || (visaoAtual === 'p2' ? 'p2' : 'p1'));
-      preencherSelectCategorias('lanc-categoria', preencher && preencher.categoria);
-
-      document.getElementById('lanc-valor').value = preencher ? Number(preencher.valor).toFixed(2).replace('.', ',') : '';
-      document.getElementById('lanc-desc').value = preencher ? (preencher.descricao || '') : '';
-      document.getElementById('lanc-data').value = hojeISO();
-      document.getElementById('lanc-hora').value = horaAgoraSegundos();
-
-      mudarTipoLanc((preencher && preencher.tipo) || 'saida');
-      atualizarCarteirasLanc(preencher && preencher.carteiraId);
-      preencherCarteirasTransf(preencher && preencher.carteiraId, preencher && preencher.carteiraDestinoId);
-      document.getElementById('modal-lancar').classList.remove('escondido');
-    }
-
-    function mudarTipoLanc(tipo) {
-      tipoLancAtual = tipo;
-      document.getElementById('btn-tipo-saida').className = 'btn-tipo-lanc' + (tipo === 'saida' ? ' ativo-saida' : '');
-      document.getElementById('btn-tipo-entrada').className = 'btn-tipo-lanc' + (tipo === 'entrada' ? ' ativo-entrada' : '');
-      document.getElementById('btn-tipo-transferencia').className = 'btn-tipo-lanc' + (tipo === 'transferencia' ? ' ativo-transf' : '');
-      const isT = tipo === 'transferencia';
-      document.getElementById('grupo-lanc-normal').classList.toggle('escondido', isT);
-      document.getElementById('grupo-lanc-transf').classList.toggle('escondido', !isT);
-    }
-
-    function atualizarCarteirasLanc(idPadrao) {
-      const dono = document.getElementById('lanc-dono').value;
-      const sel = document.getElementById('lanc-carteira'); sel.innerHTML = '';
-      const lista = carteiras.filter(c => c.dono === dono);
-      if (!lista.length) { const o = document.createElement('option'); o.value = ''; o.textContent = 'Sem carteiras'; sel.appendChild(o); return; }
-      lista.forEach(c => {
-        const o = document.createElement('option'); o.value = c.id;
-        o.textContent = `${c.icone} ${c.nome} (${formatarReal(c.saldo)})`;
-        if (c.id === idPadrao) o.selected = true;
-        sel.appendChild(o);
-      });
-    }
-
-    function preencherCarteirasTransf(idOrig, idDest) {
-      ['lanc-origem', 'lanc-destino'].forEach((id, idx) => {
-        const sel = document.getElementById(id); sel.innerHTML = '';
+    /* MODAL LANÇAR */
+    function abrirModalLancar(pre) {
+      if (!carteiras.length) return toast('Crie uma carteira primeiro');
+      pendEditId = pre ? pre.idPend : null;
+      fillDonos('lanc-dono', (pre && pre.dono) || (visaoAtual === 'p2' ? 'p2' : 'p1'));
+      fillCats('lanc-cat', pre && pre.categoria);
+      $('lanc-val').value = pre ? Number(pre.valor).toFixed(2).replace('.', ',') : '';
+      $('lanc-desc').value = pre ? (pre.descricao || '') : '';
+      $('lanc-data').value = hoje(); $('lanc-hora').value = agora();
+      setTipoLanc((pre && pre.tipo) || 'saida');
+      atualizarCartsLanc(pre && pre.carteiraId);
+      ['lanc-orig', 'lanc-dest'].forEach((id, idx) => {
+        const s = $(id); s.innerHTML = '';
         carteiras.forEach(c => {
-          const o = document.createElement('option'); o.value = c.id;
-          o.textContent = `${c.icone} ${c.nome} — ${config[c.dono].nome} (${formatarReal(c.saldo)})`;
-          if ((idx === 0 && c.id === idOrig) || (idx === 1 && c.id === idDest)) o.selected = true;
-          sel.appendChild(o);
+          const o = el('option', '', `${c.icone} ${c.nome} — ${config[c.dono].nome}`); o.value = c.id;
+          if ((idx === 0 && pre && c.id === pre.carteiraId) || (idx === 1 && pre && c.id === pre.carteiraDestinoId)) o.selected = true;
+          s.appendChild(o);
         });
-        if (idx === 1 && !idDest && carteiras.length > 1) sel.selectedIndex = 1;
+        if (idx === 1 && !(pre && pre.carteiraDestinoId) && carteiras.length > 1) s.selectedIndex = 1;
+      });
+      $('modal-lanc').classList.remove('escondido');
+    }
+    function setTipoLanc(t) {
+      tipoLanc = t;
+      $('t-saida').className = 'btn-tipo' + (t === 'saida' ? ' ativo-saida' : '');
+      $('t-entrada').className = 'btn-tipo' + (t === 'entrada' ? ' ativo-entrada' : '');
+      $('t-transferencia').className = 'btn-tipo' + (t === 'transferencia' ? ' ativo-transf' : '');
+      $('g-normal').classList.toggle('escondido', t === 'transferencia');
+      $('g-transf').classList.toggle('escondido', t !== 'transferencia');
+    }
+    function atualizarCartsLanc(pad) {
+      const s = $('lanc-cart'); s.innerHTML = '';
+      carteiras.filter(c => c.dono === $('lanc-dono').value).forEach(c => {
+        const o = el('option', '', `${c.icone} ${c.nome} (${fmt(c.saldo)})`); o.value = c.id; if (c.id === pad) o.selected = true; s.appendChild(o);
       });
     }
+    function salvarLanc() {
+      const valor = lerVal($('lanc-val').value), desc = $('lanc-desc').value.trim();
+      let h = $('lanc-hora').value || agora(); if (h.length === 5) h += ':00';
+      const dataComp = `${$('lanc-data').value || hoje()} ${h}`;
+      if (valor <= 0) return toast('Valor inválido');
 
-    function salvarLancamento() {
-      const valor = lerValorMonetario(document.getElementById('lanc-valor').value);
-      const desc = document.getElementById('lanc-desc').value.trim();
-      const dataDia = document.getElementById('lanc-data').value || hojeISO();
-      let horaDia = document.getElementById('lanc-hora').value || horaAgoraSegundos();
-      if (horaDia.length === 5) horaDia += ':00';
-      const dataCompleta = `${dataDia} ${horaDia}`;
-      if (valor <= 0) return mostrarAviso('Digite um valor maior que zero');
-
-      if (tipoLancAtual === 'transferencia') {
-        const origId = document.getElementById('lanc-origem').value, destId = document.getElementById('lanc-destino').value;
-        if (origId === destId) return mostrarAviso('Escolha carteiras diferentes');
-        const orig = carteiras.find(c => c.id === origId), dest = carteiras.find(c => c.id === destId);
-        if (!orig || !dest) return mostrarAviso('Carteiras inválidas');
+      if (tipoLanc === 'transferencia') {
+        const orig = carteiras.find(c => c.id === $('lanc-orig').value), dest = carteiras.find(c => c.id === $('lanc-dest').value);
+        if (!orig || !dest || orig.id === dest.id) return toast('Escolha carteiras diferentes');
         orig.saldo = Number(orig.saldo) - valor; dest.saldo = Number(dest.saldo) + valor;
-        movimentacoes.push({
-          id: 'm_' + Date.now(), criadoEm: Date.now(), tipo: 'transferencia',
-          dono: orig.dono, donoDestino: dest.dono, carteiraId: orig.id, carteiraNome: orig.nome,
-          carteiraDestinoId: dest.id, carteiraDestinoNome: dest.nome,
-          categoria: '🔄 Transferência', descricao: desc || `${orig.nome} → ${dest.nome}`, valor, data: dataCompleta
-        });
+        movs.push({ id: 'm_' + Date.now(), criadoEm: Date.now(), tipo: 'transferencia', dono: orig.dono, donoDestino: dest.dono, carteiraId: orig.id, carteiraNome: orig.nome, carteiraDestinoId: dest.id, carteiraDestinoNome: dest.nome, categoria: '🔄', descricao: desc || `${orig.nome} → ${dest.nome}`, valor, data: dataComp });
       } else {
-        const dono = document.getElementById('lanc-dono').value, cartId = document.getElementById('lanc-carteira').value, cat = document.getElementById('lanc-categoria').value;
-        const cart = carteiras.find(c => c.id === cartId);
-        if (!cart) return mostrarAviso('Selecione uma carteira');
-        cart.saldo = tipoLancAtual === 'entrada' ? Number(cart.saldo) + valor : Number(cart.saldo) - valor;
-        movimentacoes.push({
-          id: 'm_' + Date.now(), criadoEm: Date.now(), tipo: tipoLancAtual, dono,
-          carteiraId: cart.id, carteiraNome: cart.nome, categoria: cat, descricao: desc || cat, valor, data: dataCompleta
-        });
+        const dono = $('lanc-dono').value, cat = $('lanc-cat').value, cart = carteiras.find(c => c.id === $('lanc-cart').value);
+        if (!cart) return toast('Selecione uma carteira');
+        cart.saldo = tipoLanc === 'entrada' ? Number(cart.saldo) + valor : Number(cart.saldo) - valor;
+        movs.push({ id: 'm_' + Date.now(), criadoEm: Date.now(), tipo: tipoLanc, dono, carteiraId: cart.id, carteiraNome: cart.nome, categoria: cat, descricao: desc || cat, valor, data: dataComp });
       }
-
-      if (idPendenteEditando) {
-        pendentes = pendentes.filter(p => p.id !== idPendenteEditando);
-        idPendenteEditando = null;
-        salvarLocal('ukeah_pendentes', pendentes);
-      }
-
-      salvarLocal('ukeah_carteiras', carteiras); salvarLocal('ukeah_movimentacoes', movimentacoes);
-      fecharModal('modal-lancar'); mudarVisao(visaoAtual); mostrarAviso('✅ Lançado!'); enviarPainelParaPlanilha();
+      if (pendEditId) { pendentes = pendentes.filter(p => p.id !== pendEditId); pendEditId = null; salvarLoc('ukeah_pendentes', pendentes); }
+      salvarLoc('ukeah_carteiras', carteiras); salvarLoc('ukeah_movimentacoes', movs);
+      fechar('modal-lanc'); mudarVisao(visaoAtual); toast('✅ Lançado!'); enviarPainel();
     }
-
-    function excluirMovimentacao(id) {
+    function excluirMov(id) {
       if (!confirm('Excluir e estornar na carteira?')) return;
-      const m = movimentacoes.find(x => x.id === id);
+      const m = movs.find(x => x.id === id);
       if (m) {
         if (m.tipo === 'transferencia') {
-          const orig = carteiras.find(c => c.id === m.carteiraId), dest = carteiras.find(c => c.id === m.carteiraDestinoId);
-          if (orig) orig.saldo = Number(orig.saldo) + Number(m.valor);
-          if (dest) dest.saldo = Number(dest.saldo) - Number(m.valor);
+          const o = carteiras.find(c => c.id === m.carteiraId), d = carteiras.find(c => c.id === m.carteiraDestinoId);
+          if (o) o.saldo = Number(o.saldo) + Number(m.valor); if (d) d.saldo = Number(d.saldo) - Number(m.valor);
         } else {
-          const cart = carteiras.find(c => c.id === m.carteiraId);
-          if (cart) cart.saldo = m.tipo === 'entrada' ? Number(cart.saldo) - Number(m.valor) : Number(cart.saldo) + Number(m.valor);
+          const c = carteiras.find(x => x.id === m.carteiraId);
+          if (c) c.saldo = m.tipo === 'entrada' ? Number(c.saldo) - Number(m.valor) : Number(c.saldo) + Number(m.valor);
         }
       }
-      movimentacoes = movimentacoes.filter(x => x.id !== id);
-      salvarLocal('ukeah_carteiras', carteiras); salvarLocal('ukeah_movimentacoes', movimentacoes);
-      mudarVisao(visaoAtual); enviarPainelParaPlanilha();
+      movs = movs.filter(x => x.id !== id);
+      salvarLoc('ukeah_carteiras', carteiras); salvarLoc('ukeah_movimentacoes', movs); mudarVisao(visaoAtual); enviarPainel();
     }
 
-    /* CONTAS FIXAS / PARCELAS */
-    function mudarTipoFixa(tipo) {
-      tipoFixaAtual = tipo;
-      document.getElementById('btn-fixa-saida').className = 'btn-tipo-lanc' + (tipo === 'saida' ? ' ativo-saida' : '');
-      document.getElementById('btn-fixa-entrada').className = 'btn-tipo-lanc' + (tipo === 'entrada' ? ' ativo-entrada' : '');
+    /* MODAL FIXAS */
+    function setTipoFixa(t) { tipoFixa = t; $('f-saida').className = 'btn-tipo' + (t === 'saida' ? ' ativo-saida' : ''); $('f-entrada').className = 'btn-tipo' + (t === 'entrada' ? ' ativo-entrada' : ''); }
+    function abrirModalFixa(id) {
+      const f = id ? fixas.find(x => x.id === id) : null;
+      editFixaId = f ? f.id : null;
+      $('tit-fixa').textContent = f ? '✏️ Editar Conta' : '➕ Nova Conta / Parcela';
+      fillDonos('fixa-dono', f ? f.dono : (visaoAtual === 'p2' ? 'p2' : 'p1'));
+      fillCats('fixa-cat', f && f.categoria);
+      const [aPad, mPad] = (f && f.mesInicio ? f.mesInicio : mesAtual).split('-').map(Number);
+      $('fixa-mes-ini').innerHTML = ''; MESES.forEach((n, i) => { const o = el('option', '', n); o.value = String(i+1).padStart(2,'0'); if (i+1 === mPad) o.selected = true; $('fixa-mes-ini').appendChild(o); });
+      $('fixa-ano-ini').innerHTML = ''; const aAt = new Date().getFullYear();
+      for (let a = aAt - 1; a <= aAt + 4; a++) { const o = el('option', '', a); o.value = a; if (a === aPad) o.selected = true; $('fixa-ano-ini').appendChild(o); }
+      $('fixa-tit').value = f ? f.titulo : ''; $('fixa-val').value = f ? Number(f.valor).toFixed(2).replace('.', ',') : '';
+      $('fixa-dia').value = f ? f.diaVencimento : 10;
+      $('fixa-p-atu').value = (f && f.parcelaTotal > 0) ? f.parcelaAtual : ''; $('fixa-p-tot').value = (f && f.parcelaTotal > 0) ? f.parcelaTotal : '';
+      setTipoFixa(f ? f.tipo : 'saida');
+      $('btn-del-fixa').classList.toggle('escondido', !f);
+      $('modal-fixa').classList.remove('escondido');
     }
-
-    function abrirModalNovaFixa() {
-      idFixaEditando = null;
-      document.getElementById('modal-fixa-titulo').textContent = '➕ Nova Conta Fixa / Prevista';
-      preencherSelectDonos('fixa-dono', visaoAtual === 'p2' ? 'p2' : 'p1');
-      preencherSelectCategorias('fixa-categoria');
-      document.getElementById('fixa-titulo').value = '';
-      document.getElementById('fixa-valor').value = '';
-      document.getElementById('fixa-dia').value = '10';
-      document.getElementById('fixa-parc-atual').value = '';
-      document.getElementById('fixa-parc-total').value = '';
-      mudarTipoFixa('saida');
-      document.getElementById('btn-excluir-fixa').classList.add('escondido');
-      document.getElementById('modal-fixa').classList.remove('escondido');
+    function salvarFixa() {
+      const dono = $('fixa-dono').value, titulo = $('fixa-tit').value.trim(), valor = lerVal($('fixa-val').value);
+      const dia = Math.min(31, Math.max(1, parseInt($('fixa-dia').value) || 1)), cat = $('fixa-cat').value;
+      const mesInicio = `${$('fixa-ano-ini').value}-${$('fixa-mes-ini').value}`;
+      const pTot = parseInt($('fixa-p-tot').value) || 0, pAtu = pTot > 0 ? (parseInt($('fixa-p-atu').value) || 1) : 0;
+      if (!titulo || valor <= 0) return toast('Preencha nome e valor');
+      if (editFixaId) { const i = fixas.findIndex(x => x.id === editFixaId); if (i !== -1) fixas[i] = { ...fixas[i], dono, tipo: tipoFixa, titulo, categoria: cat, valor, diaVencimento: dia, parcelaAtual: pAtu, parcelaTotal: pTot, mesInicio }; }
+      else fixas.push({ id: 'f_' + Date.now(), dono, tipo: tipoFixa, titulo, categoria: cat, valor, diaVencimento: dia, parcelaAtual: pAtu, parcelaTotal: pTot, ultimoMesPago: '', mesInicio });
+      salvarLoc('ukeah_fixas', fixas); fechar('modal-fixa'); mudarVisao(visaoAtual); enviarPainel();
     }
-
-    function abrirModalEditarFixa(id) {
+    function excluirFixa() {
+      if (!editFixaId || !confirm('Excluir conta?')) return;
+      fixas = fixas.filter(x => x.id !== editFixaId);
+      salvarLoc('ukeah_fixas', fixas); fechar('modal-fixa'); mudarVisao(visaoAtual); enviarPainel();
+    }
+    function abrirModalPagar(id, parc) {
       const f = fixas.find(x => x.id === id); if (!f) return;
-      idFixaEditando = id;
-      document.getElementById('modal-fixa-titulo').textContent = '✏️ Editar Conta Fixa';
-      preencherSelectDonos('fixa-dono', f.dono);
-      preencherSelectCategorias('fixa-categoria', f.categoria);
-      document.getElementById('fixa-titulo').value = f.titulo;
-      document.getElementById('fixa-valor').value = Number(f.valor || 0).toFixed(2).replace('.', ',');
-      document.getElementById('fixa-dia').value = f.diaVencimento || 1;
-      document.getElementById('fixa-parc-atual').value = f.parcelaTotal > 0 ? f.parcelaAtual : '';
-      document.getElementById('fixa-parc-total').value = f.parcelaTotal > 0 ? f.parcelaTotal : '';
-      mudarTipoFixa(f.tipo || 'saida');
-      document.getElementById('btn-excluir-fixa').classList.remove('escondido');
-      document.getElementById('modal-fixa').classList.remove('escondido');
+      const carts = carteiras.filter(c => c.dono === f.dono); if (!carts.length) return toast('Crie uma carteira nesse perfil');
+      pagFixaId = id; pagParc = parc || 0;
+      $('tit-pagar').textContent = (f.tipo === 'entrada' ? 'Receber: ' : 'Pagar: ') + f.titulo;
+      $('pagar-cart').innerHTML = '';
+      carts.forEach(c => { const o = el('option', '', `${c.icone} ${c.nome} (${fmt(c.saldo)})`); o.value = c.id; $('pagar-cart').appendChild(o); });
+      $('pagar-val').value = Number(f.valor).toFixed(2).replace('.', ',');
+      $('modal-pagar').classList.remove('escondido');
+    }
+    function confirmarPagFixa() {
+      const f = fixas.find(x => x.id === pagFixaId), cart = carteiras.find(c => c.id === $('pagar-cart').value), val = lerVal($('pagar-val').value);
+      if (!f || !cart || val <= 0) return toast('Verifique os dados');
+      cart.saldo = f.tipo === 'entrada' ? Number(cart.saldo) + val : Number(cart.saldo) - val;
+      const hj = hoje(), dataU = hj.startsWith(mesAtual) ? `${hj} ${agora()}` : `${mesAtual}-${String(f.diaVencimento).padStart(2,'0')} ${agora()}`;
+      movs.push({ id: 'm_' + Date.now(), criadoEm: Date.now(), tipo: f.tipo, dono: f.dono, carteiraId: cart.id, carteiraNome: cart.nome, categoria: f.categoria, descricao: f.titulo + (f.parcelaTotal > 0 ? ` (${pagParc}/${f.parcelaTotal})` : ''), valor: val, data: dataU });
+      const ps = String(f.ultimoMesPago || '').split(',').map(x => x.trim()).filter(Boolean);
+      if (!ps.includes(mesAtual)) ps.push(mesAtual);
+      f.ultimoMesPago = ps.join(',');
+      salvarLoc('ukeah_carteiras', carteiras); salvarLoc('ukeah_movimentacoes', movs); salvarLoc('ukeah_fixas', fixas);
+      fechar('modal-pagar'); mudarVisao(visaoAtual); toast('✅ Registrado!'); enviarPainel();
     }
 
-    function salvarFixaModal() {
-      const dono = document.getElementById('fixa-dono').value;
-      const titulo = document.getElementById('fixa-titulo').value.trim();
-      const valor = lerValorMonetario(document.getElementById('fixa-valor').value);
-      const dia = Math.min(31, Math.max(1, parseInt(document.getElementById('fixa-dia').value) || 1));
-      const cat = document.getElementById('fixa-categoria').value;
-      const pTot = parseInt(document.getElementById('fixa-parc-total').value) || 0;
-      const pAtu = pTot > 0 ? (parseInt(document.getElementById('fixa-parc-atual').value) || 1) : 0;
-
-      if (!titulo || valor <= 0) return mostrarAviso('Preencha nome e valor');
-
-      if (idFixaEditando) {
-        const i = fixas.findIndex(x => x.id === idFixaEditando);
-        if (i !== -1) fixas[i] = { ...fixas[i], dono, tipo: tipoFixaAtual, titulo, categoria: cat, valor, diaVencimento: dia, parcelaAtual: pAtu, parcelaTotal: pTot };
-      } else {
-        fixas.push({ id: 'f_' + Date.now(), dono, tipo: tipoFixaAtual, titulo, categoria: cat, valor, diaVencimento: dia, parcelaAtual: pAtu, parcelaTotal: pTot, ultimoMesPago: '' });
-      }
-      salvarLocal('ukeah_fixas', fixas); fecharModal('modal-fixa'); mudarVisao(visaoAtual); enviarPainelParaPlanilha();
+    /* VOZ / IA */
+    function abrirModalVoz() { $('voz-txt').value = ''; $('modal-voz').classList.remove('escondido'); }
+    function fecharVoz() { pararMic(); fechar('modal-voz'); }
+    function pararMic() {
+      if (recVoz && ouvindo) try { recVoz.stop(); } catch (e) {}
+      ouvindo = false; $('btn-mic').classList.remove('ouvindo'); $('btn-mic').textContent = '🎙️ Tocar para Falar';
     }
-
-    function excluirFixaModal() {
-      if (!idFixaEditando || !confirm('Excluir esta conta fixa?')) return;
-      fixas = fixas.filter(x => x.id !== idFixaEditando);
-      salvarLocal('ukeah_fixas', fixas); fecharModal('modal-fixa'); mudarVisao(visaoAtual); enviarPainelParaPlanilha();
-    }
-
-    function abrirModalPagarFixa(id) {
-      const f = fixas.find(x => x.id === id); if (!f) return;
-      const minhasCarts = carteiras.filter(c => c.dono === f.dono);
-      if (!minhasCarts.length) return mostrarAviso('Crie uma carteira nesse perfil primeiro');
-      idFixaPagando = id;
-      document.getElementById('pagar-fixa-titulo').textContent = (f.tipo === 'entrada' ? 'Receber: ' : 'Pagar: ') + f.titulo;
-      const sel = document.getElementById('pagar-fixa-carteira'); sel.innerHTML = '';
-      minhasCarts.forEach(c => {
-        const o = document.createElement('option'); o.value = c.id;
-        o.textContent = `${c.icone} ${c.nome} (${formatarReal(c.saldo)})`;
-        sel.appendChild(o);
-      });
-      document.getElementById('pagar-fixa-valor').value = Number(f.valor || 0).toFixed(2).replace('.', ',');
-      document.getElementById('modal-pagar-fixa').classList.remove('escondido');
-    }
-
-    function confirmarPagamentoFixa() {
-      const f = fixas.find(x => x.id === idFixaPagando); if (!f) return;
-      const cartId = document.getElementById('pagar-fixa-carteira').value;
-      const valor = lerValorMonetario(document.getElementById('pagar-fixa-valor').value);
-      const cart = carteiras.find(c => c.id === cartId);
-      if (!cart || valor <= 0) return mostrarAviso('Verifique carteira e valor');
-
-      cart.saldo = f.tipo === 'entrada' ? Number(cart.saldo) + valor : Number(cart.saldo) - valor;
-      const diaHoje = hojeISO();
-      const dataUsar = diaHoje.startsWith(mesAtual) ? `${diaHoje} ${horaAgoraSegundos()}` : `${mesAtual}-${String(f.diaVencimento).padStart(2,'0')} ${horaAgoraSegundos()}`;
-
-      let desc = f.titulo;
-      if (f.parcelaTotal > 0) desc += ` (${f.parcelaAtual}/${f.parcelaTotal})`;
-
-      movimentacoes.push({
-        id: 'm_' + Date.now(), criadoEm: Date.now(), tipo: f.tipo, dono: f.dono,
-        carteiraId: cart.id, carteiraNome: cart.nome, categoria: f.categoria, descricao: desc, valor, data: dataUsar
-      });
-
-      f.ultimoMesPago = mesAtual;
-      if (f.parcelaTotal > 0 && f.parcelaAtual < f.parcelaTotal) f.parcelaAtual += 1;
-
-      salvarLocal('ukeah_carteiras', carteiras); salvarLocal('ukeah_movimentacoes', movimentacoes); salvarLocal('ukeah_fixas', fixas);
-      fecharModal('modal-pagar-fixa'); mudarVisao(visaoAtual); mostrarAviso('✅ Registrado!'); enviarPainelParaPlanilha();
-    }
-
-    /* MICROFONE + IA GEMINI */
-    function abrirModalVoz() {
-      document.getElementById('voz-texto').value = '';
-      document.getElementById('modal-voz').classList.remove('escondido');
-    }
-
-    function fecharModalVoz() {
-      pararMicrofone();
-      fecharModal('modal-voz');
-    }
-
-    function pararMicrofone() {
-      if (reconhecimentoVoz && ouvindoAgora) {
-        try { reconhecimentoVoz.stop(); } catch (e) {}
-      }
-      ouvindoAgora = false;
-      const btn = document.getElementById('btn-mic-ouvir');
-      btn.classList.remove('ouvindo'); btn.textContent = '🎙️ Tocar para Falar';
-    }
-
-    function alternarMicrofone() {
-      if (ouvindoAgora) return pararMicrofone();
-      const SpeechRec = window.SpeechRecognition || window.webkitSpeechRecognition;
-      if (!SpeechRec) return mostrarAviso('Use o microfone do seu teclado abaixo!');
-
+    function alternarMic() {
+      if (ouvindo) return pararMic();
+      const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+      if (!SR) return toast('Use o microfone do teclado abaixo');
       try {
-        reconhecimentoVoz = new SpeechRec();
-        reconhecimentoVoz.lang = 'pt-BR';
-        reconhecimentoVoz.continuous = true;
-        reconhecimentoVoz.interimResults = true;
-
-        const campo = document.getElementById('voz-texto');
-        const textoBase = campo.value ? campo.value + ' ' : '';
-
-        reconhecimentoVoz.onresult = (ev) => {
-          let falado = '';
-          for (let i = 0; i < ev.results.length; i++) falado += ev.results[i][0].transcript;
-          campo.value = textoBase + falado;
-        };
-        reconhecimentoVoz.onerror = () => { pararMicrofone(); mostrarAviso('Use o microfone do teclado se preferir'); };
-        reconhecimentoVoz.onend = () => pararMicrofone();
-
-        reconhecimentoVoz.start();
-        ouvindoAgora = true;
-        const btn = document.getElementById('btn-mic-ouvir');
-        btn.classList.add('ouvindo'); btn.textContent = '🔴 Ouvindo... Toque para parar';
-      } catch (e) {
-        mostrarAviso('Use o microfone do teclado abaixo!');
-      }
+        recVoz = new SR(); recVoz.lang = 'pt-BR'; recVoz.continuous = true; recVoz.interimResults = true;
+        const base = $('voz-txt').value ? $('voz-txt').value + ' ' : '';
+        recVoz.onresult = ev => { let t = ''; for (let i = 0; i < ev.results.length; i++) t += ev.results[i][0].transcript; $('voz-txt').value = base + t; };
+        recVoz.onerror = recVoz.onend = () => pararMic();
+        recVoz.start(); ouvindo = true; $('btn-mic').classList.add('ouvindo'); $('btn-mic').textContent = '🔴 Ouvindo... Toque para parar';
+      } catch (e) { toast('Use o microfone do teclado abaixo'); }
     }
-
-    async function enviarParaGemini() {
-      pararMicrofone();
-      const frase = document.getElementById('voz-texto').value.trim();
-      if (!frase) return mostrarAviso('Fale ou digite o que aconteceu');
-
-      const btn = document.getElementById('btn-enviar-ia');
-      btn.disabled = true; btn.textContent = '✨ Gemini analisando...';
-
-      const quemFalou = visaoAtual === 'p2' ? 'p2' : 'p1';
-      const dataCompleta = `${hojeISO()} ${horaAgoraSegundos()}`;
-
+    async function enviarIA() {
+      pararMic();
+      const frase = $('voz-txt').value.trim(); if (!frase) return toast('Fale ou escreva o que aconteceu');
+      const btn = $('btn-ia'); btn.disabled = true; btn.textContent = '✨ Analisando...';
+      const quem = visaoAtual === 'p2' ? 'p2' : 'p1', dc = `${hoje()} ${agora()}`;
       try {
-        const resp = await fetch(API_URL, {
-          method: 'POST',
-          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
-          body: JSON.stringify({
-            acao: 'interpretarVoz',
-            frase, quemFalou, nomeQuemFalou: config[quemFalou].nome, dataCompleta,
-            carteiras: carteiras.map(c => ({ id: c.id, dono: c.dono, nome: c.nome })),
-            categorias: config.categorias
-          })
-        });
-        const res = await resp.json();
-        if (!res.ok || !Array.isArray(res.itens) || !res.itens.length) throw new Error(res.erro || 'Sem retorno');
-
+        const res = await (await fetch(API_URL, {
+          method: 'POST', headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ acao: 'interpretarVoz', frase, quemFalou: quem, nomeQuemFalou: config[quem].nome, dataCompleta: dc, carteiras: carteiras.map(c => ({ id: c.id, dono: c.dono, nome: c.nome })), categorias: config.categorias })
+        })).json();
+        if (!res.ok || !Array.isArray(res.itens) || !res.itens.length) throw 0;
         res.itens.forEach((it, idx) => {
-          const orig = carteiras.find(c => c.id === it.carteiraId) || carteiras.find(c => c.dono === (it.dono || quemFalou)) || carteiras[0];
+          const orig = carteiras.find(c => c.id === it.carteiraId) || carteiras.find(c => c.dono === (it.dono || quem)) || carteiras[0];
           const dest = it.tipo === 'transferencia' ? (carteiras.find(c => c.id === it.carteiraDestinoId) || carteiras[1] || orig) : null;
-          pendentes.push({
-            id: 'p_' + Date.now() + '_' + idx, criadoEm: Date.now() + idx, fraseOriginal: frase,
-            tipo: it.tipo || 'saida', dono: orig ? orig.dono : quemFalou,
-            donoDestino: dest ? dest.dono : '',
-            carteiraId: orig ? orig.id : '', carteiraNome: orig ? orig.nome : '',
-            carteiraDestinoId: dest ? dest.id : '', carteiraDestinoNome: dest ? dest.nome : '',
-            categoria: it.categoria || config.categorias[0],
-            descricao: it.descricao || frase, valor: Number(it.valor) || 0, data: dataCompleta
-          });
+          pendentes.push({ id: 'p_' + Date.now() + '_' + idx, criadoEm: Date.now() + idx, fraseOriginal: frase, tipo: it.tipo || 'saida', dono: orig ? orig.dono : quem, donoDestino: dest ? dest.dono : '', carteiraId: orig ? orig.id : '', carteiraNome: orig ? orig.nome : '', carteiraDestinoId: dest ? dest.id : '', carteiraDestinoNome: dest ? dest.nome : '', categoria: it.categoria || config.categorias[0], descricao: it.descricao || frase, valor: Number(it.valor) || 0, data: dc });
         });
-
-        salvarLocal('ukeah_pendentes', pendentes);
-        fecharModalVoz();
-        mudarVisao(visaoAtual);
-        mostrarAviso('⏳ Salvo em Aguardando confirmação!');
-        enviarPainelParaPlanilha();
-      } catch (e) {
-        mostrarAviso('⚠️ Não foi possível interpretar agora.');
-      } finally {
-        btn.disabled = false; btn.textContent = '✨ Interpretar com Gemini';
-      }
+        salvarLoc('ukeah_pendentes', pendentes); fecharVoz(); mudarVisao(visaoAtual); toast('⏳ Salvo para confirmar!'); enviarPainel();
+      } catch (e) { toast('⚠️ Não foi possível interpretar'); } finally { btn.disabled = false; btn.textContent = '✨ Interpretar'; }
     }
-
-    function confirmarPendente(id) {
+    function confirmarPend(id) {
       const p = pendentes.find(x => x.id === id); if (!p) return;
-      const valor = Number(p.valor) || 0;
-      if (valor <= 0) return editarPendenteAntes(id);
-
+      const v = Number(p.valor) || 0; if (v <= 0) return editarPend(id);
       if (p.tipo === 'transferencia') {
-        const orig = carteiras.find(c => c.id === p.carteiraId), dest = carteiras.find(c => c.id === p.carteiraDestinoId);
-        if (!orig || !dest || orig.id === dest.id) return editarPendenteAntes(id);
-        orig.saldo = Number(orig.saldo) - valor; dest.saldo = Number(dest.saldo) + valor;
+        const o = carteiras.find(c => c.id === p.carteiraId), d = carteiras.find(c => c.id === p.carteiraDestinoId);
+        if (!o || !d || o.id === d.id) return editarPend(id);
+        o.saldo = Number(o.saldo) - v; d.saldo = Number(d.saldo) + v;
       } else {
-        const cart = carteiras.find(c => c.id === p.carteiraId);
-        if (!cart) return editarPendenteAntes(id);
-        cart.saldo = p.tipo === 'entrada' ? Number(cart.saldo) + valor : Number(cart.saldo) - valor;
+        const c = carteiras.find(x => x.id === p.carteiraId); if (!c) return editarPend(id);
+        c.saldo = p.tipo === 'entrada' ? Number(c.saldo) + v : Number(c.saldo) - v;
       }
-
-      movimentacoes.push({
-        id: 'm_' + Date.now(), criadoEm: Date.now(), tipo: p.tipo, dono: p.dono, donoDestino: p.donoDestino || '',
-        carteiraId: p.carteiraId, carteiraNome: p.carteiraNome,
-        carteiraDestinoId: p.carteiraDestinoId || '', carteiraDestinoNome: p.carteiraDestinoNome || '',
-        categoria: p.categoria, descricao: p.descricao, valor, data: `${hojeISO()} ${horaAgoraSegundos()}`
-      });
-
+      movs.push({ id: 'm_' + Date.now(), criadoEm: Date.now(), tipo: p.tipo, dono: p.dono, donoDestino: p.donoDestino || '', carteiraId: p.carteiraId, carteiraNome: p.carteiraNome, carteiraDestinoId: p.carteiraDestinoId || '', carteiraDestinoNome: p.carteiraDestinoNome || '', categoria: p.categoria, descricao: p.descricao, valor: v, data: `${hoje()} ${agora()}` });
       pendentes = pendentes.filter(x => x.id !== id);
-      salvarLocal('ukeah_carteiras', carteiras); salvarLocal('ukeah_movimentacoes', movimentacoes); salvarLocal('ukeah_pendentes', pendentes);
-      mudarVisao(visaoAtual); mostrarAviso('✅ Confirmado!'); enviarPainelParaPlanilha();
+      salvarLoc('ukeah_carteiras', carteiras); salvarLoc('ukeah_movimentacoes', movs); salvarLoc('ukeah_pendentes', pendentes);
+      mudarVisao(visaoAtual); toast('✅ Confirmado!'); enviarPainel();
     }
-
-    function editarPendenteAntes(id) {
-      const p = pendentes.find(x => x.id === id); if (!p) return;
-      abrirModalLancar({
-        idPendente: p.id, tipo: p.tipo, dono: p.dono,
-        carteiraId: p.carteiraId, carteiraDestinoId: p.carteiraDestinoId,
-        categoria: p.categoria, valor: p.valor, descricao: p.descricao
-      });
-    }
-
-    function descartarPendente(id) {
-      pendentes = pendentes.filter(x => x.id !== id);
-      salvarLocal('ukeah_pendentes', pendentes);
-      mudarVisao(visaoAtual); enviarPainelParaPlanilha();
-    }
-
-    let timerToast;
-    function mostrarAviso(msg) {
-      const t = document.getElementById('toast');
-      t.textContent = msg; t.classList.add('visivel');
-      clearTimeout(timerToast);
-      timerToast = setTimeout(() => t.classList.remove('visivel'), 2600);
-    }
+    function editarPend(id) { const p = pendentes.find(x => x.id === id); if (p) abrirModalLancar({ idPend: p.id, tipo: p.tipo, dono: p.dono, carteiraId: p.carteiraId, carteiraDestinoId: p.carteiraDestinoId, categoria: p.categoria, valor: p.valor, descricao: p.descricao }); }
+    function descartarPend(id) { pendentes = pendentes.filter(x => x.id !== id); salvarLoc('ukeah_pendentes', pendentes); mudarVisao(visaoAtual); enviarPainel(); }
 
     window.addEventListener('DOMContentLoaded', () => {
-      mesAtual = hojeISO().slice(0, 7);
-      atualizarLabelMes();
-      carregarDadosLocais();
-      montarTelaEntrada();
+      mesAtual = hoje().slice(0, 7);
+      const [a, m] = mesAtual.split('-').map(Number); $('mes-label').textContent = `${MESES[m-1]} ${a}`;
+      carregarLocais(); montarEntrada();
       try {
-        let s = localStorage.getItem('ukeah_perfil');
-        if (s === 'ministro') s = 'p1'; if (s === 'dona') s = 'p2';
-        if (s === 'p1' || s === 'p2' || s === 'casal') {
-          document.getElementById('lembrar-escolha').checked = true;
-          entrarNoPerfil(s);
-        }
+        let s = localStorage.getItem('ukeah_perfil'); if (s === 'ministro') s = 'p1'; if (s === 'dona') s = 'p2';
+        if (s === 'p1' || s === 'p2' || s === 'casal') { $('lembrar-escolha').checked = true; entrar(s); }
       } catch (e) {}
-      sincronizarComPlanilha(false);
+      sincronizar(false);
     });
   </script>
 </body>
