@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ukeah — Um Kasal Em Alta Harmonia</title>
 
-  <!-- Fonte arredondada e moderna -->
+  <!-- Fonte arredondada Nunito -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
@@ -16,23 +16,9 @@
       --branco: #FFFFFF;
       --texto: #2D3142;
       --texto-suave: #6E748A;
-
-      /* Tema Ministro (Azul Pastel) */
-      --azul-fundo: #E6F2FF;
-      --azul-borda: #B8DCFF;
-      --azul-forte: #2B6CB0;
-
-      /* Tema Dona Encrenca (Rosa Pastel) */
-      --rosa-fundo: #FFEAF2;
-      --rosa-borda: #FFC2D9;
-      --rosa-forte: #B83268;
-
-      /* Tema Casal (Lilás Pastel) */
       --lilas-fundo: #F1EBFF;
       --lilas-borda: #D9C9FF;
       --lilas-forte: #5B3CC4;
-
-      /* Complementares */
       --verde-fundo: #E7F8EE;
       --verde-forte: #1F7A4D;
       --coral-fundo: #FFEBE9;
@@ -40,7 +26,6 @@
       --amarelo-fundo: #FFF7DC;
       --amarelo-borda: #F5DF98;
       --amarelo-forte: #7A5901;
-
       --sombra: 0 10px 26px rgba(95, 90, 135, 0.08);
     }
 
@@ -87,7 +72,7 @@
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: linear-gradient(135deg, var(--azul-fundo), var(--lilas-fundo), var(--rosa-fundo));
+      background: linear-gradient(135deg, #E6F2FF, #F1EBFF, #FFEAF2);
       padding: 8px 16px;
       border-radius: 30px;
       font-size: 0.9rem;
@@ -135,17 +120,6 @@
       transform: scale(0.97);
     }
 
-    .card-perfil.ministro {
-      background-color: var(--azul-fundo);
-      border-color: var(--azul-borda);
-    }
-
-    .card-perfil.dona {
-      background-color: var(--rosa-fundo);
-      border-color: var(--rosa-borda);
-    }
-
-    /* Moldura redonda pronta para receber a foto real depois */
     .foto-perfil {
       width: 96px;
       height: 96px;
@@ -173,9 +147,6 @@
       margin-bottom: 4px;
     }
 
-    .card-perfil.ministro .perfil-apelido { color: var(--azul-forte); }
-    .card-perfil.dona .perfil-apelido { color: var(--rosa-forte); }
-
     .perfil-sub {
       font-size: 0.85rem;
       color: var(--texto-suave);
@@ -189,7 +160,7 @@
       padding: 10px 18px;
       border-radius: 18px;
       box-shadow: var(--sombra);
-      margin-bottom: 18px;
+      margin-bottom: 16px;
       cursor: pointer;
       font-size: 0.92rem;
       color: var(--texto);
@@ -213,10 +184,19 @@
       cursor: pointer;
       width: 100%;
       max-width: 340px;
+      margin-bottom: 14px;
+    }
+
+    .link-admin-entrada {
+      color: var(--texto-suave);
+      text-decoration: none;
+      font-size: 0.88rem;
+      padding: 8px 14px;
+      border-radius: 14px;
     }
 
     /* ========================
-       TELA 2: PAINEL DO USUÁRIO
+       TELA 2: PAINEL PRINCIPAL
        ======================== */
     .tela-painel {
       max-width: 680px;
@@ -236,11 +216,12 @@
       display: flex;
       align-items: center;
       gap: 10px;
+      min-width: 0;
     }
 
     .mini-avatar {
-      width: 44px;
-      height: 44px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
       background-color: var(--branco);
       display: flex;
@@ -250,12 +231,22 @@
       box-shadow: var(--sombra);
       overflow: hidden;
       flex-shrink: 0;
+      border: 2px solid var(--branco);
+    }
+
+    .mini-avatar img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
     }
 
     .usuario-logado h2 {
-      font-size: 1.1rem;
+      font-size: 1.08rem;
       font-weight: 700;
       line-height: 1.2;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
     .usuario-logado span {
@@ -274,9 +265,10 @@
       color: var(--texto);
       cursor: pointer;
       white-space: nowrap;
+      flex-shrink: 0;
     }
 
-    /* Seletor das 3 visões (Meu / Dela / Casal) */
+    /* Abas das 3 visões */
     .abas-visao {
       display: grid;
       grid-template-columns: 1fr 1fr 1fr;
@@ -294,32 +286,20 @@
       border-radius: 15px;
       padding: 10px 6px;
       font-family: 'Nunito', sans-serif;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       font-weight: 400;
       color: var(--texto-suave);
       cursor: pointer;
       text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
     }
 
-    .aba-btn.ativa-ministro {
-      background-color: var(--azul-fundo);
-      color: var(--azul-forte);
+    .aba-btn.ativa {
       font-weight: 700;
     }
 
-    .aba-btn.ativa-dona {
-      background-color: var(--rosa-fundo);
-      color: var(--rosa-forte);
-      font-weight: 700;
-    }
-
-    .aba-btn.ativa-casal {
-      background-color: var(--lilas-fundo);
-      color: var(--lilas-forte);
-      font-weight: 700;
-    }
-
-    /* Card de frase debochada */
     .banner-humor {
       background-color: var(--amarelo-fundo);
       border: 1px solid var(--amarelo-borda);
@@ -330,28 +310,13 @@
       color: var(--amarelo-forte);
     }
 
-    /* Card de Saldo que muda de cor conforme a aba */
     .card-saldo {
       border-radius: 24px;
       padding: 22px;
       margin-bottom: 14px;
       box-shadow: var(--sombra);
-      transition: background 0.25s ease;
-    }
-
-    .card-saldo.tema-azul {
-      background: linear-gradient(135deg, #E6F2FF 0%, #F2F8FF 100%);
-      border: 1px solid var(--azul-borda);
-    }
-
-    .card-saldo.tema-rosa {
-      background: linear-gradient(135deg, #FFEAF2 0%, #FFF4F8 100%);
-      border: 1px solid var(--rosa-borda);
-    }
-
-    .card-saldo.tema-lilas {
-      background: linear-gradient(135deg, #E6F2FF 0%, #F1EBFF 50%, #FFEAF2 100%);
-      border: 1px solid var(--lilas-borda);
+      border: 1px solid transparent;
+      transition: background 0.25s ease, border-color 0.25s ease;
     }
 
     .saldo-titulo {
@@ -372,7 +337,6 @@
       color: var(--texto-suave);
     }
 
-    /* Cards Receitas e Despesas */
     .grid-resumo {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -406,7 +370,6 @@
       font-weight: 700;
     }
 
-    /* Lista de Movimentações */
     .secao-cabecalho {
       display: flex;
       justify-content: space-between;
@@ -460,9 +423,6 @@
       flex-shrink: 0;
     }
 
-    .bg-ministro { background-color: var(--azul-fundo); }
-    .bg-dona { background-color: var(--rosa-fundo); }
-
     .item-nome {
       font-size: 0.95rem;
       font-weight: 600;
@@ -484,16 +444,6 @@
       padding: 1px 8px;
       border-radius: 10px;
       font-size: 0.74rem;
-    }
-
-    .etiqueta.ministro {
-      background-color: var(--azul-fundo);
-      color: var(--azul-forte);
-    }
-
-    .etiqueta.dona {
-      background-color: var(--rosa-fundo);
-      color: var(--rosa-forte);
     }
 
     .item-valor {
@@ -526,6 +476,7 @@
     .nav-btn {
       border: none;
       background: transparent;
+      text-decoration: none;
       font-family: 'Nunito', sans-serif;
       display: flex;
       flex-direction: column;
@@ -591,18 +542,16 @@
     </div>
 
     <div class="perfis-grid">
-      <!-- Card do Ministro -->
-      <div class="card-perfil ministro" onclick="entrarNoPerfil('ministro')">
-        <div class="foto-perfil">🎩</div>
-        <p class="perfil-apelido" id="nome-entrada-ministro">Ministro da Economia</p>
-        <p class="perfil-sub">Fiscal do orçamento</p>
+      <div class="card-perfil" id="card-entrada-p1" onclick="entrarNoPerfil('p1')">
+        <div class="foto-perfil" id="foto-entrada-p1">🎩</div>
+        <p class="perfil-apelido" id="nome-entrada-p1">Ministro da Economia</p>
+        <p class="perfil-sub" id="sub-entrada-p1">Fiscal do orçamento</p>
       </div>
 
-      <!-- Card dela -->
-      <div class="card-perfil dona" onclick="entrarNoPerfil('dona')">
-        <div class="foto-perfil">👑</div>
-        <p class="perfil-apelido" id="nome-entrada-dona">Dona Encrenca</p>
-        <p class="perfil-sub">Aprovação presidencial</p>
+      <div class="card-perfil" id="card-entrada-p2" onclick="entrarNoPerfil('p2')">
+        <div class="foto-perfil" id="foto-entrada-p2">👑</div>
+        <p class="perfil-apelido" id="nome-entrada-p2">Dona Encrenca</p>
+        <p class="perfil-sub" id="sub-entrada-p2">Aprovação presidencial</p>
       </div>
     </div>
 
@@ -614,6 +563,10 @@
     <button class="btn-casal-direto" onclick="entrarNoPerfil('casal')">
       📊 Ver logo o Somatório do Casal
     </button>
+
+    <a href="admin.html" class="link-admin-entrada">
+      ⚙️ Trocar fotos, apelidos ou cores
+    </a>
   </section>
 
   <!-- =========================
@@ -621,139 +574,162 @@
        ========================= -->
   <section id="tela-painel" class="tela-painel escondido">
 
-    <!-- Topo com perfil e botão trocar -->
     <header class="topo-painel">
       <div class="usuario-logado">
         <div class="mini-avatar" id="topo-avatar">🎩</div>
-        <div>
-          <h2 id="topo-saudacao">Olá, Ministro!</h2>
+        <div style="min-width:0;">
+          <h2 id="topo-saudacao">Olá!</h2>
           <span>Ukeah • Novembro 2026</span>
         </div>
       </div>
       <button class="btn-trocar" onclick="voltarParaEntrada()">🔄 Trocar</button>
     </header>
 
-    <!-- Abas para alternar entre Individual e Total do Casal -->
     <div class="abas-visao">
-      <button class="aba-btn" id="aba-ministro" onclick="mudarVisao('ministro')">🎩 Ministro</button>
-      <button class="aba-btn" id="aba-dona" onclick="mudarVisao('dona')">👑 Dona Encrenca</button>
+      <button class="aba-btn" id="aba-p1" onclick="mudarVisao('p1')">🎩 Ministro</button>
+      <button class="aba-btn" id="aba-p2" onclick="mudarVisao('p2')">👑 Dona Encrenca</button>
       <button class="aba-btn" id="aba-casal" onclick="mudarVisao('casal')">💜 Casal (Total)</button>
     </div>
 
-    <!-- Frase divertida -->
     <div class="banner-humor" id="banner-humor">
       "O casal está enriquecendo. Ou pelo menos tentando."
     </div>
 
-    <!-- Card Principal de Saldo -->
-    <div class="card-saldo tema-azul" id="card-saldo">
+    <div class="card-saldo" id="card-saldo">
       <p class="saldo-titulo" id="saldo-titulo">Saldo atual</p>
-      <p class="saldo-numero" id="saldo-numero">R$ 2.640,00</p>
+      <p class="saldo-numero" id="saldo-numero">R$ 0,00</p>
       <p class="saldo-sub" id="saldo-sub">Mais um mês sem falir: vitória!</p>
     </div>
 
-    <!-- Receitas e Despesas -->
     <div class="grid-resumo">
       <div class="box-resumo entradas">
         <p>📈 Entrou</p>
-        <strong id="valor-entradas">R$ 5.200,00</strong>
+        <strong id="valor-entradas">R$ 0,00</strong>
       </div>
       <div class="box-resumo saidas">
         <p>🛍️ Saiu</p>
-        <strong id="valor-saidas">R$ 2.560,00</strong>
+        <strong id="valor-saidas">R$ 0,00</strong>
       </div>
     </div>
 
-    <!-- Movimentações Recentes -->
     <div class="secao-cabecalho">
       <h3>Movimentações recentes</h3>
-      <span id="contador-mov">Valores de exemplo</span>
+      <span>Valores de exemplo</span>
     </div>
 
-    <div class="lista-mov" id="lista-movimentacoes">
-      <!-- Preenchido automaticamente pelo JavaScript abaixo -->
-    </div>
+    <div class="lista-mov" id="lista-movimentacoes"></div>
 
-    <!-- Barra Inferior -->
+    <!-- Barra Inferior já ligada no admin.html -->
     <nav class="nav-inferior">
       <button class="nav-btn ativo" onclick="mostrarAviso('Você já está no painel principal 💜')">
         <span class="ico">🏠</span>
         <span>Painel</span>
       </button>
-      <button class="nav-btn" onclick="mostrarAviso('O botão de lançar gastos/ganhos chega na próxima etapa! 💸')">
+      <button class="nav-btn" onclick="mostrarAviso('Na próxima etapa vamos fazer o Lançar funcionar de verdade! 💸')">
         <span class="ico">➕</span>
         <span>Lançar</span>
       </button>
-      <button class="nav-btn" onclick="mostrarAviso('Em breve: admin.html para trocar apelidos, cores e fotos! ⚙️')">
+      <a href="admin.html" class="nav-btn">
         <span class="ico">⚙️</span>
         <span>Configurar</span>
-      </button>
+      </a>
     </nav>
 
   </section>
 
-  <!-- Aviso flutuante -->
   <div id="toast" class="toast"></div>
 
   <script>
-    // Dados de exemplo para cada visão (Ministro, Dona Encrenca e Total do Casal)
-    const dadosVisoes = {
-      ministro: {
-        nome: 'Ministro da Economia',
-        icone: '🎩',
-        tema: 'tema-azul',
-        frase: '"Ministro, precisamos conversar sobre esse cartão..."',
-        tituloSaldo: 'Saldo individual do Ministro',
-        saldo: 'R$ 2.640,00',
-        subSaldo: 'Gestão sob análise do tribunal doméstico.',
-        entradas: 'R$ 5.200,00',
-        saidas: 'R$ 2.560,00'
-      },
-      dona: {
-        nome: 'Dona Encrenca',
-        icone: '👑',
-        tema: 'tema-rosa',
-        frase: '"Se estava na promoção, tecnicamente foi economia."',
-        tituloSaldo: 'Saldo individual da Dona Encrenca',
-        saldo: 'R$ 2.180,50',
-        subSaldo: 'Orçamento aprovado por decreto presidencial.',
-        entradas: 'R$ 4.300,00',
-        saidas: 'R$ 2.119,50'
-      },
-      casal: {
-        nome: 'Total do Casal',
-        icone: '💜',
-        tema: 'tema-lilas',
-        frase: '"O casal está enriquecendo. Ou pelo menos tentando."',
-        tituloSaldo: 'Somatório geral (Ministro + Dona Encrenca)',
-        saldo: 'R$ 4.820,50',
-        subSaldo: 'Mais um mês sem falir: vitória!',
-        entradas: 'R$ 9.500,00',
-        saidas: 'R$ 4.679,50'
-      }
+    // Mesma paleta do admin.html para tudo combinar perfeito
+    const PALETA = {
+      azul:    { fundo: '#E6F2FF', borda: '#B8DCFF', texto: '#2B6CB0' },
+      rosa:    { fundo: '#FFEAF2', borda: '#FFC2D9', texto: '#B83268' },
+      lilas:   { fundo: '#F1EBFF', borda: '#D9C9FF', texto: '#5B3CC4' },
+      verde:   { fundo: '#E7F8EE', borda: '#B5E8CB', texto: '#1F7A4D' },
+      amarelo: { fundo: '#FFF7DC', borda: '#F5DF98', texto: '#8A6500' },
+      pessego: { fundo: '#FFF0E5', borda: '#FFD1B3', texto: '#A84B18' }
     };
 
-    // Movimentações fictícias para demonstração
+    const PADRAO = {
+      p1: { nome: 'Ministro da Economia', subtitulo: 'Fiscal do orçamento', cor: 'azul', icone: '🎩', foto: '' },
+      p2: { nome: 'Dona Encrenca', subtitulo: 'Aprovação presidencial', cor: 'rosa', icone: '👑', foto: '' }
+    };
+
+    let config = {};
+
+    function carregarConfig() {
+      let salvo = null;
+      try {
+        const texto = localStorage.getItem('ukeah_config');
+        if (texto) salvo = JSON.parse(texto);
+      } catch (e) {}
+
+      config = {
+        p1: { ...PADRAO.p1, ...(salvo && salvo.p1 ? salvo.p1 : {}) },
+        p2: { ...PADRAO.p2, ...(salvo && salvo.p2 ? salvo.p2 : {}) }
+      };
+    }
+
+    function aplicarAvatar(elemento, perfil) {
+      if (perfil.foto) {
+        elemento.innerHTML = '';
+        const img = document.createElement('img');
+        img.src = perfil.foto;
+        img.alt = perfil.nome;
+        elemento.appendChild(img);
+      } else {
+        elemento.textContent = perfil.icone;
+      }
+    }
+
+    function montarTelaEntrada() {
+      ['p1', 'p2'].forEach(chave => {
+        const p = config[chave];
+        const tema = PALETA[p.cor] || PALETA.azul;
+
+        const card = document.getElementById(`card-entrada-${chave}`);
+        card.style.backgroundColor = tema.fundo;
+        card.style.borderColor = tema.borda;
+
+        const nomeEl = document.getElementById(`nome-entrada-${chave}`);
+        nomeEl.textContent = p.nome;
+        nomeEl.style.color = tema.texto;
+
+        document.getElementById(`sub-entrada-${chave}`).textContent = p.subtitulo;
+        aplicarAvatar(document.getElementById(`foto-entrada-${chave}`), p);
+
+        // Atualiza também o texto das abas lá dentro
+        document.getElementById(`aba-${chave}`).textContent = `${p.icone} ${p.nome}`;
+      });
+    }
+
+    // Valores fictícios (até conectarmos a planilha/lançamentos)
     const movimentacoes = [
-      { dono: 'ministro', titulo: 'Salário do Ministro', data: 'Ontem', valor: '+ R$ 5.200,00', tipo: 'entrada', icone: '💼' },
-      { dono: 'dona', titulo: 'Salário + Freela', data: 'Ontem', valor: '+ R$ 4.300,00', tipo: 'entrada', icone: '✨' },
-      { dono: 'ministro', titulo: 'Supermercado', data: 'Hoje', valor: '- R$ 482,30', tipo: 'saida', icone: '🛒' },
-      { dono: 'dona', titulo: 'Cafeteria & Croissant', data: '16/11', valor: '- R$ 64,90', tipo: 'saida', icone: '☕' },
-      { dono: 'ministro', titulo: 'Fatura do cartão', data: '14/11', valor: '- R$ 890,00', tipo: 'saida', icone: '💳' },
-      { dono: 'dona', titulo: 'Farmácia & Autocuidado', data: '12/11', valor: '- R$ 215,00', tipo: 'saida', icone: '🧴' }
+      { dono: 'p1', titulo: 'Salário', data: 'Ontem', valor: '+ R$ 5.200,00', tipo: 'entrada', icone: '💼' },
+      { dono: 'p2', titulo: 'Salário + Freela', data: 'Ontem', valor: '+ R$ 4.300,00', tipo: 'entrada', icone: '✨' },
+      { dono: 'p1', titulo: 'Supermercado', data: 'Hoje', valor: '- R$ 482,30', tipo: 'saida', icone: '🛒' },
+      { dono: 'p2', titulo: 'Cafeteria & Croissant', data: '16/11', valor: '- R$ 64,90', tipo: 'saida', icone: '☕' },
+      { dono: 'p1', titulo: 'Fatura do cartão', data: '14/11', valor: '- R$ 890,00', tipo: 'saida', icone: '💳' },
+      { dono: 'p2', titulo: 'Farmácia & Autocuidado', data: '12/11', valor: '- R$ 215,00', tipo: 'saida', icone: '🧴' }
     ];
 
-    // Quando alguém clica em um perfil na tela inicial
     function entrarNoPerfil(perfil) {
       const lembrar = document.getElementById('lembrar-escolha').checked;
       if (lembrar) {
         try { localStorage.setItem('ukeah_perfil', perfil); } catch (e) {}
       }
 
-      const info = dadosVisoes[perfil];
-      document.getElementById('topo-avatar').textContent = info.icone;
-      document.getElementById('topo-saudacao').textContent =
-        perfil === 'casal' ? 'Visão do Casal 💜' : `Olá, ${info.nome}!`;
+      const topoAvatar = document.getElementById('topo-avatar');
+      const topoSaudacao = document.getElementById('topo-saudacao');
+
+      if (perfil === 'casal') {
+        topoAvatar.textContent = '💜';
+        topoSaudacao.textContent = 'Visão do Casal 💜';
+      } else {
+        const p = config[perfil];
+        aplicarAvatar(topoAvatar, p);
+        topoSaudacao.textContent = `Olá, ${p.nome}!`;
+      }
 
       document.getElementById('tela-entrada').classList.add('escondido');
       document.getElementById('tela-painel').classList.remove('escondido');
@@ -761,7 +737,6 @@
       mudarVisao(perfil);
     }
 
-    // Volta para a tela "Quem está entrando?"
     function voltarParaEntrada() {
       try { localStorage.removeItem('ukeah_perfil'); } catch (e) {}
       document.getElementById('lembrar-escolha').checked = false;
@@ -769,25 +744,64 @@
       document.getElementById('tela-entrada').classList.remove('escondido');
     }
 
-    // Troca entre Ministro, Dona Encrenca e Casal dentro do painel
     function mudarVisao(visao) {
-      const info = dadosVisoes[visao];
+      const temaP1 = PALETA[config.p1.cor] || PALETA.azul;
+      const temaP2 = PALETA[config.p2.cor] || PALETA.rosa;
 
-      // Atualiza visual das abas
-      document.getElementById('aba-ministro').className = 'aba-btn' + (visao === 'ministro' ? ' ativa-ministro' : '');
-      document.getElementById('aba-dona').className = 'aba-btn' + (visao === 'dona' ? ' ativa-dona' : '');
-      document.getElementById('aba-casal').className = 'aba-btn' + (visao === 'casal' ? ' ativa-casal' : '');
+      // Limpa estilo de todas as abas
+      ['p1', 'p2', 'casal'].forEach(id => {
+        const btn = document.getElementById(`aba-${id}`);
+        btn.className = 'aba-btn' + (visao === id ? ' ativa' : '');
+        btn.style.backgroundColor = '';
+        btn.style.color = '';
+      });
 
-      // Atualiza textos e cor do card principal
-      document.getElementById('banner-humor').textContent = info.frase;
-      document.getElementById('card-saldo').className = 'card-saldo ' + info.tema;
-      document.getElementById('saldo-titulo').textContent = info.tituloSaldo;
-      document.getElementById('saldo-numero').textContent = info.saldo;
-      document.getElementById('saldo-sub').textContent = info.subSaldo;
-      document.getElementById('valor-entradas').textContent = info.entradas;
-      document.getElementById('valor-saidas').textContent = info.saidas;
+      // Colore a aba ativa com a cor escolhida
+      const abaAtiva = document.getElementById(`aba-${visao}`);
+      if (visao === 'p1') {
+        abaAtiva.style.backgroundColor = temaP1.fundo;
+        abaAtiva.style.color = temaP1.texto;
+      } else if (visao === 'p2') {
+        abaAtiva.style.backgroundColor = temaP2.fundo;
+        abaAtiva.style.color = temaP2.texto;
+      } else {
+        abaAtiva.style.backgroundColor = PALETA.lilas.fundo;
+        abaAtiva.style.color = PALETA.lilas.texto;
+      }
 
-      // Filtra as movimentações
+      // Atualiza textos e cor do card de saldo
+      const cardSaldo = document.getElementById('card-saldo');
+
+      if (visao === 'p1') {
+        document.getElementById('banner-humor').textContent = `"${config.p1.nome}, precisamos conversar sobre esse cartão..."`;
+        cardSaldo.style.background = `linear-gradient(135deg, ${temaP1.fundo} 0%, #FFFFFF 100%)`;
+        cardSaldo.style.borderColor = temaP1.borda;
+        document.getElementById('saldo-titulo').textContent = `Saldo individual — ${config.p1.nome}`;
+        document.getElementById('saldo-numero').textContent = 'R$ 2.640,00';
+        document.getElementById('saldo-sub').textContent = 'Gestão sob análise do tribunal doméstico.';
+        document.getElementById('valor-entradas').textContent = 'R$ 5.200,00';
+        document.getElementById('valor-saidas').textContent = 'R$ 2.560,00';
+      } else if (visao === 'p2') {
+        document.getElementById('banner-humor').textContent = `"${config.p2.nome}: se estava na promoção, tecnicamente foi economia."`;
+        cardSaldo.style.background = `linear-gradient(135deg, ${temaP2.fundo} 0%, #FFFFFF 100%)`;
+        cardSaldo.style.borderColor = temaP2.borda;
+        document.getElementById('saldo-titulo').textContent = `Saldo individual — ${config.p2.nome}`;
+        document.getElementById('saldo-numero').textContent = 'R$ 2.180,50';
+        document.getElementById('saldo-sub').textContent = 'Orçamento aprovado por decreto presidencial.';
+        document.getElementById('valor-entradas').textContent = 'R$ 4.300,00';
+        document.getElementById('valor-saidas').textContent = 'R$ 2.119,50';
+      } else {
+        document.getElementById('banner-humor').textContent = '"O casal está enriquecendo. Ou pelo menos tentando."';
+        cardSaldo.style.background = `linear-gradient(135deg, ${temaP1.fundo} 0%, #F1EBFF 50%, ${temaP2.fundo} 100%)`;
+        cardSaldo.style.borderColor = PALETA.lilas.borda;
+        document.getElementById('saldo-titulo').textContent = `Somatório (${config.p1.nome} + ${config.p2.nome})`;
+        document.getElementById('saldo-numero').textContent = 'R$ 4.820,50';
+        document.getElementById('saldo-sub').textContent = 'Mais um mês sem falir: vitória!';
+        document.getElementById('valor-entradas').textContent = 'R$ 9.500,00';
+        document.getElementById('valor-saidas').textContent = 'R$ 4.679,50';
+      }
+
+      // Renderiza movimentações filtradas com segurança
       const filtradas = visao === 'casal'
         ? movimentacoes
         : movimentacoes.filter(item => item.dono === visao);
@@ -796,28 +810,56 @@
       container.innerHTML = '';
 
       filtradas.forEach(item => {
-        const nomeDono = item.dono === 'ministro' ? 'Ministro' : 'Dona Encrenca';
-        const classeValor = item.tipo === 'entrada' ? 'val-pos' : 'val-neg';
+        const pDono = config[item.dono];
+        const temaDono = PALETA[pDono.cor] || PALETA.azul;
 
-        container.innerHTML += `
-          <div class="item-mov">
-            <div class="item-esq">
-              <div class="item-ico bg-${item.dono}">${item.icone}</div>
-              <div style="min-width:0;">
-                <p class="item-nome">${item.titulo}</p>
-                <div class="item-detalhe">
-                  <span class="etiqueta ${item.dono}">${nomeDono}</span>
-                  <span>${item.data}</span>
-                </div>
-              </div>
-            </div>
-            <p class="item-valor ${classeValor}">${item.valor}</p>
-          </div>
-        `;
+        const row = document.createElement('div');
+        row.className = 'item-mov';
+
+        const esq = document.createElement('div');
+        esq.className = 'item-esq';
+
+        const ico = document.createElement('div');
+        ico.className = 'item-ico';
+        ico.style.backgroundColor = temaDono.fundo;
+        ico.textContent = item.icone;
+
+        const info = document.createElement('div');
+        info.style.minWidth = '0';
+
+        const nome = document.createElement('p');
+        nome.className = 'item-nome';
+        nome.textContent = item.titulo;
+
+        const detalhe = document.createElement('div');
+        detalhe.className = 'item-detalhe';
+
+        const tag = document.createElement('span');
+        tag.className = 'etiqueta';
+        tag.style.backgroundColor = temaDono.fundo;
+        tag.style.color = temaDono.texto;
+        tag.textContent = pDono.nome;
+
+        const data = document.createElement('span');
+        data.textContent = item.data;
+
+        detalhe.appendChild(tag);
+        detalhe.appendChild(data);
+        info.appendChild(nome);
+        info.appendChild(detalhe);
+        esq.appendChild(ico);
+        esq.appendChild(info);
+
+        const val = document.createElement('p');
+        val.className = 'item-valor ' + (item.tipo === 'entrada' ? 'val-pos' : 'val-neg');
+        val.textContent = item.valor;
+
+        row.appendChild(esq);
+        row.appendChild(val);
+        container.appendChild(row);
       });
     }
 
-    // Aviso temporário na tela
     let timerToast;
     function mostrarAviso(msg) {
       const toast = document.getElementById('toast');
@@ -827,11 +869,16 @@
       timerToast = setTimeout(() => toast.classList.remove('visivel'), 2800);
     }
 
-    // Verifica se o aparelho já tinha um perfil salvo ao abrir o site
     window.addEventListener('DOMContentLoaded', () => {
+      carregarConfig();
+      montarTelaEntrada();
+
       try {
-        const salvo = localStorage.getItem('ukeah_perfil');
-        if (salvo && dadosVisoes[salvo]) {
+        let salvo = localStorage.getItem('ukeah_perfil');
+        if (salvo === 'ministro') salvo = 'p1';
+        if (salvo === 'dona') salvo = 'p2';
+
+        if (salvo === 'p1' || salvo === 'p2' || salvo === 'casal') {
           document.getElementById('lembrar-escolha').checked = true;
           entrarNoPerfil(salvo);
         }
