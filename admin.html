@@ -18,21 +18,17 @@
     body { font-family: 'Nunito', sans-serif; font-weight: 400; background: var(--fundo); color: var(--texto); line-height: 1.5; padding-bottom: 48px; }
     .container { max-width: 680px; margin: 0 auto; padding: 20px 16px; }
 
-    .topo { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; gap: 12px; }
+    .topo { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; gap: 12px; }
     .btn-voltar { display: inline-flex; align-items: center; gap: 6px; background: var(--branco); color: var(--texto); text-decoration: none; padding: 10px 16px; border-radius: 16px; font-size: 0.92rem; font-weight: 600; box-shadow: var(--sombra); border: 1px solid #ECE8F4; }
-    .topo-titulo { text-align: right; }
-    .topo-titulo h1 { font-size: 1.35rem; font-weight: 800; }
-    .topo-titulo p { font-size: 0.84rem; color: var(--texto-suave); }
+    .topo-dir { display: flex; align-items: center; gap: 10px; }
+    .topo-dir h1 { font-size: 1.3rem; font-weight: 800; }
+    .status-dot { padding: 5px 11px; border-radius: 14px; font-size: 0.78rem; background: var(--lilas-fundo); color: var(--lilas-forte); }
+    .status-dot.ok { background: var(--verde-fundo); color: var(--verde-forte); }
+    .status-dot.erro { background: #FFEBE9; color: #A83232; }
 
-    .status-nuvem { display: inline-flex; align-items: center; gap: 8px; background: var(--lilas-fundo); color: var(--lilas-forte); padding: 7px 14px; border-radius: 16px; font-size: 0.84rem; margin-bottom: 16px; }
-    .status-nuvem.ok { background: var(--verde-fundo); color: var(--verde-forte); }
-    .status-nuvem.erro { background: #FFEBE9; color: #A83232; }
-
-    .aviso-topo { background: #FFF7DC; border: 1px solid #F5DF98; color: #7A5901; border-radius: 20px; padding: 14px 18px; margin-bottom: 20px; font-size: 0.92rem; }
-    .card-config { background: var(--branco); border-radius: 26px; padding: 22px 18px; box-shadow: var(--sombra); margin-bottom: 20px; border: 2px solid #EFEBF7; transition: background-color 0.25s ease, border-color 0.25s ease; }
-    .card-cabecalho { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
-    .card-cabecalho h2 { font-size: 1.15rem; font-weight: 700; }
-    .tag-id { background: rgba(255,255,255,0.8); padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; color: var(--texto-suave); }
+    .card-config { background: var(--branco); border-radius: 26px; padding: 22px 18px; box-shadow: var(--sombra); margin-bottom: 18px; border: 2px solid #EFEBF7; transition: background-color 0.25s ease, border-color 0.25s ease; }
+    .card-cabecalho { display: flex; align-items: center; justify-content: space-between; margin-bottom: 16px; }
+    .card-cabecalho h2 { font-size: 1.12rem; font-weight: 700; }
 
     .foto-area { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
     .foto-preview { width: 88px; height: 88px; border-radius: 50%; background: var(--branco); border: 4px solid var(--branco); box-shadow: 0 6px 16px rgba(0,0,0,0.09); display: flex; align-items: center; justify-content: center; font-size: 42px; overflow: hidden; flex-shrink: 0; }
@@ -43,11 +39,11 @@
     .input-arquivo { display: none; }
 
     .campo { margin-bottom: 14px; }
-    .campo label { display: block; font-size: 0.88rem; color: var(--texto-suave); margin-bottom: 6px; padding-left: 4px; }
+    .campo label { display: block; font-size: 0.86rem; color: var(--texto-suave); margin-bottom: 6px; padding-left: 4px; }
     .campo input { width: 100%; padding: 12px 14px; border-radius: 16px; border: 1px solid rgba(0,0,0,0.1); background: rgba(255,255,255,0.92); font-family: inherit; font-size: 16px; color: var(--texto); outline: none; }
     .campo input:focus { border-color: var(--lilas-forte); }
 
-    .cores-rotulo { font-size: 0.88rem; color: var(--texto-suave); margin-bottom: 10px; padding-left: 4px; }
+    .cores-rotulo { font-size: 0.86rem; color: var(--texto-suave); margin-bottom: 10px; padding-left: 4px; }
     .cores-grid { display: flex; flex-wrap: wrap; gap: 10px; }
     .cor-opcao { width: 44px; height: 44px; border-radius: 50%; border: 3px solid var(--branco); box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
     .cor-opcao.selecionada { transform: scale(1.12); outline: 3px solid var(--texto); }
@@ -73,30 +69,22 @@
   <main class="container">
     <header class="topo">
       <a href="index.html" class="btn-voltar">← Voltar</a>
-      <div class="topo-titulo">
-        <h1>⚙️ Configurações</h1>
-        <p>Sincronizado com o Google Planilhas</p>
+      <div class="topo-dir">
+        <span class="status-dot" id="status-nuvem">☁️ ...</span>
+        <h1>⚙️ Ajustes</h1>
       </div>
     </header>
 
-    <div class="status-nuvem" id="status-nuvem">☁️ Conectando à planilha...</div>
-
-    <div class="aviso-topo">
-      💡 <strong>Dica:</strong> Tudo que você salvar aqui vai para a planilha e aparece automaticamente no celular dela também!
-    </div>
-
-    <!-- PERFIL 1 -->
     <section class="card-config" id="card-p1">
       <div class="card-cabecalho">
         <h2 id="titulo-p1">Ministro da Economia</h2>
-        <span class="tag-id">Perfil 1</span>
       </div>
       <div class="foto-area">
         <div class="foto-preview" id="preview-p1">🎩</div>
         <div class="foto-botoes">
-          <label for="arquivo-p1" class="btn-foto">📷 Escolher foto da galeria</label>
+          <label for="arquivo-p1" class="btn-foto">📷 Foto da galeria</label>
           <input type="file" id="arquivo-p1" class="input-arquivo" accept="image/*" onchange="carregarFoto('p1', this)">
-          <button type="button" class="btn-remover-foto" onclick="removerFoto('p1')">Usar ícone padrão (🎩)</button>
+          <button type="button" class="btn-remover-foto" onclick="removerFoto('p1')">Usar ícone (🎩)</button>
         </div>
       </div>
       <div class="campo">
@@ -107,22 +95,20 @@
         <label for="sub-p1">Cargo ou frase curta</label>
         <input type="text" id="sub-p1">
       </div>
-      <p class="cores-rotulo">Cor do tema dele:</p>
+      <p class="cores-rotulo">Cor do tema:</p>
       <div class="cores-grid" id="cores-p1"></div>
     </section>
 
-    <!-- PERFIL 2 -->
     <section class="card-config" id="card-p2">
       <div class="card-cabecalho">
         <h2 id="titulo-p2">Dona Encrenca</h2>
-        <span class="tag-id">Perfil 2</span>
       </div>
       <div class="foto-area">
         <div class="foto-preview" id="preview-p2">👑</div>
         <div class="foto-botoes">
-          <label for="arquivo-p2" class="btn-foto">📷 Escolher foto da galeria</label>
+          <label for="arquivo-p2" class="btn-foto">📷 Foto da galeria</label>
           <input type="file" id="arquivo-p2" class="input-arquivo" accept="image/*" onchange="carregarFoto('p2', this)">
-          <button type="button" class="btn-remover-foto" onclick="removerFoto('p2')">Usar ícone padrão (👑)</button>
+          <button type="button" class="btn-remover-foto" onclick="removerFoto('p2')">Usar ícone (👑)</button>
         </div>
       </div>
       <div class="campo">
@@ -133,15 +119,13 @@
         <label for="sub-p2">Cargo ou frase curta</label>
         <input type="text" id="sub-p2">
       </div>
-      <p class="cores-rotulo">Cor do tema dela:</p>
+      <p class="cores-rotulo">Cor do tema:</p>
       <div class="cores-grid" id="cores-p2"></div>
     </section>
 
-    <!-- CATEGORIAS -->
     <section class="card-config">
       <div class="card-cabecalho">
-        <h2>🏷️ Categorias do casal</h2>
-        <span class="tag-id">Compartilhadas</span>
+        <h2>🏷️ Categorias</h2>
       </div>
       <div class="cats-lista" id="lista-categorias"></div>
       <div class="add-cat-row">
@@ -151,8 +135,8 @@
     </section>
 
     <div class="acoes-finais">
-      <button type="button" class="btn-salvar" id="btn-salvar" onclick="salvarConfiguracoes()">💾 Salvar na Planilha</button>
-      <button type="button" class="btn-reset" onclick="restaurarPadrao()">🔄 Restaurar tudo para o padrão</button>
+      <button type="button" class="btn-salvar" id="btn-salvar" onclick="salvarConfiguracoes()">💾 Salvar</button>
+      <button type="button" class="btn-reset" onclick="restaurarPadrao()">🔄 Restaurar padrão</button>
     </div>
   </main>
 
@@ -182,7 +166,7 @@
     function setStatusNuvem(texto, tipo) {
       const el = document.getElementById('status-nuvem');
       el.textContent = texto;
-      el.className = 'status-nuvem' + (tipo ? ' ' + tipo : '');
+      el.className = 'status-dot' + (tipo ? ' ' + tipo : '');
     }
 
     function carregarLocal() {
@@ -202,37 +186,19 @@
         const resp = await fetch(API_URL);
         const dados = await resp.json();
         if (dados.ok && dados.config && Object.keys(dados.config).length > 0) {
-          const c = dados.config;
-          const base = clonarPadrao();
+          const c = dados.config, base = clonarPadrao();
           let cats = base.categorias;
           try { if (c.categorias) cats = JSON.parse(c.categorias); } catch (e) {}
-
           config = {
-            p1: {
-              nome: c.p1_nome || base.p1.nome,
-              subtitulo: c.p1_subtitulo || base.p1.subtitulo,
-              cor: c.p1_cor || base.p1.cor,
-              icone: c.p1_icone || base.p1.icone,
-              foto: c.p1_foto || ''
-            },
-            p2: {
-              nome: c.p2_nome || base.p2.nome,
-              subtitulo: c.p2_subtitulo || base.p2.subtitulo,
-              cor: c.p2_cor || base.p2.cor,
-              icone: c.p2_icone || base.p2.icone,
-              foto: c.p2_foto || ''
-            },
+            p1: { nome: c.p1_nome || base.p1.nome, subtitulo: c.p1_subtitulo || base.p1.subtitulo, cor: c.p1_cor || base.p1.cor, icone: c.p1_icone || base.p1.icone, foto: c.p1_foto || '' },
+            p2: { nome: c.p2_nome || base.p2.nome, subtitulo: c.p2_subtitulo || base.p2.subtitulo, cor: c.p2_cor || base.p2.cor, icone: c.p2_icone || base.p2.icone, foto: c.p2_foto || '' },
             categorias: Array.isArray(cats) ? cats : base.categorias
           };
           try { localStorage.setItem('ukeah_config', JSON.stringify(config)); } catch (e) {}
           preencherTela();
-          setStatusNuvem('☁️ Conectado à planilha ✅', 'ok');
-        } else if (dados.ok) {
-          setStatusNuvem('☁️ Planilha conectada (toque em Salvar abaixo para enviar)', 'ok');
         }
-      } catch (e) {
-        setStatusNuvem('⚠️ Sem sinal da planilha (usando dados do aparelho)', 'erro');
-      }
+        if (dados.ok) setStatusNuvem('☁️ ✅', 'ok');
+      } catch (e) { setStatusNuvem('⚠️ Offline', 'erro'); }
     }
 
     function preencherTela() {
@@ -241,9 +207,7 @@
         document.getElementById(`nome-${k}`).value = p.nome;
         document.getElementById(`sub-${k}`).value = p.subtitulo;
         document.getElementById(`titulo-${k}`).textContent = p.nome || 'Sem nome';
-        atualizarPreviewFoto(k);
-        aplicarCorCard(k);
-        desenharBolinhasCor(k);
+        atualizarPreviewFoto(k); aplicarCorCard(k); desenharBolinhasCor(k);
       });
       desenharCategorias();
     }
@@ -255,8 +219,7 @@
     function aplicarCorCard(k) {
       const tema = PALETA[config[k].cor] || PALETA.azul;
       const card = document.getElementById(`card-${k}`);
-      card.style.backgroundColor = tema.fundo;
-      card.style.borderColor = tema.borda;
+      card.style.backgroundColor = tema.fundo; card.style.borderColor = tema.borda;
       document.getElementById(`titulo-${k}`).style.color = tema.texto;
     }
 
@@ -287,16 +250,11 @@
         img.onload = () => {
           const tam = 180, canvas = document.createElement('canvas');
           canvas.width = tam; canvas.height = tam;
-          const ctx = canvas.getContext('2d');
-          const menor = Math.min(img.width, img.height);
+          const ctx = canvas.getContext('2d'), menor = Math.min(img.width, img.height);
           ctx.drawImage(img, (img.width - menor)/2, (img.height - menor)/2, menor, menor, 0, 0, tam, tam);
-
           let dataUrl = canvas.toDataURL('image/jpeg', 0.72);
           if (dataUrl.length > 45000) dataUrl = canvas.toDataURL('image/jpeg', 0.48);
-
-          config[k].foto = dataUrl;
-          atualizarPreviewFoto(k);
-          mostrarAviso('Foto pronta! Toque em Salvar na Planilha 📸');
+          config[k].foto = dataUrl; atualizarPreviewFoto(k);
         };
         img.src = ev.target.result;
       };
@@ -304,8 +262,7 @@
     }
 
     function removerFoto(k) {
-      config[k].foto = '';
-      document.getElementById(`arquivo-${k}`).value = '';
+      config[k].foto = ''; document.getElementById(`arquivo-${k}`).value = '';
       atualizarPreviewFoto(k);
     }
 
@@ -331,11 +288,10 @@
       config.p1.subtitulo = document.getElementById('sub-p1').value.trim() || PADRAO.p1.subtitulo;
       config.p2.nome = document.getElementById('nome-p2').value.trim() || PADRAO.p2.nome;
       config.p2.subtitulo = document.getElementById('sub-p2').value.trim() || PADRAO.p2.subtitulo;
-
       try { localStorage.setItem('ukeah_config', JSON.stringify(config)); } catch (e) {}
 
       const btn = document.getElementById('btn-salvar');
-      btn.disabled = true; btn.textContent = '⏳ Salvando na Planilha...';
+      btn.disabled = true; btn.textContent = '⏳ Salvando...';
 
       const payload = {
         p1_nome: config.p1.nome, p1_subtitulo: config.p1.subtitulo, p1_cor: config.p1.cor, p1_icone: config.p1.icone, p1_foto: config.p1.foto,
@@ -350,25 +306,18 @@
           body: JSON.stringify({ acao: 'salvarConfig', config: payload })
         });
         const res = await resp.json();
-        if (res.ok) {
-          setStatusNuvem('☁️ Salvo na planilha agora ✅', 'ok');
-          mostrarAviso('✅ Salvo na Planilha Google com sucesso!');
-        } else {
-          throw new Error(res.erro || 'Erro');
-        }
+        if (res.ok) { setStatusNuvem('☁️ ✅', 'ok'); mostrarAviso('✅ Salvo!'); }
+        else throw new Error('Erro');
       } catch (e) {
-        setStatusNuvem('⚠️ Erro ao enviar para a planilha', 'erro');
-        mostrarAviso('⚠️ Salvo no aparelho, mas falhou na planilha.');
+        setStatusNuvem('⚠️ Erro', 'erro'); mostrarAviso('⚠️ Falhou na planilha.');
       } finally {
-        btn.disabled = false; btn.textContent = '💾 Salvar na Planilha';
+        btn.disabled = false; btn.textContent = '💾 Salvar';
       }
     }
 
     function restaurarPadrao() {
-      if (!confirm('Voltar apelidos, cores e fotos para o padrão?')) return;
-      config = clonarPadrao();
-      preencherTela();
-      salvarConfiguracoes();
+      if (!confirm('Restaurar padrão?')) return;
+      config = clonarPadrao(); preencherTela(); salvarConfiguracoes();
     }
 
     let timerToast;
@@ -376,13 +325,10 @@
       const t = document.getElementById('toast');
       t.textContent = msg; t.classList.add('visivel');
       clearTimeout(timerToast);
-      timerToast = setTimeout(() => t.classList.remove('visivel'), 3000);
+      timerToast = setTimeout(() => t.classList.remove('visivel'), 2600);
     }
 
-    window.addEventListener('DOMContentLoaded', () => {
-      carregarLocal();
-      carregarDaPlanilha();
-    });
+    window.addEventListener('DOMContentLoaded', () => { carregarLocal(); carregarDaPlanilha(); });
   </script>
 </body>
 </html>
