@@ -4,414 +4,93 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Configurações — Ukeah</title>
-
-  <!-- Fonte arredondada Nunito -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-
   <style>
     :root {
-      --fundo: #FAF8FC;
-      --branco: #FFFFFF;
-      --texto: #2D3142;
-      --texto-suave: #6E748A;
-      --lilas-fundo: #F1EBFF;
-      --lilas-forte: #5B3CC4;
-      --verde-fundo: #E7F8EE;
-      --verde-forte: #1F7A4D;
-      --coral-fundo: #FFEBE9;
-      --coral-forte: #A83232;
+      --fundo: #FAF8FC; --branco: #FFFFFF; --texto: #2D3142; --texto-suave: #6E748A;
+      --lilas-fundo: #F1EBFF; --lilas-forte: #5B3CC4;
+      --verde-fundo: #E7F8EE; --verde-forte: #1F7A4D;
       --sombra: 0 10px 26px rgba(95, 90, 135, 0.08);
     }
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body { font-family: 'Nunito', sans-serif; font-weight: 400; background: var(--fundo); color: var(--texto); line-height: 1.5; padding-bottom: 48px; }
+    .container { max-width: 680px; margin: 0 auto; padding: 20px 16px; }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
+    .topo { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; gap: 12px; }
+    .btn-voltar { display: inline-flex; align-items: center; gap: 6px; background: var(--branco); color: var(--texto); text-decoration: none; padding: 10px 16px; border-radius: 16px; font-size: 0.92rem; font-weight: 600; box-shadow: var(--sombra); border: 1px solid #ECE8F4; }
+    .topo-titulo { text-align: right; }
+    .topo-titulo h1 { font-size: 1.35rem; font-weight: 800; }
+    .topo-titulo p { font-size: 0.84rem; color: var(--texto-suave); }
 
-    body {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 400;
-      background-color: var(--fundo);
-      color: var(--texto);
-      line-height: 1.5;
-      padding-bottom: 48px;
-    }
+    .status-nuvem { display: inline-flex; align-items: center; gap: 8px; background: var(--lilas-fundo); color: var(--lilas-forte); padding: 7px 14px; border-radius: 16px; font-size: 0.84rem; margin-bottom: 16px; }
+    .status-nuvem.ok { background: var(--verde-fundo); color: var(--verde-forte); }
+    .status-nuvem.erro { background: #FFEBE9; color: #A83232; }
 
-    .container {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 20px 16px;
-    }
+    .aviso-topo { background: #FFF7DC; border: 1px solid #F5DF98; color: #7A5901; border-radius: 20px; padding: 14px 18px; margin-bottom: 20px; font-size: 0.92rem; }
+    .card-config { background: var(--branco); border-radius: 26px; padding: 22px 18px; box-shadow: var(--sombra); margin-bottom: 20px; border: 2px solid #EFEBF7; transition: background-color 0.25s ease, border-color 0.25s ease; }
+    .card-cabecalho { display: flex; align-items: center; justify-content: space-between; margin-bottom: 18px; }
+    .card-cabecalho h2 { font-size: 1.15rem; font-weight: 700; }
+    .tag-id { background: rgba(255,255,255,0.8); padding: 4px 12px; border-radius: 12px; font-size: 0.8rem; color: var(--texto-suave); }
 
-    /* Cabeçalho */
-    .topo {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 22px;
-      gap: 12px;
-    }
+    .foto-area { display: flex; align-items: center; gap: 16px; margin-bottom: 18px; flex-wrap: wrap; }
+    .foto-preview { width: 88px; height: 88px; border-radius: 50%; background: var(--branco); border: 4px solid var(--branco); box-shadow: 0 6px 16px rgba(0,0,0,0.09); display: flex; align-items: center; justify-content: center; font-size: 42px; overflow: hidden; flex-shrink: 0; }
+    .foto-preview img { width: 100%; height: 100%; object-fit: cover; }
+    .foto-botoes { display: flex; flex-direction: column; gap: 8px; flex: 1; min-width: 180px; }
+    .btn-foto { display: inline-flex; align-items: center; justify-content: center; gap: 8px; background: var(--branco); color: var(--texto); border: 1px solid rgba(0,0,0,0.08); border-radius: 16px; padding: 10px 14px; font-family: inherit; font-size: 0.9rem; font-weight: 600; cursor: pointer; box-shadow: 0 4px 10px rgba(0,0,0,0.04); }
+    .btn-remover-foto { background: transparent; border: none; color: var(--texto-suave); font-family: inherit; font-size: 0.82rem; text-decoration: underline; cursor: pointer; text-align: left; padding: 2px 4px; }
+    .input-arquivo { display: none; }
 
-    .btn-voltar {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background-color: var(--branco);
-      color: var(--texto);
-      text-decoration: none;
-      padding: 10px 16px;
-      border-radius: 16px;
-      font-size: 0.92rem;
-      font-weight: 600;
-      box-shadow: var(--sombra);
-      border: 1px solid #ECE8F4;
-    }
+    .campo { margin-bottom: 14px; }
+    .campo label { display: block; font-size: 0.88rem; color: var(--texto-suave); margin-bottom: 6px; padding-left: 4px; }
+    .campo input { width: 100%; padding: 12px 14px; border-radius: 16px; border: 1px solid rgba(0,0,0,0.1); background: rgba(255,255,255,0.92); font-family: inherit; font-size: 16px; color: var(--texto); outline: none; }
+    .campo input:focus { border-color: var(--lilas-forte); }
 
-    .topo-titulo {
-      text-align: right;
-    }
+    .cores-rotulo { font-size: 0.88rem; color: var(--texto-suave); margin-bottom: 10px; padding-left: 4px; }
+    .cores-grid { display: flex; flex-wrap: wrap; gap: 10px; }
+    .cor-opcao { width: 44px; height: 44px; border-radius: 50%; border: 3px solid var(--branco); box-shadow: 0 4px 10px rgba(0,0,0,0.1); cursor: pointer; display: flex; align-items: center; justify-content: center; font-size: 1rem; }
+    .cor-opcao.selecionada { transform: scale(1.12); outline: 3px solid var(--texto); }
 
-    .topo-titulo h1 {
-      font-size: 1.35rem;
-      font-weight: 800;
-    }
+    .cats-lista { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 16px; }
+    .cat-chip { display: inline-flex; align-items: center; gap: 8px; background: var(--lilas-fundo); color: var(--lilas-forte); padding: 8px 14px; border-radius: 16px; font-size: 0.9rem; }
+    .cat-chip button { border: none; background: rgba(255,255,255,0.7); color: var(--lilas-forte); width: 22px; height: 22px; border-radius: 50%; font-weight: 700; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .add-cat-row { display: flex; gap: 8px; }
+    .add-cat-row input { flex: 1; padding: 12px 14px; border-radius: 16px; border: 1px solid #E2DDF0; font-family: inherit; font-size: 16px; outline: none; }
+    .btn-add-cat { background: var(--lilas-fundo); color: var(--lilas-forte); border: none; border-radius: 16px; padding: 0 18px; font-family: inherit; font-size: 0.95rem; font-weight: 700; cursor: pointer; }
 
-    .topo-titulo p {
-      font-size: 0.84rem;
-      color: var(--texto-suave);
-    }
+    .acoes-finais { display: flex; flex-direction: column; gap: 12px; margin-top: 8px; }
+    .btn-salvar { width: 100%; padding: 16px; border: none; border-radius: 20px; background: linear-gradient(135deg, #7C5CE6, #9E7BF5); color: var(--branco); font-family: inherit; font-size: 1.05rem; font-weight: 700; cursor: pointer; box-shadow: 0 10px 24px rgba(124,92,230,0.28); }
+    .btn-salvar:disabled { opacity: 0.65; cursor: wait; }
+    .btn-reset { width: 100%; padding: 12px; border: 1px solid #E5E0EE; border-radius: 18px; background: var(--branco); color: var(--texto-suave); font-family: inherit; font-size: 0.9rem; cursor: pointer; }
 
-    /* Aviso simpático */
-    .aviso-topo {
-      background-color: #FFF7DC;
-      border: 1px solid #F5DF98;
-      color: #7A5901;
-      border-radius: 20px;
-      padding: 14px 18px;
-      margin-bottom: 20px;
-      font-size: 0.92rem;
-    }
-
-    /* Cards dos Perfis */
-    .card-config {
-      background-color: var(--branco);
-      border-radius: 26px;
-      padding: 22px 18px;
-      box-shadow: var(--sombra);
-      margin-bottom: 20px;
-      border: 2px solid #EFEBF7;
-      transition: background-color 0.25s ease, border-color 0.25s ease;
-    }
-
-    .card-cabecalho {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 18px;
-    }
-
-    .card-cabecalho h2 {
-      font-size: 1.15rem;
-      font-weight: 700;
-    }
-
-    .tag-id {
-      background-color: rgba(255, 255, 255, 0.8);
-      padding: 4px 12px;
-      border-radius: 12px;
-      font-size: 0.8rem;
-      color: var(--texto-suave);
-    }
-
-    /* Área da Foto */
-    .foto-area {
-      display: flex;
-      align-items: center;
-      gap: 16px;
-      margin-bottom: 18px;
-      flex-wrap: wrap;
-    }
-
-    .foto-preview {
-      width: 88px;
-      height: 88px;
-      border-radius: 50%;
-      background-color: var(--branco);
-      border: 4px solid var(--branco);
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.09);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 42px;
-      overflow: hidden;
-      flex-shrink: 0;
-    }
-
-    .foto-preview img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .foto-botoes {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      flex: 1;
-      min-width: 180px;
-    }
-
-    .btn-foto {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      background-color: var(--branco);
-      color: var(--texto);
-      border: 1px solid rgba(0, 0, 0, 0.08);
-      border-radius: 16px;
-      padding: 10px 14px;
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.04);
-    }
-
-    .btn-remover-foto {
-      background: transparent;
-      border: none;
-      color: var(--texto-suave);
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.82rem;
-      text-decoration: underline;
-      cursor: pointer;
-      text-align: left;
-      padding: 2px 4px;
-    }
-
-    .input-arquivo {
-      display: none;
-    }
-
-    /* Campos de Texto (16px evita zoom automático no tablet) */
-    .campo {
-      margin-bottom: 14px;
-    }
-
-    .campo label {
-      display: block;
-      font-size: 0.88rem;
-      color: var(--texto-suave);
-      margin-bottom: 6px;
-      padding-left: 4px;
-    }
-
-    .campo input {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 16px;
-      border: 1px solid rgba(0, 0, 0, 0.1);
-      background-color: rgba(255, 255, 255, 0.92);
-      font-family: 'Nunito', sans-serif;
-      font-size: 16px;
-      font-weight: 400;
-      color: var(--texto);
-      outline: none;
-    }
-
-    .campo input:focus {
-      border-color: var(--lilas-forte);
-    }
-
-    /* Seletor de Cores */
-    .cores-rotulo {
-      font-size: 0.88rem;
-      color: var(--texto-suave);
-      margin-bottom: 10px;
-      padding-left: 4px;
-    }
-
-    .cores-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-    }
-
-    .cor-opcao {
-      width: 44px;
-      height: 44px;
-      border-radius: 50%;
-      border: 3px solid var(--branco);
-      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1rem;
-      transition: transform 0.15s ease;
-    }
-
-    .cor-opcao.selecionada {
-      transform: scale(1.12);
-      outline: 3px solid var(--texto);
-    }
-
-    /* Categorias */
-    .cats-lista {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-bottom: 16px;
-    }
-
-    .cat-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background-color: var(--lilas-fundo);
-      color: var(--lilas-forte);
-      padding: 8px 14px;
-      border-radius: 16px;
-      font-size: 0.9rem;
-    }
-
-    .cat-chip button {
-      border: none;
-      background: rgba(255, 255, 255, 0.7);
-      color: var(--lilas-forte);
-      width: 22px;
-      height: 22px;
-      border-radius: 50%;
-      font-weight: 700;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .add-cat-row {
-      display: flex;
-      gap: 8px;
-    }
-
-    .add-cat-row input {
-      flex: 1;
-      padding: 12px 14px;
-      border-radius: 16px;
-      border: 1px solid #E2DDF0;
-      font-family: 'Nunito', sans-serif;
-      font-size: 16px;
-      outline: none;
-    }
-
-    .btn-add-cat {
-      background-color: var(--lilas-fundo);
-      color: var(--lilas-forte);
-      border: none;
-      border-radius: 16px;
-      padding: 0 18px;
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 700;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    /* Botões Finais */
-    .acoes-finais {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-      margin-top: 8px;
-    }
-
-    .btn-salvar {
-      width: 100%;
-      padding: 16px;
-      border: none;
-      border-radius: 20px;
-      background: linear-gradient(135deg, #7C5CE6 0%, #9E7BF5 100%);
-      color: var(--branco);
-      font-family: 'Nunito', sans-serif;
-      font-size: 1.05rem;
-      font-weight: 700;
-      cursor: pointer;
-      box-shadow: 0 10px 24px rgba(124, 92, 230, 0.28);
-    }
-
-    .btn-salvar:active {
-      transform: scale(0.98);
-    }
-
-    .btn-reset {
-      width: 100%;
-      padding: 12px;
-      border: 1px solid #E5E0EE;
-      border-radius: 18px;
-      background-color: var(--branco);
-      color: var(--texto-suave);
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.9rem;
-      cursor: pointer;
-    }
-
-    /* Aviso flutuante */
-    .toast {
-      position: fixed;
-      bottom: 24px;
-      left: 50%;
-      transform: translateX(-50%) translateY(20px);
-      background-color: var(--texto);
-      color: var(--branco);
-      padding: 12px 20px;
-      border-radius: 18px;
-      font-size: 0.92rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.25s ease;
-      z-index: 200;
-      text-align: center;
-      max-width: 90%;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
-    }
-
-    .toast.visivel {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
+    .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--texto); color: var(--branco); padding: 12px 20px; border-radius: 18px; font-size: 0.92rem; opacity: 0; pointer-events: none; transition: all 0.25s ease; z-index: 200; text-align: center; max-width: 90%; box-shadow: 0 10px 25px rgba(0,0,0,0.18); }
+    .toast.visivel { opacity: 1; transform: translateX(-50%) translateY(0); }
   </style>
 </head>
 <body>
 
   <main class="container">
-
-    <!-- Topo -->
     <header class="topo">
       <a href="index.html" class="btn-voltar">← Voltar</a>
       <div class="topo-titulo">
         <h1>⚙️ Configurações</h1>
-        <p>Personalize o Ukeah do jeito de vocês</p>
+        <p>Sincronizado com o Google Planilhas</p>
       </div>
     </header>
 
+    <div class="status-nuvem" id="status-nuvem">☁️ Conectando à planilha...</div>
+
     <div class="aviso-topo">
-      💡 <strong>Dica:</strong> Escolha as fotos da galeria, mude os apelidos e escolha as cores abaixo. Depois toque em <strong>Salvar Configurações</strong> lá no final!
+      💡 <strong>Dica:</strong> Tudo que você salvar aqui vai para a planilha e aparece automaticamente no celular dela também!
     </div>
 
-    <!-- ========================
-         PERFIL 1 (ELE)
-         ======================== -->
+    <!-- PERFIL 1 -->
     <section class="card-config" id="card-p1">
       <div class="card-cabecalho">
         <h2 id="titulo-p1">Ministro da Economia</h2>
         <span class="tag-id">Perfil 1</span>
       </div>
-
       <div class="foto-area">
         <div class="foto-preview" id="preview-p1">🎩</div>
         <div class="foto-botoes">
@@ -420,30 +99,24 @@
           <button type="button" class="btn-remover-foto" onclick="removerFoto('p1')">Usar ícone padrão (🎩)</button>
         </div>
       </div>
-
       <div class="campo">
         <label for="nome-p1">Apelido</label>
-        <input type="text" id="nome-p1" placeholder="Ex: Ministro da Economia" oninput="atualizarTituloCard('p1')">
+        <input type="text" id="nome-p1" oninput="atualizarTituloCard('p1')">
       </div>
-
       <div class="campo">
         <label for="sub-p1">Cargo ou frase curta</label>
-        <input type="text" id="sub-p1" placeholder="Ex: Fiscal do orçamento">
+        <input type="text" id="sub-p1">
       </div>
-
       <p class="cores-rotulo">Cor do tema dele:</p>
       <div class="cores-grid" id="cores-p1"></div>
     </section>
 
-    <!-- ========================
-         PERFIL 2 (ELA)
-         ======================== -->
+    <!-- PERFIL 2 -->
     <section class="card-config" id="card-p2">
       <div class="card-cabecalho">
         <h2 id="titulo-p2">Dona Encrenca</h2>
         <span class="tag-id">Perfil 2</span>
       </div>
-
       <div class="foto-area">
         <div class="foto-preview" id="preview-p2">👑</div>
         <div class="foto-botoes">
@@ -452,50 +125,42 @@
           <button type="button" class="btn-remover-foto" onclick="removerFoto('p2')">Usar ícone padrão (👑)</button>
         </div>
       </div>
-
       <div class="campo">
         <label for="nome-p2">Apelido</label>
-        <input type="text" id="nome-p2" placeholder="Ex: Dona Encrenca" oninput="atualizarTituloCard('p2')">
+        <input type="text" id="nome-p2" oninput="atualizarTituloCard('p2')">
       </div>
-
       <div class="campo">
         <label for="sub-p2">Cargo ou frase curta</label>
-        <input type="text" id="sub-p2" placeholder="Ex: Aprovação presidencial">
+        <input type="text" id="sub-p2">
       </div>
-
       <p class="cores-rotulo">Cor do tema dela:</p>
       <div class="cores-grid" id="cores-p2"></div>
     </section>
 
-    <!-- ========================
-         CATEGORIAS DO CASAL
-         ======================== -->
+    <!-- CATEGORIAS -->
     <section class="card-config">
       <div class="card-cabecalho">
         <h2>🏷️ Categorias do casal</h2>
-        <span class="tag-id">Opcional</span>
+        <span class="tag-id">Compartilhadas</span>
       </div>
-
       <div class="cats-lista" id="lista-categorias"></div>
-
       <div class="add-cat-row">
         <input type="text" id="nova-categoria" placeholder="Nova categoria (ex: 🍕 Delivery)">
         <button type="button" class="btn-add-cat" onclick="adicionarCategoria()">➕ Add</button>
       </div>
     </section>
 
-    <!-- Botões de Ação -->
     <div class="acoes-finais">
-      <button type="button" class="btn-salvar" onclick="salvarConfiguracoes()">💾 Salvar Configurações</button>
+      <button type="button" class="btn-salvar" id="btn-salvar" onclick="salvarConfiguracoes()">💾 Salvar na Planilha</button>
       <button type="button" class="btn-reset" onclick="restaurarPadrao()">🔄 Restaurar tudo para o padrão</button>
     </div>
-
   </main>
 
   <div id="toast" class="toast"></div>
 
   <script>
-    // Paleta de cores pastéis disponíveis
+    const API_URL = 'https://script.google.com/macros/s/AKfycbznLrLxLa2-3PUecTKSc--px_y41hxUoF44L0yP5N1gPMWnujYiWkkFsbDbv6q-9kHV2A/exec';
+
     const PALETA = {
       azul:    { fundo: '#E6F2FF', borda: '#B8DCFF', texto: '#2B6CB0', bolinha: '#90C8FF' },
       rosa:    { fundo: '#FFEAF2', borda: '#FFC2D9', texto: '#B83268', bolinha: '#FFA6C9' },
@@ -505,211 +170,219 @@
       pessego: { fundo: '#FFF0E5', borda: '#FFD1B3', texto: '#A84B18', bolinha: '#FFB88C' }
     };
 
-    // Valores padrão iniciais
     const PADRAO = {
-      p1: {
-        nome: 'Ministro da Economia',
-        subtitulo: 'Fiscal do orçamento',
-        cor: 'azul',
-        icone: '🎩',
-        foto: ''
-      },
-      p2: {
-        nome: 'Dona Encrenca',
-        subtitulo: 'Aprovação presidencial',
-        cor: 'rosa',
-        icone: '👑',
-        foto: ''
-      },
+      p1: { nome: 'Ministro da Economia', subtitulo: 'Fiscal do orçamento', cor: 'azul', icone: '🎩', foto: '' },
+      p2: { nome: 'Dona Encrenca', subtitulo: 'Aprovação presidencial', cor: 'rosa', icone: '👑', foto: '' },
       categorias: ['🛒 Mercado', '💳 Cartão', '☕ Lazer & Mimos', '🏠 Casa', '💼 Salário']
     };
 
     let config = {};
+    const clonarPadrao = () => JSON.parse(JSON.stringify(PADRAO));
 
-    function clonarPadrao() {
-      return JSON.parse(JSON.stringify(PADRAO));
+    function setStatusNuvem(texto, tipo) {
+      const el = document.getElementById('status-nuvem');
+      el.textContent = texto;
+      el.className = 'status-nuvem' + (tipo ? ' ' + tipo : '');
     }
 
-    function carregarSalvo() {
+    function carregarLocal() {
       let salvo = null;
-      try {
-        const texto = localStorage.getItem('ukeah_config');
-        if (texto) salvo = JSON.parse(texto);
-      } catch (e) {}
-
+      try { salvo = JSON.parse(localStorage.getItem('ukeah_config')); } catch (e) {}
       const base = clonarPadrao();
-      if (salvo) {
-        config = {
-          p1: { ...base.p1, ...(salvo.p1 || {}) },
-          p2: { ...base.p2, ...(salvo.p2 || {}) },
-          categorias: Array.isArray(salvo.categorias) ? salvo.categorias : base.categorias
-        };
-      } else {
-        config = base;
-      }
-
+      config = salvo ? {
+        p1: { ...base.p1, ...(salvo.p1 || {}) },
+        p2: { ...base.p2, ...(salvo.p2 || {}) },
+        categorias: Array.isArray(salvo.categorias) ? salvo.categorias : base.categorias
+      } : base;
       preencherTela();
     }
 
-    function preencherTela() {
-      ['p1', 'p2'].forEach(chave => {
-        const perfil = config[chave];
-        document.getElementById(`nome-${chave}`).value = perfil.nome;
-        document.getElementById(`sub-${chave}`).value = perfil.subtitulo;
-        document.getElementById(`titulo-${chave}`).textContent = perfil.nome || 'Sem nome';
+    async function carregarDaPlanilha() {
+      try {
+        const resp = await fetch(API_URL);
+        const dados = await resp.json();
+        if (dados.ok && dados.config && Object.keys(dados.config).length > 0) {
+          const c = dados.config;
+          const base = clonarPadrao();
+          let cats = base.categorias;
+          try { if (c.categorias) cats = JSON.parse(c.categorias); } catch (e) {}
 
-        atualizarPreviewFoto(chave);
-        aplicarCorCard(chave);
-        desenharBolinhasCor(chave);
-      });
-
-      desenharCategorias();
-    }
-
-    function atualizarTituloCard(chave) {
-      const valor = document.getElementById(`nome-${chave}`).value;
-      document.getElementById(`titulo-${chave}`).textContent = valor || 'Sem apelido';
-    }
-
-    function aplicarCorCard(chave) {
-      const corKey = config[chave].cor;
-      const tema = PALETA[corKey] || PALETA.azul;
-      const card = document.getElementById(`card-${chave}`);
-      card.style.backgroundColor = tema.fundo;
-      card.style.borderColor = tema.borda;
-      document.getElementById(`titulo-${chave}`).style.color = tema.texto;
-    }
-
-    function desenharBolinhasCor(chave) {
-      const container = document.getElementById(`cores-${chave}`);
-      container.innerHTML = '';
-
-      Object.keys(PALETA).forEach(corKey => {
-        const tema = PALETA[corKey];
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'cor-opcao' + (config[chave].cor === corKey ? ' selecionada' : '');
-        btn.style.backgroundColor = tema.bolinha;
-        btn.title = corKey;
-        btn.textContent = config[chave].cor === corKey ? '✓' : '';
-        btn.onclick = () => {
-          config[chave].cor = corKey;
-          aplicarCorCard(chave);
-          desenharBolinhasCor(chave);
-        };
-        container.appendChild(btn);
-      });
-    }
-
-    function atualizarPreviewFoto(chave) {
-      const box = document.getElementById(`preview-${chave}`);
-      const perfil = config[chave];
-      if (perfil.foto) {
-        box.innerHTML = `<img src="${perfil.foto}" alt="Foto">`;
-      } else {
-        box.textContent = perfil.icone;
+          config = {
+            p1: {
+              nome: c.p1_nome || base.p1.nome,
+              subtitulo: c.p1_subtitulo || base.p1.subtitulo,
+              cor: c.p1_cor || base.p1.cor,
+              icone: c.p1_icone || base.p1.icone,
+              foto: c.p1_foto || ''
+            },
+            p2: {
+              nome: c.p2_nome || base.p2.nome,
+              subtitulo: c.p2_subtitulo || base.p2.subtitulo,
+              cor: c.p2_cor || base.p2.cor,
+              icone: c.p2_icone || base.p2.icone,
+              foto: c.p2_foto || ''
+            },
+            categorias: Array.isArray(cats) ? cats : base.categorias
+          };
+          try { localStorage.setItem('ukeah_config', JSON.stringify(config)); } catch (e) {}
+          preencherTela();
+          setStatusNuvem('☁️ Conectado à planilha ✅', 'ok');
+        } else if (dados.ok) {
+          setStatusNuvem('☁️ Planilha conectada (toque em Salvar abaixo para enviar)', 'ok');
+        }
+      } catch (e) {
+        setStatusNuvem('⚠️ Sem sinal da planilha (usando dados do aparelho)', 'erro');
       }
     }
 
-    // Redimensiona a foto da galeria para ficar leve e rápida
-    function carregarFoto(chave, input) {
-      const arquivo = input.files && input.files[0];
-      if (!arquivo) return;
-
-      const leitor = new FileReader();
-      leitor.onload = function(evento) {
-        const img = new Image();
-        img.onload = function() {
-          const tamanho = 240;
-          const canvas = document.createElement('canvas');
-          canvas.width = tamanho;
-          canvas.height = tamanho;
-          const ctx = canvas.getContext('2d');
-
-          // Corta centralizado em quadrado para ficar perfeito no círculo
-          const menorLado = Math.min(img.width, img.height);
-          const inicioX = (img.width - menorLado) / 2;
-          const inicioY = (img.height - menorLado) / 2;
-
-          ctx.drawImage(img, inicioX, inicioY, menorLado, menorLado, 0, 0, tamanho, tamanho);
-          config[chave].foto = canvas.toDataURL('image/jpeg', 0.82);
-          atualizarPreviewFoto(chave);
-          mostrarAviso('Foto carregada! Lembre de salvar lá embaixo 📸');
-        };
-        img.src = evento.target.result;
-      };
-      leitor.readAsDataURL(arquivo);
+    function preencherTela() {
+      ['p1', 'p2'].forEach(k => {
+        const p = config[k];
+        document.getElementById(`nome-${k}`).value = p.nome;
+        document.getElementById(`sub-${k}`).value = p.subtitulo;
+        document.getElementById(`titulo-${k}`).textContent = p.nome || 'Sem nome';
+        atualizarPreviewFoto(k);
+        aplicarCorCard(k);
+        desenharBolinhasCor(k);
+      });
+      desenharCategorias();
     }
 
-    function removerFoto(chave) {
-      config[chave].foto = '';
-      document.getElementById(`arquivo-${chave}`).value = '';
-      atualizarPreviewFoto(chave);
+    function atualizarTituloCard(k) {
+      document.getElementById(`titulo-${k}`).textContent = document.getElementById(`nome-${k}`).value || 'Sem apelido';
+    }
+
+    function aplicarCorCard(k) {
+      const tema = PALETA[config[k].cor] || PALETA.azul;
+      const card = document.getElementById(`card-${k}`);
+      card.style.backgroundColor = tema.fundo;
+      card.style.borderColor = tema.borda;
+      document.getElementById(`titulo-${k}`).style.color = tema.texto;
+    }
+
+    function desenharBolinhasCor(k) {
+      const cont = document.getElementById(`cores-${k}`); cont.innerHTML = '';
+      Object.keys(PALETA).forEach(corKey => {
+        const tema = PALETA[corKey];
+        const btn = document.createElement('button'); btn.type = 'button';
+        btn.className = 'cor-opcao' + (config[k].cor === corKey ? ' selecionada' : '');
+        btn.style.backgroundColor = tema.bolinha;
+        btn.textContent = config[k].cor === corKey ? '✓' : '';
+        btn.onclick = () => { config[k].cor = corKey; aplicarCorCard(k); desenharBolinhasCor(k); };
+        cont.appendChild(btn);
+      });
+    }
+
+    function atualizarPreviewFoto(k) {
+      const box = document.getElementById(`preview-${k}`), p = config[k];
+      if (p.foto) box.innerHTML = `<img src="${p.foto}" alt="Foto">`;
+      else box.textContent = p.icone;
+    }
+
+    function carregarFoto(k, input) {
+      const arq = input.files && input.files[0]; if (!arq) return;
+      const leitor = new FileReader();
+      leitor.onload = ev => {
+        const img = new Image();
+        img.onload = () => {
+          const tam = 180, canvas = document.createElement('canvas');
+          canvas.width = tam; canvas.height = tam;
+          const ctx = canvas.getContext('2d');
+          const menor = Math.min(img.width, img.height);
+          ctx.drawImage(img, (img.width - menor)/2, (img.height - menor)/2, menor, menor, 0, 0, tam, tam);
+
+          let dataUrl = canvas.toDataURL('image/jpeg', 0.72);
+          if (dataUrl.length > 45000) dataUrl = canvas.toDataURL('image/jpeg', 0.48);
+
+          config[k].foto = dataUrl;
+          atualizarPreviewFoto(k);
+          mostrarAviso('Foto pronta! Toque em Salvar na Planilha 📸');
+        };
+        img.src = ev.target.result;
+      };
+      leitor.readAsDataURL(arq);
+    }
+
+    function removerFoto(k) {
+      config[k].foto = '';
+      document.getElementById(`arquivo-${k}`).value = '';
+      atualizarPreviewFoto(k);
     }
 
     function desenharCategorias() {
-      const container = document.getElementById('lista-categorias');
-      container.innerHTML = '';
-
-      config.categorias.forEach((cat, indice) => {
-        const chip = document.createElement('div');
-        chip.className = 'cat-chip';
-        chip.innerHTML = `
-          <span>${cat}</span>
-          <button type="button" onclick="removerCategoria(${indice})">×</button>
-        `;
-        container.appendChild(chip);
+      const cont = document.getElementById('lista-categorias'); cont.innerHTML = '';
+      config.categorias.forEach((cat, i) => {
+        const chip = document.createElement('div'); chip.className = 'cat-chip';
+        const span = document.createElement('span'); span.textContent = cat;
+        const btn = document.createElement('button'); btn.type = 'button'; btn.textContent = '×';
+        btn.onclick = () => { config.categorias.splice(i, 1); desenharCategorias(); };
+        chip.append(span, btn); cont.appendChild(chip);
       });
     }
 
     function adicionarCategoria() {
-      const input = document.getElementById('nova-categoria');
-      const texto = input.value.trim();
-      if (!texto) return;
-      config.categorias.push(texto);
-      input.value = '';
-      desenharCategorias();
+      const inp = document.getElementById('nova-categoria'), txt = inp.value.trim();
+      if (!txt) return;
+      config.categorias.push(txt); inp.value = ''; desenharCategorias();
     }
 
-    function removerCategoria(indice) {
-      config.categorias.splice(indice, 1);
-      desenharCategorias();
-    }
-
-    function salvarConfiguracoes() {
+    async function salvarConfiguracoes() {
       config.p1.nome = document.getElementById('nome-p1').value.trim() || PADRAO.p1.nome;
       config.p1.subtitulo = document.getElementById('sub-p1').value.trim() || PADRAO.p1.subtitulo;
-
       config.p2.nome = document.getElementById('nome-p2').value.trim() || PADRAO.p2.nome;
       config.p2.subtitulo = document.getElementById('sub-p2').value.trim() || PADRAO.p2.subtitulo;
 
+      try { localStorage.setItem('ukeah_config', JSON.stringify(config)); } catch (e) {}
+
+      const btn = document.getElementById('btn-salvar');
+      btn.disabled = true; btn.textContent = '⏳ Salvando na Planilha...';
+
+      const payload = {
+        p1_nome: config.p1.nome, p1_subtitulo: config.p1.subtitulo, p1_cor: config.p1.cor, p1_icone: config.p1.icone, p1_foto: config.p1.foto,
+        p2_nome: config.p2.nome, p2_subtitulo: config.p2.subtitulo, p2_cor: config.p2.cor, p2_icone: config.p2.icone, p2_foto: config.p2.foto,
+        categorias: JSON.stringify(config.categorias)
+      };
+
       try {
-        localStorage.setItem('ukeah_config', JSON.stringify(config));
-        mostrarAviso('✅ Configurações salvas com sucesso!');
+        const resp = await fetch(API_URL, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+          body: JSON.stringify({ acao: 'salvarConfig', config: payload })
+        });
+        const res = await resp.json();
+        if (res.ok) {
+          setStatusNuvem('☁️ Salvo na planilha agora ✅', 'ok');
+          mostrarAviso('✅ Salvo na Planilha Google com sucesso!');
+        } else {
+          throw new Error(res.erro || 'Erro');
+        }
       } catch (e) {
-        mostrarAviso('⚠️ Não foi possível salvar. Tente uma foto menor.');
+        setStatusNuvem('⚠️ Erro ao enviar para a planilha', 'erro');
+        mostrarAviso('⚠️ Salvo no aparelho, mas falhou na planilha.');
+      } finally {
+        btn.disabled = false; btn.textContent = '💾 Salvar na Planilha';
       }
     }
 
     function restaurarPadrao() {
-      if (!confirm('Quer voltar apelidos, cores e fotos para o padrão?')) return;
+      if (!confirm('Voltar apelidos, cores e fotos para o padrão?')) return;
       config = clonarPadrao();
-      try { localStorage.removeItem('ukeah_config'); } catch (e) {}
       preencherTela();
-      mostrarAviso('🔄 Tudo restaurado para o padrão!');
+      salvarConfiguracoes();
     }
 
     let timerToast;
     function mostrarAviso(msg) {
-      const toast = document.getElementById('toast');
-      toast.textContent = msg;
-      toast.classList.add('visivel');
+      const t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('visivel');
       clearTimeout(timerToast);
-      timerToast = setTimeout(() => toast.classList.remove('visivel'), 3000);
+      timerToast = setTimeout(() => t.classList.remove('visivel'), 3000);
     }
 
-    window.addEventListener('DOMContentLoaded', carregarSalvo);
+    window.addEventListener('DOMContentLoaded', () => {
+      carregarLocal();
+      carregarDaPlanilha();
+    });
   </script>
-
 </body>
 </html>
