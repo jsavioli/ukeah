@@ -4,764 +4,123 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Ukeah — Um Kasal Em Alta Harmonia</title>
-
-  <!-- Fonte arredondada Nunito -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
-
   <style>
     :root {
-      --fundo: #FAF8FC;
-      --branco: #FFFFFF;
-      --texto: #2D3142;
-      --texto-suave: #6E748A;
-      --lilas-fundo: #F1EBFF;
-      --lilas-borda: #D9C9FF;
-      --lilas-forte: #5B3CC4;
-      --verde-fundo: #E7F8EE;
-      --verde-forte: #1F7A4D;
-      --coral-fundo: #FFEBE9;
-      --coral-forte: #A83232;
-      --amarelo-fundo: #FFF7DC;
-      --amarelo-borda: #F5DF98;
-      --amarelo-forte: #7A5901;
+      --fundo: #FAF8FC; --branco: #FFFFFF; --texto: #2D3142; --texto-suave: #6E748A;
+      --lilas-fundo: #F1EBFF; --lilas-borda: #D9C9FF; --lilas-forte: #5B3CC4;
+      --verde-fundo: #E7F8EE; --verde-forte: #1F7A4D;
+      --coral-fundo: #FFEBE9; --coral-forte: #A83232;
+      --amarelo-fundo: #FFF7DC; --amarelo-borda: #F5DF98; --amarelo-forte: #7A5901;
       --sombra: 0 10px 26px rgba(95, 90, 135, 0.08);
     }
-
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      -webkit-tap-highlight-color: transparent;
-    }
-
-    body {
-      font-family: 'Nunito', sans-serif;
-      font-weight: 400;
-      background-color: var(--fundo);
-      color: var(--texto);
-      line-height: 1.5;
-      min-height: 100vh;
-    }
-
-    .escondido {
-      display: none !important;
-    }
-
-    /* ========================
-       TELA 1: QUEM ESTÁ ENTRANDO
-       ======================== */
-    .tela-entrada {
-      max-width: 640px;
-      margin: 0 auto;
-      padding: 32px 18px 40px;
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
-
-    .marca-entrada {
-      margin-bottom: 26px;
-    }
-
-    .logo-pilula {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: linear-gradient(135deg, #E6F2FF, #F1EBFF, #FFEAF2);
-      padding: 8px 16px;
-      border-radius: 30px;
-      font-size: 0.9rem;
-      font-weight: 700;
-      color: var(--texto);
-      margin-bottom: 12px;
-      box-shadow: var(--sombra);
-    }
-
-    .marca-entrada h1 {
-      font-size: 1.85rem;
-      font-weight: 800;
-      color: var(--texto);
-      margin-bottom: 6px;
-    }
-
-    .marca-entrada p {
-      font-size: 0.98rem;
-      color: var(--texto-suave);
-    }
-
-    .perfis-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      width: 100%;
-      margin-bottom: 22px;
-    }
-
-    .card-perfil {
-      background-color: var(--branco);
-      border-radius: 26px;
-      padding: 24px 14px 20px;
-      box-shadow: var(--sombra);
-      border: 2px solid transparent;
-      cursor: pointer;
-      transition: transform 0.15s ease;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      text-align: center;
-    }
-
-    .card-perfil:active {
-      transform: scale(0.97);
-    }
-
-    .foto-perfil {
-      width: 96px;
-      height: 96px;
-      border-radius: 50%;
-      background-color: var(--branco);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 46px;
-      margin-bottom: 14px;
-      box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
-      overflow: hidden;
-      border: 4px solid var(--branco);
-    }
-
-    .foto-perfil img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .perfil-apelido {
-      font-size: 1.08rem;
-      font-weight: 700;
-      margin-bottom: 4px;
-    }
-
-    .perfil-sub {
-      font-size: 0.85rem;
-      color: var(--texto-suave);
-    }
-
-    .lembrar-box {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      background-color: var(--branco);
-      padding: 10px 18px;
-      border-radius: 18px;
-      box-shadow: var(--sombra);
-      margin-bottom: 16px;
-      cursor: pointer;
-      font-size: 0.92rem;
-      color: var(--texto);
-    }
-
-    .lembrar-box input {
-      width: 18px;
-      height: 18px;
-      accent-color: var(--lilas-forte);
-    }
-
-    .btn-casal-direto {
-      background-color: var(--lilas-fundo);
-      color: var(--lilas-forte);
-      border: 1px solid var(--lilas-borda);
-      border-radius: 20px;
-      padding: 12px 22px;
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      width: 100%;
-      max-width: 340px;
-      margin-bottom: 14px;
-    }
-
-    .link-admin-entrada {
-      color: var(--texto-suave);
-      text-decoration: none;
-      font-size: 0.88rem;
-      padding: 8px 14px;
-      border-radius: 14px;
-    }
-
-    /* ========================
-       TELA 2: PAINEL PRINCIPAL
-       ======================== */
-    .tela-painel {
-      max-width: 680px;
-      margin: 0 auto;
-      padding: 18px 16px 115px;
-    }
-
-    .topo-painel {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 18px;
-      gap: 10px;
-    }
-
-    .usuario-logado {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      min-width: 0;
-    }
-
-    .mini-avatar {
-      width: 46px;
-      height: 46px;
-      border-radius: 50%;
-      background-color: var(--branco);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      box-shadow: var(--sombra);
-      overflow: hidden;
-      flex-shrink: 0;
-      border: 2px solid var(--branco);
-    }
-
-    .mini-avatar img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .usuario-logado h2 {
-      font-size: 1.08rem;
-      font-weight: 700;
-      line-height: 1.2;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .usuario-logado span {
-      font-size: 0.82rem;
-      color: var(--texto-suave);
-    }
-
-    .btn-trocar {
-      background-color: var(--branco);
-      border: 1px solid #E5E2EE;
-      border-radius: 16px;
-      padding: 8px 14px;
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.84rem;
-      font-weight: 600;
-      color: var(--texto);
-      cursor: pointer;
-      white-space: nowrap;
-      flex-shrink: 0;
-    }
-
-    /* Abas das 3 visões */
-    .abas-visao {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 8px;
-      background-color: var(--branco);
-      padding: 6px;
-      border-radius: 20px;
-      box-shadow: var(--sombra);
-      margin-bottom: 18px;
-    }
-
-    .aba-btn {
-      border: none;
-      background: transparent;
-      border-radius: 15px;
-      padding: 10px 6px;
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.84rem;
-      font-weight: 400;
-      color: var(--texto-suave);
-      cursor: pointer;
-      text-align: center;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .aba-btn.ativa {
-      font-weight: 700;
-    }
-
-    .banner-humor {
-      background-color: var(--amarelo-fundo);
-      border: 1px solid var(--amarelo-borda);
-      border-radius: 20px;
-      padding: 14px 18px;
-      margin-bottom: 18px;
-      font-size: 0.94rem;
-      color: var(--amarelo-forte);
-    }
-
-    .card-saldo {
-      border-radius: 24px;
-      padding: 22px;
-      margin-bottom: 14px;
-      box-shadow: var(--sombra);
-      border: 1px solid transparent;
-      transition: background 0.25s ease, border-color 0.25s ease;
-    }
-
-    .saldo-titulo {
-      font-size: 0.9rem;
-      color: var(--texto-suave);
-      margin-bottom: 4px;
-    }
-
-    .saldo-numero {
-      font-size: 2rem;
-      font-weight: 800;
-      color: var(--texto);
-      margin-bottom: 6px;
-    }
-
-    .saldo-sub {
-      font-size: 0.85rem;
-      color: var(--texto-suave);
-    }
-
-    .grid-resumo {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-      margin-bottom: 24px;
-    }
-
-    .box-resumo {
-      border-radius: 20px;
-      padding: 16px;
-      box-shadow: var(--sombra);
-    }
-
-    .box-resumo.entradas {
-      background-color: var(--verde-fundo);
-      color: var(--verde-forte);
-    }
-
-    .box-resumo.saidas {
-      background-color: var(--coral-fundo);
-      color: var(--coral-forte);
-    }
-
-    .box-resumo p {
-      font-size: 0.88rem;
-      margin-bottom: 4px;
-    }
-
-    .box-resumo strong {
-      font-size: 1.2rem;
-      font-weight: 700;
-    }
-
-    /* Cabeçalho de seções */
-    .secao-cabecalho {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 12px;
-      padding: 0 4px;
-      gap: 10px;
-    }
-
-    .secao-cabecalho h3 {
-      font-size: 1.1rem;
-      font-weight: 700;
-    }
-
-    .secao-cabecalho span {
-      font-size: 0.82rem;
-      color: var(--texto-suave);
-    }
-
-    .btn-nova-carteira {
-      background-color: var(--lilas-fundo);
-      color: var(--lilas-forte);
-      border: 1px solid var(--lilas-borda);
-      border-radius: 14px;
-      padding: 6px 12px;
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.84rem;
-      font-weight: 700;
-      cursor: pointer;
-      white-space: nowrap;
-    }
-
-    /* Lista de Carteiras */
-    .lista-carteiras {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-      margin-bottom: 26px;
-    }
-
-    .card-carteira {
-      background-color: var(--branco);
-      border-radius: 20px;
-      padding: 14px 16px;
-      box-shadow: var(--sombra);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .carteira-esq {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-    }
-
-    .carteira-ico {
-      width: 44px;
-      height: 44px;
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 21px;
-      flex-shrink: 0;
-    }
-
-    .carteira-info {
-      min-width: 0;
-    }
-
-    .carteira-nome {
-      font-size: 0.96rem;
-      font-weight: 700;
-      color: var(--texto);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .carteira-dono {
-      display: inline-block;
-      font-size: 0.75rem;
-      padding: 1px 8px;
-      border-radius: 10px;
-      margin-top: 2px;
-    }
-
-    .carteira-dir {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      flex-shrink: 0;
-    }
-
-    .carteira-saldo {
-      font-size: 1rem;
-      font-weight: 700;
-      color: var(--texto);
-      white-space: nowrap;
-    }
-
-    .btn-lapis {
-      width: 38px;
-      height: 38px;
-      border-radius: 13px;
-      border: 1px solid #EAE6F3;
-      background-color: #FAF8FC;
-      font-size: 1rem;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .btn-lapis:active {
-      transform: scale(0.92);
-    }
-
-    /* Lista de Movimentações */
-    .lista-mov {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .item-mov {
-      background-color: var(--branco);
-      border-radius: 18px;
-      padding: 14px 16px;
-      box-shadow: var(--sombra);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .item-esq {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      min-width: 0;
-    }
-
-    .item-ico {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 20px;
-      flex-shrink: 0;
-    }
-
-    .item-nome {
-      font-size: 0.95rem;
-      font-weight: 600;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .item-detalhe {
-      font-size: 0.8rem;
-      color: var(--texto-suave);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      margin-top: 2px;
-    }
-
-    .etiqueta {
-      padding: 1px 8px;
-      border-radius: 10px;
-      font-size: 0.74rem;
-    }
-
-    .item-valor {
-      font-size: 0.96rem;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
+    * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+    body { font-family: 'Nunito', sans-serif; font-weight: 400; background: var(--fundo); color: var(--texto); line-height: 1.5; min-height: 100vh; }
+    .escondido { display: none !important; }
+
+    /* TELA 1: ENTRADA */
+    .tela-entrada { max-width: 640px; margin: 0 auto; padding: 32px 18px 40px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
+    .marca-entrada { margin-bottom: 26px; }
+    .logo-pilula { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(135deg, #E6F2FF, #F1EBFF, #FFEAF2); padding: 8px 16px; border-radius: 30px; font-size: 0.9rem; font-weight: 700; margin-bottom: 12px; box-shadow: var(--sombra); }
+    .marca-entrada h1 { font-size: 1.85rem; font-weight: 800; margin-bottom: 6px; }
+    .marca-entrada p { font-size: 0.98rem; color: var(--texto-suave); }
+    .perfis-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; width: 100%; margin-bottom: 22px; }
+    .card-perfil { background: var(--branco); border-radius: 26px; padding: 24px 14px 20px; box-shadow: var(--sombra); border: 2px solid transparent; cursor: pointer; display: flex; flex-direction: column; align-items: center; text-align: center; }
+    .card-perfil:active { transform: scale(0.97); }
+    .foto-perfil { width: 96px; height: 96px; border-radius: 50%; background: var(--branco); display: flex; align-items: center; justify-content: center; font-size: 46px; margin-bottom: 14px; box-shadow: 0 6px 16px rgba(0,0,0,0.08); overflow: hidden; border: 4px solid var(--branco); }
+    .foto-perfil img { width: 100%; height: 100%; object-fit: cover; }
+    .perfil-apelido { font-size: 1.08rem; font-weight: 700; margin-bottom: 4px; }
+    .perfil-sub { font-size: 0.85rem; color: var(--texto-suave); }
+    .lembrar-box { display: inline-flex; align-items: center; gap: 10px; background: var(--branco); padding: 10px 18px; border-radius: 18px; box-shadow: var(--sombra); margin-bottom: 16px; cursor: pointer; font-size: 0.92rem; }
+    .lembrar-box input { width: 18px; height: 18px; accent-color: var(--lilas-forte); }
+    .btn-casal-direto { background: var(--lilas-fundo); color: var(--lilas-forte); border: 1px solid var(--lilas-borda); border-radius: 20px; padding: 12px 22px; font-family: inherit; font-size: 0.95rem; font-weight: 600; cursor: pointer; width: 100%; max-width: 340px; margin-bottom: 14px; }
+    .link-admin-entrada { color: var(--texto-suave); text-decoration: none; font-size: 0.88rem; padding: 8px 14px; }
+
+    /* TELA 2: PAINEL */
+    .tela-painel { max-width: 680px; margin: 0 auto; padding: 18px 16px 115px; }
+    .topo-painel { display: flex; justify-content: space-between; align-items: center; margin-bottom: 18px; gap: 10px; }
+    .usuario-logado { display: flex; align-items: center; gap: 10px; min-width: 0; }
+    .mini-avatar { width: 46px; height: 46px; border-radius: 50%; background: var(--branco); display: flex; align-items: center; justify-content: center; font-size: 22px; box-shadow: var(--sombra); overflow: hidden; flex-shrink: 0; border: 2px solid var(--branco); }
+    .mini-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .usuario-logado h2 { font-size: 1.08rem; font-weight: 700; line-height: 1.2; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .usuario-logado span { font-size: 0.82rem; color: var(--texto-suave); }
+    .btn-trocar { background: var(--branco); border: 1px solid #E5E2EE; border-radius: 16px; padding: 8px 14px; font-family: inherit; font-size: 0.84rem; font-weight: 600; color: var(--texto); cursor: pointer; white-space: nowrap; }
+
+    .abas-visao { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; background: var(--branco); padding: 6px; border-radius: 20px; box-shadow: var(--sombra); margin-bottom: 18px; }
+    .aba-btn { border: none; background: transparent; border-radius: 15px; padding: 10px 6px; font-family: inherit; font-size: 0.84rem; font-weight: 400; color: var(--texto-suave); cursor: pointer; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .aba-btn.ativa { font-weight: 700; }
+
+    .banner-humor { background: var(--amarelo-fundo); border: 1px solid var(--amarelo-borda); border-radius: 20px; padding: 14px 18px; margin-bottom: 18px; font-size: 0.94rem; color: var(--amarelo-forte); }
+    .card-saldo { border-radius: 24px; padding: 22px; margin-bottom: 14px; box-shadow: var(--sombra); border: 1px solid transparent; transition: background 0.25s ease; }
+    .saldo-titulo { font-size: 0.9rem; color: var(--texto-suave); margin-bottom: 4px; }
+    .saldo-numero { font-size: 2rem; font-weight: 800; margin-bottom: 6px; }
+    .saldo-sub { font-size: 0.85rem; color: var(--texto-suave); }
+
+    .grid-resumo { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 24px; }
+    .box-resumo { border-radius: 20px; padding: 16px; box-shadow: var(--sombra); }
+    .box-resumo.entradas { background: var(--verde-fundo); color: var(--verde-forte); }
+    .box-resumo.saidas { background: var(--coral-fundo); color: var(--coral-forte); }
+    .box-resumo p { font-size: 0.88rem; margin-bottom: 4px; }
+    .box-resumo strong { font-size: 1.2rem; font-weight: 700; }
+
+    .secao-cabecalho { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; padding: 0 4px; gap: 10px; }
+    .secao-cabecalho h3 { font-size: 1.1rem; font-weight: 700; }
+    .secao-cabecalho span { font-size: 0.82rem; color: var(--texto-suave); }
+    .btn-nova-carteira { background: var(--lilas-fundo); color: var(--lilas-forte); border: 1px solid var(--lilas-borda); border-radius: 14px; padding: 6px 12px; font-family: inherit; font-size: 0.84rem; font-weight: 700; cursor: pointer; }
+
+    /* CARTEIRAS & MOVIMENTAÇÕES */
+    .lista-carteiras, .lista-mov { display: flex; flex-direction: column; gap: 10px; margin-bottom: 24px; }
+    .card-carteira, .item-mov { background: var(--branco); border-radius: 20px; padding: 14px 16px; box-shadow: var(--sombra); display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+    .carteira-esq, .item-esq { display: flex; align-items: center; gap: 12px; min-width: 0; }
+    .carteira-ico, .item-ico { width: 42px; height: 42px; border-radius: 14px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+    .carteira-info, .item-info { min-width: 0; }
+    .carteira-nome, .item-nome { font-size: 0.96rem; font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .carteira-nome { font-weight: 700; }
+    .carteira-dono, .etiqueta { display: inline-block; font-size: 0.74rem; padding: 1px 8px; border-radius: 10px; }
+    .item-detalhe { font-size: 0.78rem; color: var(--texto-suave); display: flex; align-items: center; flex-wrap: wrap; gap: 6px; margin-top: 3px; }
+    .carteira-dir, .item-dir { display: flex; align-items: center; gap: 8px; flex-shrink: 0; }
+    .carteira-saldo, .item-valor { font-size: 0.98rem; font-weight: 700; white-space: nowrap; }
     .val-pos { color: var(--verde-forte); }
     .val-neg { color: var(--coral-forte); }
+    .val-transf { color: var(--lilas-forte); }
+    .btn-mini-acao { width: 36px; height: 36px; border-radius: 12px; border: 1px solid #EAE6F3; background: #FAF8FC; font-size: 0.95rem; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .btn-mini-acao:active { transform: scale(0.92); }
+    .vazio-aviso { text-align: center; color: var(--texto-suave); padding: 20px 12px; background: var(--branco); border-radius: 20px; box-shadow: var(--sombra); font-size: 0.92rem; }
 
-    /* ========================
-       MODAL DA CARTEIRA (EDITAR / NOVA)
-       ======================== */
-    .modal-fundo {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(45, 49, 66, 0.45);
-      backdrop-filter: blur(4px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 18px;
-      z-index: 300;
-    }
+    /* MODAIS */
+    .modal-fundo { position: fixed; inset: 0; background: rgba(45,49,66,0.45); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; padding: 16px; z-index: 300; overflow-y: auto; }
+    .modal-caixa { background: var(--branco); width: 100%; max-width: 450px; border-radius: 26px; padding: 22px 20px; box-shadow: 0 20px 50px rgba(45,49,66,0.25); max-height: 92vh; overflow-y: auto; }
+    .modal-topo { display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px; }
+    .modal-topo h3 { font-size: 1.15rem; font-weight: 800; }
+    .btn-fechar-modal { width: 36px; height: 36px; border-radius: 50%; border: none; background: #F4F1FA; color: var(--texto); font-size: 1.1rem; cursor: pointer; }
+    .campo-modal { margin-bottom: 14px; }
+    .campo-modal label { display: block; font-size: 0.85rem; color: var(--texto-suave); margin-bottom: 6px; }
+    .campo-modal input, .campo-modal select { width: 100%; padding: 12px 14px; border-radius: 16px; border: 1px solid #DFDAEC; background: #FAF9FD; font-family: inherit; font-size: 16px; color: var(--texto); outline: none; }
+    .campo-modal input:focus, .campo-modal select:focus { border-color: var(--lilas-forte); background: var(--branco); }
+    .icones-grid { display: flex; flex-wrap: wrap; gap: 8px; }
+    .ico-opcao { width: 42px; height: 42px; border-radius: 14px; border: 2px solid #EFEBF7; background: var(--branco); font-size: 20px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
+    .ico-opcao.selecionado { border-color: var(--lilas-forte); background: var(--lilas-fundo); }
 
-    .modal-caixa {
-      background-color: var(--branco);
-      width: 100%;
-      max-width: 440px;
-      border-radius: 26px;
-      padding: 22px 20px;
-      box-shadow: 0 20px 50px rgba(45, 49, 66, 0.25);
-    }
+    .tipos-lanc-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; margin-bottom: 16px; }
+    .btn-tipo-lanc { padding: 10px 6px; border-radius: 16px; border: 2px solid #EFEBF7; background: var(--branco); font-family: inherit; font-size: 0.86rem; font-weight: 600; color: var(--texto-suave); cursor: pointer; }
+    .btn-tipo-lanc.ativo-saida { background: var(--coral-fundo); border-color: #F5B8B8; color: var(--coral-forte); }
+    .btn-tipo-lanc.ativo-entrada { background: var(--verde-fundo); border-color: #B5E8CB; color: var(--verde-forte); }
+    .btn-tipo-lanc.ativo-transf { background: var(--lilas-fundo); border-color: var(--lilas-borda); color: var(--lilas-forte); }
 
-    .modal-topo {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 16px;
-    }
+    .modal-botoes { display: flex; flex-direction: column; gap: 8px; margin-top: 16px; }
+    .btn-modal-salvar { width: 100%; padding: 14px; border: none; border-radius: 18px; background: linear-gradient(135deg, #7C5CE6, #9E7BF5); color: var(--branco); font-family: inherit; font-size: 1rem; font-weight: 700; cursor: pointer; }
+    .btn-modal-excluir { width: 100%; padding: 11px; border: none; border-radius: 16px; background: var(--coral-fundo); color: var(--coral-forte); font-family: inherit; font-size: 0.9rem; font-weight: 600; cursor: pointer; }
 
-    .modal-topo h3 {
-      font-size: 1.15rem;
-      font-weight: 800;
-    }
-
-    .btn-fechar-modal {
-      width: 36px;
-      height: 36px;
-      border-radius: 50%;
-      border: none;
-      background-color: #F4F1FA;
-      color: var(--texto);
-      font-size: 1.1rem;
-      cursor: pointer;
-    }
-
-    .campo-modal {
-      margin-bottom: 14px;
-    }
-
-    .campo-modal label {
-      display: block;
-      font-size: 0.85rem;
-      color: var(--texto-suave);
-      margin-bottom: 6px;
-    }
-
-    .campo-modal input,
-    .campo-modal select {
-      width: 100%;
-      padding: 12px 14px;
-      border-radius: 16px;
-      border: 1px solid #DFDAEC;
-      background-color: #FAF9FD;
-      font-family: 'Nunito', sans-serif;
-      font-size: 16px;
-      color: var(--texto);
-      outline: none;
-    }
-
-    .campo-modal input:focus,
-    .campo-modal select:focus {
-      border-color: var(--lilas-forte);
-      background-color: var(--branco);
-    }
-
-    .icones-grid {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-
-    .ico-opcao {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      border: 2px solid #EFEBF7;
-      background-color: var(--branco);
-      font-size: 20px;
-      cursor: pointer;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .ico-opcao.selecionado {
-      border-color: var(--lilas-forte);
-      background-color: var(--lilas-fundo);
-    }
-
-    .modal-botoes {
-      display: flex;
-      flex-direction: column;
-      gap: 8px;
-      margin-top: 18px;
-    }
-
-    .btn-modal-salvar {
-      width: 100%;
-      padding: 14px;
-      border: none;
-      border-radius: 18px;
-      background: linear-gradient(135deg, #7C5CE6 0%, #9E7BF5 100%);
-      color: var(--branco);
-      font-family: 'Nunito', sans-serif;
-      font-size: 1rem;
-      font-weight: 700;
-      cursor: pointer;
-    }
-
-    .btn-modal-excluir {
-      width: 100%;
-      padding: 11px;
-      border: none;
-      border-radius: 16px;
-      background-color: var(--coral-fundo);
-      color: var(--coral-forte);
-      font-family: 'Nunito', sans-serif;
-      font-size: 0.9rem;
-      font-weight: 600;
-      cursor: pointer;
-    }
-
-    /* Barra inferior */
-    .nav-inferior {
-      position: fixed;
-      bottom: 14px;
-      left: 14px;
-      right: 14px;
-      max-width: 652px;
-      margin: 0 auto;
-      background-color: rgba(255, 255, 255, 0.95);
-      backdrop-filter: blur(10px);
-      border-radius: 24px;
-      padding: 8px 12px;
-      box-shadow: 0 10px 30px rgba(80, 70, 120, 0.14);
-      display: flex;
-      justify-content: space-around;
-      z-index: 100;
-    }
-
-    .nav-btn {
-      border: none;
-      background: transparent;
-      text-decoration: none;
-      font-family: 'Nunito', sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-      padding: 8px 16px;
-      border-radius: 16px;
-      font-size: 0.78rem;
-      color: var(--texto-suave);
-      cursor: pointer;
-    }
-
+    /* BARRA INFERIOR */
+    .nav-inferior { position: fixed; bottom: 14px; left: 14px; right: 14px; max-width: 652px; margin: 0 auto; background: rgba(255,255,255,0.95); backdrop-filter: blur(10px); border-radius: 24px; padding: 8px 12px; box-shadow: 0 10px 30px rgba(80,70,120,0.14); display: flex; justify-content: space-around; z-index: 100; }
+    .nav-btn { border: none; background: transparent; text-decoration: none; font-family: inherit; display: flex; flex-direction: column; align-items: center; gap: 2px; padding: 8px 16px; border-radius: 16px; font-size: 0.78rem; color: var(--texto-suave); cursor: pointer; }
     .nav-btn .ico { font-size: 1.25rem; }
+    .nav-btn.ativo { background: var(--lilas-fundo); color: var(--lilas-forte); font-weight: 700; }
 
-    .nav-btn.ativo {
-      background-color: var(--lilas-fundo);
-      color: var(--lilas-forte);
-      font-weight: 700;
-    }
-
-    /* Aviso flutuante */
-    .toast {
-      position: fixed;
-      bottom: 94px;
-      left: 50%;
-      transform: translateX(-50%) translateY(20px);
-      background-color: var(--texto);
-      color: var(--branco);
-      padding: 10px 18px;
-      border-radius: 16px;
-      font-size: 0.88rem;
-      opacity: 0;
-      pointer-events: none;
-      transition: all 0.25s ease;
-      z-index: 400;
-      text-align: center;
-      max-width: 90%;
-    }
-
-    .toast.visivel {
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
-    }
+    .toast { position: fixed; bottom: 94px; left: 50%; transform: translateX(-50%) translateY(20px); background: var(--texto); color: var(--branco); padding: 10px 18px; border-radius: 16px; font-size: 0.88rem; opacity: 0; pointer-events: none; transition: all 0.25s ease; z-index: 400; text-align: center; max-width: 90%; }
+    .toast.visivel { opacity: 1; transform: translateX(-50%) translateY(0); }
 
     @media (max-width: 420px) {
       .perfis-grid { gap: 12px; }
@@ -773,9 +132,7 @@
 </head>
 <body>
 
-  <!-- =========================
-       TELA 1: QUEM ESTÁ ENTRANDO
-       ========================= -->
+  <!-- TELA 1: QUEM ESTÁ ENTRANDO -->
   <section id="tela-entrada" class="tela-entrada">
     <div class="marca-entrada">
       <div class="logo-pilula">💜 Ukeah • Um Kasal Em Alta Harmonia</div>
@@ -789,7 +146,6 @@
         <p class="perfil-apelido" id="nome-entrada-p1">Ministro da Economia</p>
         <p class="perfil-sub" id="sub-entrada-p1">Fiscal do orçamento</p>
       </div>
-
       <div class="card-perfil" id="card-entrada-p2" onclick="entrarNoPerfil('p2')">
         <div class="foto-perfil" id="foto-entrada-p2">👑</div>
         <p class="perfil-apelido" id="nome-entrada-p2">Dona Encrenca</p>
@@ -802,26 +158,18 @@
       <span>Lembrar minha escolha neste aparelho</span>
     </label>
 
-    <button class="btn-casal-direto" onclick="entrarNoPerfil('casal')">
-      📊 Ver logo o Somatório do Casal
-    </button>
-
-    <a href="admin.html" class="link-admin-entrada">
-      ⚙️ Trocar fotos, apelidos ou cores
-    </a>
+    <button class="btn-casal-direto" onclick="entrarNoPerfil('casal')">📊 Ver logo o Somatório do Casal</button>
+    <a href="admin.html" class="link-admin-entrada">⚙️ Trocar fotos, apelidos ou cores</a>
   </section>
 
-  <!-- =========================
-       TELA 2: PAINEL PRINCIPAL
-       ========================= -->
+  <!-- TELA 2: PAINEL PRINCIPAL -->
   <section id="tela-painel" class="tela-painel escondido">
-
     <header class="topo-painel">
       <div class="usuario-logado">
         <div class="mini-avatar" id="topo-avatar">🎩</div>
         <div style="min-width:0;">
           <h2 id="topo-saudacao">Olá!</h2>
-          <span>Ukeah • Novembro 2026</span>
+          <span>Ukeah • Controle do Casal</span>
         </div>
       </div>
       <button class="btn-trocar" onclick="voltarParaEntrada()">🔄 Trocar</button>
@@ -833,11 +181,8 @@
       <button class="aba-btn" id="aba-casal" onclick="mudarVisao('casal')">💜 Casal (Total)</button>
     </div>
 
-    <div class="banner-humor" id="banner-humor">
-      "O casal está enriquecendo. Ou pelo menos tentando."
-    </div>
+    <div class="banner-humor" id="banner-humor">"O casal está enriquecendo. Ou pelo menos tentando."</div>
 
-    <!-- Card Principal de Saldo (agora soma de verdade as carteiras!) -->
     <div class="card-saldo" id="card-saldo">
       <p class="saldo-titulo" id="saldo-titulo">Saldo atual nas carteiras</p>
       <p class="saldo-numero" id="saldo-numero">R$ 0,00</p>
@@ -846,82 +191,127 @@
 
     <div class="grid-resumo">
       <div class="box-resumo entradas">
-        <p>📈 Entrou (exemplo)</p>
+        <p>📈 Entrou (lançamentos)</p>
         <strong id="valor-entradas">R$ 0,00</strong>
       </div>
       <div class="box-resumo saidas">
-        <p>🛍️ Saiu (exemplo)</p>
+        <p>🛍️ Saiu (lançamentos)</p>
         <strong id="valor-saidas">R$ 0,00</strong>
       </div>
     </div>
 
-    <!-- SEÇÃO DE CARTEIRAS -->
     <div class="secao-cabecalho">
       <h3>💳 Carteiras &amp; Contas</h3>
-      <button type="button" class="btn-nova-carteira" onclick="abrirModalNovaCarteira()">➕ Nova</button>
+      <button type="button" class="btn-nova-carteira" id="btn-nova-carteira" onclick="abrirModalNovaCarteira()">➕ Nova</button>
     </div>
-
     <div class="lista-carteiras" id="lista-carteiras"></div>
 
-    <!-- MOVIMENTAÇÕES RECENTES -->
     <div class="secao-cabecalho">
-      <h3>Movimentações recentes</h3>
-      <span>Em breve reais no Lançar</span>
+      <h3>📝 Movimentações</h3>
+      <span id="sub-mov">Mais recentes primeiro</span>
     </div>
-
     <div class="lista-mov" id="lista-movimentacoes"></div>
 
-    <!-- Barra Inferior -->
     <nav class="nav-inferior">
-      <button class="nav-btn ativo" onclick="mostrarAviso('Você já está no painel principal 💜')">
-        <span class="ico">🏠</span>
-        <span>Painel</span>
+      <button class="nav-btn ativo" onclick="window.scrollTo({top:0, behavior:'smooth'})">
+        <span class="ico">🏠</span><span>Painel</span>
       </button>
-      <button class="nav-btn" onclick="mostrarAviso('Na próxima etapa vamos ligar o Lançar às suas carteiras! 💸')">
-        <span class="ico">➕</span>
-        <span>Lançar</span>
+      <button class="nav-btn" onclick="abrirModalLancar()">
+        <span class="ico">➕</span><span>Lançar</span>
       </button>
       <a href="admin.html" class="nav-btn">
-        <span class="ico">⚙️</span>
-        <span>Configurar</span>
+        <span class="ico">⚙️</span><span>Configurar</span>
       </a>
     </nav>
-
   </section>
 
-  <!-- =========================
-       MODAL EDITAR / NOVA CARTEIRA
-       ========================= -->
-  <div id="modal-carteira" class="modal-fundo escondido" onclick="fecharSeClicarFora(event)">
+  <!-- MODAL 1: EDITAR / NOVA CARTEIRA -->
+  <div id="modal-carteira" class="modal-fundo escondido" onclick="if(event.target===this) fecharModalCarteira()">
     <div class="modal-caixa">
       <div class="modal-topo">
         <h3 id="modal-titulo">Editar Carteira</h3>
         <button type="button" class="btn-fechar-modal" onclick="fecharModalCarteira()">✕</button>
       </div>
-
-      <div class="campo-modal" id="campo-dono-carteira">
+      <div class="campo-modal">
         <label for="select-dono-carteira">De quem é essa carteira?</label>
         <select id="select-dono-carteira"></select>
       </div>
-
       <div class="campo-modal">
         <label for="input-nome-carteira">Nome do banco ou carteira</label>
         <input type="text" id="input-nome-carteira" placeholder="Ex: Nubank, Cofrinho...">
       </div>
-
       <div class="campo-modal">
         <label for="input-saldo-carteira">Saldo atual (R$)</label>
         <input type="text" inputmode="decimal" id="input-saldo-carteira" placeholder="Ex: 150,00">
       </div>
-
       <div class="campo-modal">
         <label>Escolha um ícone</label>
         <div class="icones-grid" id="grid-icones-carteira"></div>
       </div>
-
       <div class="modal-botoes">
         <button type="button" class="btn-modal-salvar" onclick="salvarCarteiraModal()">💾 Salvar Carteira</button>
         <button type="button" class="btn-modal-excluir escondido" id="btn-excluir-carteira" onclick="excluirCarteiraModal()">🗑️ Excluir esta carteira</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- MODAL 2: LANÇAR (DESPESA, RECEITA, TRANSFERÊNCIA) -->
+  <div id="modal-lancar" class="modal-fundo escondido" onclick="if(event.target===this) fecharModalLancar()">
+    <div class="modal-caixa">
+      <div class="modal-topo">
+        <h3>💸 Novo Lançamento</h3>
+        <button type="button" class="btn-fechar-modal" onclick="fecharModalLancar()">✕</button>
+      </div>
+
+      <div class="tipos-lanc-grid">
+        <button type="button" class="btn-tipo-lanc" id="btn-tipo-saida" onclick="mudarTipoLanc('saida')">💸 Despesa</button>
+        <button type="button" class="btn-tipo-lanc" id="btn-tipo-entrada" onclick="mudarTipoLanc('entrada')">💰 Receita</button>
+        <button type="button" class="btn-tipo-lanc" id="btn-tipo-transferencia" onclick="mudarTipoLanc('transferencia')">🔄 Transferir</button>
+      </div>
+
+      <div id="grupo-lanc-normal">
+        <div class="campo-modal">
+          <label for="lanc-dono">Quem lançou?</label>
+          <select id="lanc-dono" onchange="atualizarCarteirasLanc()"></select>
+        </div>
+        <div class="campo-modal">
+          <label for="lanc-carteira">Em qual carteira?</label>
+          <select id="lanc-carteira"></select>
+        </div>
+        <div class="campo-modal">
+          <label for="lanc-categoria">Categoria</label>
+          <select id="lanc-categoria"></select>
+        </div>
+      </div>
+
+      <div id="grupo-lanc-transf" class="escondido">
+        <div class="campo-modal">
+          <label for="lanc-origem">Saiu de qual carteira?</label>
+          <select id="lanc-origem"></select>
+        </div>
+        <div class="campo-modal">
+          <label for="lanc-destino">Entrou em qual carteira?</label>
+          <select id="lanc-destino"></select>
+        </div>
+      </div>
+
+      <div class="campo-modal">
+        <label for="lanc-valor">Valor (R$)</label>
+        <input type="text" inputmode="decimal" id="lanc-valor" placeholder="Ex: 49,90">
+      </div>
+
+      <div class="campo-modal">
+        <label for="lanc-desc">Descrição (o porquê)</label>
+        <input type="text" id="lanc-desc" placeholder="Ex: Pizza de sexta, Pix pro amigo...">
+      </div>
+
+      <div class="campo-modal">
+        <label for="lanc-data">Data</label>
+        <input type="date" id="lanc-data">
+      </div>
+
+      <div class="modal-botoes">
+        <button type="button" class="btn-modal-salvar" onclick="salvarLancamento()">✅ Confirmar Lançamento</button>
       </div>
     </div>
   </div>
@@ -940,17 +330,16 @@
 
     const PADRAO_CONFIG = {
       p1: { nome: 'Ministro da Economia', subtitulo: 'Fiscal do orçamento', cor: 'azul', icone: '🎩', foto: '' },
-      p2: { nome: 'Dona Encrenca', subtitulo: 'Aprovação presidencial', cor: 'rosa', icone: '👑', foto: '' }
+      p2: { nome: 'Dona Encrenca', subtitulo: 'Aprovação presidencial', cor: 'rosa', icone: '👑', foto: '' },
+      categorias: ['🛒 Mercado', '💳 Cartão', '☕ Lazer & Mimos', '🏠 Casa', '💼 Salário']
     };
 
-    // Carteiras iniciais baseadas nas que vocês usam!
     const CARTEIRAS_PADRAO = [
       { id: 'c1', dono: 'p1', nome: 'Nubank', icone: '💜', saldo: 1200.00 },
       { id: 'c2', dono: 'p1', nome: 'Mercado Pago', icone: '💙', saldo: 540.00 },
       { id: 'c3', dono: 'p1', nome: 'PicPay', icone: '💚', saldo: 300.00 },
       { id: 'c4', dono: 'p1', nome: 'InfinitePay', icone: '⚡', saldo: 400.00 },
       { id: 'c5', dono: 'p1', nome: 'Cofrinho físico', icone: '🐷', saldo: 200.00 },
-
       { id: 'c6', dono: 'p2', nome: 'Nubank', icone: '💜', saldo: 1100.00 },
       { id: 'c7', dono: 'p2', nome: 'Banco Inter', icone: '🧡', saldo: 880.50 },
       { id: 'c8', dono: 'p2', nome: 'Dinheiro físico', icone: '💵', saldo: 200.00 }
@@ -958,122 +347,84 @@
 
     const ICONES_CARTEIRA = ['💜', '🧡', '💙', '💚', '⚡', '🐷', '💵', '💳', '🏦', '🪙'];
 
-    let config = {};
-    let carteiras = [];
-    let visaoAtual = 'casal';
-    let idCarteiraEditando = null;
-    let iconeSelecionadoModal = '💳';
+    let config = {}, carteiras = [], movimentacoes = [];
+    let visaoAtual = 'casal', idCarteiraEditando = null, iconeSelecionadoModal = '💳', tipoLancAtual = 'saida';
 
-    function formatarReal(valor) {
-      return Number(valor || 0).toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-      });
+    const formatarReal = v => Number(v || 0).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+    function lerValorMonetario(txt) {
+      let s = String(txt || '').replace(/[^\d.,-]/g, '').trim();
+      if (!s) return 0;
+      if (s.includes(',') && s.includes('.')) s = s.replace(/\./g, '').replace(',', '.');
+      else if (s.includes(',')) s = s.replace(',', '.');
+      const n = parseFloat(s);
+      return isNaN(n) ? 0 : n;
     }
 
-    function lerValorMonetario(texto) {
-      let limpo = String(texto || '').replace(/[^\d.,-]/g, '').trim();
-      if (!limpo) return 0;
-      if (limpo.includes(',') && limpo.includes('.')) {
-        limpo = limpo.replace(/\./g, '').replace(',', '.');
-      } else if (limpo.includes(',')) {
-        limpo = limpo.replace(',', '.');
-      }
-      const num = parseFloat(limpo);
-      return isNaN(num) ? 0 : num;
+    function hojeISO() {
+      const d = new Date();
+      return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+    }
+
+    function formatarDataBR(iso) {
+      if (!iso || !iso.includes('-')) return iso || '';
+      const [a, m, d] = iso.split('-');
+      return `${d}/${m}/${a}`;
     }
 
     function carregarDados() {
-      // Config (apelidos, fotos, cores do admin.html)
-      let salvoConfig = null;
+      let cSalvo = null, cartSalvas = null, movSalvas = null;
       try {
-        const txt = localStorage.getItem('ukeah_config');
-        if (txt) salvoConfig = JSON.parse(txt);
+        cSalvo = JSON.parse(localStorage.getItem('ukeah_config'));
+        cartSalvas = JSON.parse(localStorage.getItem('ukeah_carteiras'));
+        movSalvas = JSON.parse(localStorage.getItem('ukeah_movimentacoes'));
       } catch (e) {}
 
       config = {
-        p1: { ...PADRAO_CONFIG.p1, ...(salvoConfig && salvoConfig.p1 ? salvoConfig.p1 : {}) },
-        p2: { ...PADRAO_CONFIG.p2, ...(salvoConfig && salvoConfig.p2 ? salvoConfig.p2 : {}) }
+        p1: { ...PADRAO_CONFIG.p1, ...(cSalvo && cSalvo.p1 ? cSalvo.p1 : {}) },
+        p2: { ...PADRAO_CONFIG.p2, ...(cSalvo && cSalvo.p2 ? cSalvo.p2 : {}) },
+        categorias: cSalvo && Array.isArray(cSalvo.categorias) && cSalvo.categorias.length ? cSalvo.categorias : PADRAO_CONFIG.categorias
       };
-
-      // Carteiras
-      let salvasCarteiras = null;
-      try {
-        const txtC = localStorage.getItem('ukeah_carteiras');
-        if (txtC) salvasCarteiras = JSON.parse(txtC);
-      } catch (e) {}
-
-      carteiras = Array.isArray(salvasCarteiras) && salvasCarteiras.length > 0
-        ? salvasCarteiras
-        : JSON.parse(JSON.stringify(CARTEIRAS_PADRAO));
+      carteiras = Array.isArray(cartSalvas) && cartSalvas.length ? cartSalvas : JSON.parse(JSON.stringify(CARTEIRAS_PADRAO));
+      movimentacoes = Array.isArray(movSalvas) ? movSalvas : [];
     }
 
-    function salvarCarteirasNoAparelho() {
-      try {
-        localStorage.setItem('ukeah_carteiras', JSON.stringify(carteiras));
-      } catch (e) {}
+    function salvarLocal(chave, dados) {
+      try { localStorage.setItem(chave, JSON.stringify(dados)); } catch (e) {}
     }
 
-    function aplicarAvatar(elemento, perfil) {
-      if (perfil.foto) {
-        elemento.innerHTML = '';
+    function aplicarAvatar(el, p) {
+      if (p.foto) {
+        el.innerHTML = '';
         const img = document.createElement('img');
-        img.src = perfil.foto;
-        img.alt = perfil.nome;
-        elemento.appendChild(img);
-      } else {
-        elemento.textContent = perfil.icone;
-      }
+        img.src = p.foto; img.alt = p.nome;
+        el.appendChild(img);
+      } else { el.textContent = p.icone; }
     }
 
     function montarTelaEntrada() {
-      ['p1', 'p2'].forEach(chave => {
-        const p = config[chave];
-        const tema = PALETA[p.cor] || PALETA.azul;
-
-        const card = document.getElementById(`card-entrada-${chave}`);
-        card.style.backgroundColor = tema.fundo;
-        card.style.borderColor = tema.borda;
-
-        const nomeEl = document.getElementById(`nome-entrada-${chave}`);
-        nomeEl.textContent = p.nome;
-        nomeEl.style.color = tema.texto;
-
-        document.getElementById(`sub-entrada-${chave}`).textContent = p.subtitulo;
-        aplicarAvatar(document.getElementById(`foto-entrada-${chave}`), p);
-
-        document.getElementById(`aba-${chave}`).textContent = `${p.icone} ${p.nome}`;
+      ['p1', 'p2'].forEach(k => {
+        const p = config[k], t = PALETA[p.cor] || PALETA.azul;
+        const card = document.getElementById(`card-entrada-${k}`);
+        card.style.backgroundColor = t.fundo; card.style.borderColor = t.borda;
+        const n = document.getElementById(`nome-entrada-${k}`);
+        n.textContent = p.nome; n.style.color = t.texto;
+        document.getElementById(`sub-entrada-${k}`).textContent = p.subtitulo;
+        aplicarAvatar(document.getElementById(`foto-entrada-${k}`), p);
+        document.getElementById(`aba-${k}`).textContent = `${p.icone} ${p.nome}`;
       });
     }
 
-    const movimentacoesExemplo = [
-      { dono: 'p1', titulo: 'Salário', data: 'Ontem', valor: '+ R$ 5.200,00', tipo: 'entrada', icone: '💼' },
-      { dono: 'p2', titulo: 'Salário + Freela', data: 'Ontem', valor: '+ R$ 4.300,00', tipo: 'entrada', icone: '✨' },
-      { dono: 'p1', titulo: 'Supermercado', data: 'Hoje', valor: '- R$ 482,30', tipo: 'saida', icone: '🛒' },
-      { dono: 'p2', titulo: 'Cafeteria & Croissant', data: '16/11', valor: '- R$ 64,90', tipo: 'saida', icone: '☕' }
-    ];
-
     function entrarNoPerfil(perfil) {
-      const lembrar = document.getElementById('lembrar-escolha').checked;
-      if (lembrar) {
+      if (document.getElementById('lembrar-escolha').checked) {
         try { localStorage.setItem('ukeah_perfil', perfil); } catch (e) {}
       }
-
-      const topoAvatar = document.getElementById('topo-avatar');
-      const topoSaudacao = document.getElementById('topo-saudacao');
-
-      if (perfil === 'casal') {
-        topoAvatar.textContent = '💜';
-        topoSaudacao.textContent = 'Visão do Casal 💜';
-      } else {
-        const p = config[perfil];
-        aplicarAvatar(topoAvatar, p);
-        topoSaudacao.textContent = `Olá, ${p.nome}!`;
-      }
+      const av = document.getElementById('topo-avatar'), saud = document.getElementById('topo-saudacao');
+      if (perfil === 'casal') { av.textContent = '💜'; saud.textContent = 'Visão do Casal 💜'; }
+      else { aplicarAvatar(av, config[perfil]); saud.textContent = `Olá, ${config[perfil].nome}!`; }
 
       document.getElementById('tela-entrada').classList.add('escondido');
       document.getElementById('tela-painel').classList.remove('escondido');
-
       mudarVisao(perfil);
     }
 
@@ -1086,337 +437,356 @@
 
     function mudarVisao(visao) {
       visaoAtual = visao;
-      const temaP1 = PALETA[config.p1.cor] || PALETA.azul;
-      const temaP2 = PALETA[config.p2.cor] || PALETA.rosa;
+      const t1 = PALETA[config.p1.cor] || PALETA.azul, t2 = PALETA[config.p2.cor] || PALETA.rosa;
+      const somenteLeitura = (visao === 'casal');
 
-      // Atualiza abas
       ['p1', 'p2', 'casal'].forEach(id => {
-        const btn = document.getElementById(`aba-${id}`);
-        btn.className = 'aba-btn' + (visao === id ? ' ativa' : '');
-        btn.style.backgroundColor = '';
-        btn.style.color = '';
+        const b = document.getElementById(`aba-${id}`);
+        b.className = 'aba-btn' + (visao === id ? ' ativa' : '');
+        b.style.backgroundColor = ''; b.style.color = '';
       });
+      const aba = document.getElementById(`aba-${visao}`);
+      const tAtivo = visao === 'p1' ? t1 : (visao === 'p2' ? t2 : PALETA.lilas);
+      aba.style.backgroundColor = tAtivo.fundo; aba.style.color = tAtivo.texto;
 
-      const abaAtiva = document.getElementById(`aba-${visao}`);
-      if (visao === 'p1') {
-        abaAtiva.style.backgroundColor = temaP1.fundo;
-        abaAtiva.style.color = temaP1.texto;
-      } else if (visao === 'p2') {
-        abaAtiva.style.backgroundColor = temaP2.fundo;
-        abaAtiva.style.color = temaP2.texto;
-      } else {
-        abaAtiva.style.backgroundColor = PALETA.lilas.fundo;
-        abaAtiva.style.color = PALETA.lilas.texto;
-      }
+      // Esconde "+ Nova" carteira na aba Casal para evitar conflitos
+      document.getElementById('btn-nova-carteira').classList.toggle('escondido', somenteLeitura);
 
-      // Filtra carteiras e calcula a soma REAL delas!
-      const carteirasFiltradas = visao === 'casal'
-        ? carteiras
-        : carteiras.filter(c => c.dono === visao);
+      const carts = somenteLeitura ? carteiras : carteiras.filter(c => c.dono === visao);
+      const saldoTotal = carts.reduce((s, c) => s + Number(c.saldo || 0), 0);
 
-      const saldoTotalReal = carteirasFiltradas.reduce((soma, c) => soma + Number(c.saldo || 0), 0);
+      const movs = somenteLeitura
+        ? movimentacoes
+        : movimentacoes.filter(m => m.dono === visao || m.donoDestino === visao);
 
-      // Atualiza Card de Saldo
+      const totEntradas = movs.filter(m => m.tipo === 'entrada' && (somenteLeitura || m.dono === visao)).reduce((s, m) => s + Number(m.valor), 0);
+      const totSaidas = movs.filter(m => m.tipo === 'saida' && (somenteLeitura || m.dono === visao)).reduce((s, m) => s + Number(m.valor), 0);
+
       const cardSaldo = document.getElementById('card-saldo');
-      document.getElementById('saldo-numero').textContent = formatarReal(saldoTotalReal);
+      document.getElementById('saldo-numero').textContent = formatarReal(saldoTotal);
+      document.getElementById('valor-entradas').textContent = formatarReal(totEntradas);
+      document.getElementById('valor-saidas').textContent = formatarReal(totSaidas);
 
       if (visao === 'p1') {
         document.getElementById('banner-humor').textContent = `"${config.p1.nome}, precisamos conversar sobre esse cartão..."`;
-        cardSaldo.style.background = `linear-gradient(135deg, ${temaP1.fundo} 0%, #FFFFFF 100%)`;
-        cardSaldo.style.borderColor = temaP1.borda;
+        cardSaldo.style.background = `linear-gradient(135deg, ${t1.fundo} 0%, #FFFFFF 100%)`; cardSaldo.style.borderColor = t1.borda;
         document.getElementById('saldo-titulo').textContent = `Saldo nas carteiras — ${config.p1.nome}`;
-        document.getElementById('saldo-sub').textContent = `${carteirasFiltradas.length} carteira(s) somada(s). Toque no ✏️ para ajustar.`;
-        document.getElementById('valor-entradas').textContent = 'R$ 5.200,00';
-        document.getElementById('valor-saidas').textContent = 'R$ 2.560,00';
+        document.getElementById('saldo-sub').textContent = `${carts.length} carteira(s). Toque no ✏️ para ajustar rápido.`;
       } else if (visao === 'p2') {
         document.getElementById('banner-humor').textContent = `"${config.p2.nome}: se estava na promoção, tecnicamente foi economia."`;
-        cardSaldo.style.background = `linear-gradient(135deg, ${temaP2.fundo} 0%, #FFFFFF 100%)`;
-        cardSaldo.style.borderColor = temaP2.borda;
+        cardSaldo.style.background = `linear-gradient(135deg, ${t2.fundo} 0%, #FFFFFF 100%)`; cardSaldo.style.borderColor = t2.borda;
         document.getElementById('saldo-titulo').textContent = `Saldo nas carteiras — ${config.p2.nome}`;
-        document.getElementById('saldo-sub').textContent = `${carteirasFiltradas.length} carteira(s) somada(s). Toque no ✏️ para ajustar.`;
-        document.getElementById('valor-entradas').textContent = 'R$ 4.300,00';
-        document.getElementById('valor-saidas').textContent = 'R$ 2.119,50';
+        document.getElementById('saldo-sub').textContent = `${carts.length} carteira(s). Toque no ✏️ para ajustar rápido.`;
       } else {
         document.getElementById('banner-humor').textContent = '"O casal está enriquecendo. Ou pelo menos tentando."';
-        cardSaldo.style.background = `linear-gradient(135deg, ${temaP1.fundo} 0%, #F1EBFF 50%, ${temaP2.fundo} 100%)`;
-        cardSaldo.style.borderColor = PALETA.lilas.borda;
+        cardSaldo.style.background = `linear-gradient(135deg, ${t1.fundo} 0%, #F1EBFF 50%, ${t2.fundo} 100%)`; cardSaldo.style.borderColor = PALETA.lilas.borda;
         document.getElementById('saldo-titulo').textContent = `Somatório Geral (${config.p1.nome} + ${config.p2.nome})`;
-        document.getElementById('saldo-sub').textContent = `Soma real de todas as ${carteirasFiltradas.length} carteiras do casal!`;
-        document.getElementById('valor-entradas').textContent = 'R$ 9.500,00';
-        document.getElementById('valor-saidas').textContent = 'R$ 4.679,50';
+        document.getElementById('saldo-sub').textContent = `👀 Somente visualização — para editar, acesse o perfil individual.`;
       }
 
-      desenharCarteiras(carteirasFiltradas);
-      desenharMovimentacoes(visao);
+      desenharCarteiras(carts, somenteLeitura);
+      desenharMovimentacoes(movs, somenteLeitura);
     }
 
-    function desenharCarteiras(lista) {
-      const container = document.getElementById('lista-carteiras');
-      container.innerHTML = '';
+    function desenharCarteiras(lista, somenteLeitura) {
+      const cont = document.getElementById('lista-carteiras');
+      cont.innerHTML = '';
+      if (!lista.length) {
+        cont.innerHTML = '<div class="vazio-aviso">Nenhuma carteira por aqui ainda.</div>';
+        return;
+      }
+      lista.forEach(c => {
+        const pDono = config[c.dono] || config.p1, t = PALETA[pDono.cor] || PALETA.azul;
+        const card = document.createElement('div'); card.className = 'card-carteira';
 
-      if (lista.length === 0) {
-        container.innerHTML = '<p style="text-align:center; color:var(--texto-suave); padding:16px;">Nenhuma carteira ainda. Toque em ➕ Nova!</p>';
+        const esq = document.createElement('div'); esq.className = 'carteira-esq';
+        const ico = document.createElement('div'); ico.className = 'carteira-ico'; ico.style.backgroundColor = t.fundo; ico.textContent = c.icone || '💳';
+        const info = document.createElement('div'); info.className = 'carteira-info';
+        const nome = document.createElement('p'); nome.className = 'carteira-nome'; nome.textContent = c.nome;
+        const tag = document.createElement('span'); tag.className = 'carteira-dono'; tag.style.backgroundColor = t.fundo; tag.style.color = t.texto; tag.textContent = pDono.nome;
+        info.append(nome, tag); esq.append(ico, info);
+
+        const dir = document.createElement('div'); dir.className = 'carteira-dir';
+        const saldo = document.createElement('span'); saldo.className = 'carteira-saldo'; saldo.textContent = formatarReal(c.saldo);
+        dir.appendChild(saldo);
+
+        if (!somenteLeitura) {
+          const btn = document.createElement('button'); btn.type = 'button'; btn.className = 'btn-mini-acao'; btn.textContent = '✏️';
+          btn.onclick = () => abrirModalEditarCarteira(c.id);
+          dir.appendChild(btn);
+        }
+        card.append(esq, dir); cont.appendChild(card);
+      });
+    }
+
+    function desenharMovimentacoes(lista, somenteLeitura) {
+      const cont = document.getElementById('lista-movimentacoes');
+      cont.innerHTML = '';
+      if (!lista.length) {
+        cont.innerHTML = '<div class="vazio-aviso">Nenhum lançamento registrado ainda.<br>Toque em <strong>➕ Lançar</strong> lá embaixo para começar!</div>';
         return;
       }
 
-      lista.forEach(c => {
-        const pDono = config[c.dono] || config.p1;
-        const temaDono = PALETA[pDono.cor] || PALETA.azul;
+      const ordenadas = [...lista].sort((a, b) => (b.data || '').localeCompare(a.data || '') || (b.criadoEm || 0) - (a.criadoEm || 0));
 
-        const card = document.createElement('div');
-        card.className = 'card-carteira';
+      ordenadas.forEach(m => {
+        const pDono = config[m.dono] || config.p1, t = PALETA[pDono.cor] || PALETA.azul;
+        const row = document.createElement('div'); row.className = 'item-mov';
 
-        const esq = document.createElement('div');
-        esq.className = 'carteira-esq';
+        const esq = document.createElement('div'); esq.className = 'item-esq';
+        const ico = document.createElement('div'); ico.className = 'item-ico';
+        ico.style.backgroundColor = m.tipo === 'transferencia' ? PALETA.lilas.fundo : t.fundo;
+        ico.textContent = m.tipo === 'transferencia' ? '🔄' : (m.categoria ? m.categoria.split(' ')[0] : '💸');
 
-        const ico = document.createElement('div');
-        ico.className = 'carteira-ico';
-        ico.style.backgroundColor = temaDono.fundo;
-        ico.textContent = c.icone || '💳';
+        const info = document.createElement('div'); info.className = 'item-info';
+        const titulo = document.createElement('p'); titulo.className = 'item-nome'; titulo.textContent = m.descricao || m.categoria;
+        const det = document.createElement('div'); det.className = 'item-detalhe';
 
-        const info = document.createElement('div');
-        info.className = 'carteira-info';
+        const tag = document.createElement('span'); tag.className = 'etiqueta';
+        tag.style.backgroundColor = t.fundo; tag.style.color = t.texto;
+        tag.textContent = m.tipo === 'transferencia' ? `${m.carteiraNome} → ${m.carteiraDestinoNome}` : `${pDono.nome} • ${m.carteiraNome}`;
 
-        const nome = document.createElement('p');
-        nome.className = 'carteira-nome';
-        nome.textContent = c.nome;
+        const dataTxt = document.createElement('span'); dataTxt.textContent = formatarDataBR(m.data);
+        det.append(tag, dataTxt); info.append(titulo, det); esq.append(ico, info);
 
-        const donoTag = document.createElement('span');
-        donoTag.className = 'carteira-dono';
-        donoTag.style.backgroundColor = temaDono.fundo;
-        donoTag.style.color = temaDono.texto;
-        donoTag.textContent = pDono.nome;
+        const dir = document.createElement('div'); dir.className = 'item-dir';
+        const val = document.createElement('span');
+        const sinal = m.tipo === 'entrada' ? '+ ' : (m.tipo === 'saida' ? '- ' : '');
+        val.className = 'item-valor ' + (m.tipo === 'entrada' ? 'val-pos' : (m.tipo === 'saida' ? 'val-neg' : 'val-transf'));
+        val.textContent = sinal + formatarReal(m.valor);
+        dir.appendChild(val);
 
-        info.appendChild(nome);
-        info.appendChild(donoTag);
-        esq.appendChild(ico);
-        esq.appendChild(info);
-
-        const dir = document.createElement('div');
-        dir.className = 'carteira-dir';
-
-        const saldo = document.createElement('span');
-        saldo.className = 'carteira-saldo';
-        saldo.textContent = formatarReal(c.saldo);
-
-        const btnLapis = document.createElement('button');
-        btnLapis.type = 'button';
-        btnLapis.className = 'btn-lapis';
-        btnLapis.title = 'Editar saldo ou nome';
-        btnLapis.textContent = '✏️';
-        btnLapis.onclick = () => abrirModalEditarCarteira(c.id);
-
-        dir.appendChild(saldo);
-        dir.appendChild(btnLapis);
-
-        card.appendChild(esq);
-        card.appendChild(dir);
-        container.appendChild(card);
+        if (!somenteLeitura) {
+          const btnDel = document.createElement('button'); btnDel.type = 'button'; btnDel.className = 'btn-mini-acao'; btnDel.textContent = '🗑️';
+          btnDel.onclick = () => excluirMovimentacao(m.id);
+          dir.appendChild(btnDel);
+        }
+        row.append(esq, dir); cont.appendChild(row);
       });
     }
 
-    function desenharMovimentacoes(visao) {
-      const filtradas = visao === 'casal'
-        ? movimentacoesExemplo
-        : movimentacoesExemplo.filter(item => item.dono === visao);
-
-      const container = document.getElementById('lista-movimentacoes');
-      container.innerHTML = '';
-
-      filtradas.forEach(item => {
-        const pDono = config[item.dono];
-        const temaDono = PALETA[pDono.cor] || PALETA.azul;
-
-        const row = document.createElement('div');
-        row.className = 'item-mov';
-
-        const esq = document.createElement('div');
-        esq.className = 'item-esq';
-
-        const ico = document.createElement('div');
-        ico.className = 'item-ico';
-        ico.style.backgroundColor = temaDono.fundo;
-        ico.textContent = item.icone;
-
-        const info = document.createElement('div');
-        info.style.minWidth = '0';
-
-        const nome = document.createElement('p');
-        nome.className = 'item-nome';
-        nome.textContent = item.titulo;
-
-        const detalhe = document.createElement('div');
-        detalhe.className = 'item-detalhe';
-
-        const tag = document.createElement('span');
-        tag.className = 'etiqueta';
-        tag.style.backgroundColor = temaDono.fundo;
-        tag.style.color = temaDono.texto;
-        tag.textContent = pDono.nome;
-
-        const data = document.createElement('span');
-        data.textContent = item.data;
-
-        detalhe.appendChild(tag);
-        detalhe.appendChild(data);
-        info.appendChild(nome);
-        info.appendChild(detalhe);
-        esq.appendChild(ico);
-        esq.appendChild(info);
-
-        const val = document.createElement('p');
-        val.className = 'item-valor ' + (item.tipo === 'entrada' ? 'val-pos' : 'val-neg');
-        val.textContent = item.valor;
-
-        row.appendChild(esq);
-        row.appendChild(val);
-        container.appendChild(row);
-      });
-    }
-
-    /* ========================
-       CONTROLE DO MODAL DA CARTEIRA
-       ======================== */
-    function preencherSelectDonos(donoPadrao) {
-      const select = document.getElementById('select-dono-carteira');
-      select.innerHTML = '';
-      ['p1', 'p2'].forEach(chave => {
-        const opt = document.createElement('option');
-        opt.value = chave;
-        opt.textContent = `${config[chave].icone} ${config[chave].nome}`;
-        if (chave === donoPadrao) opt.selected = true;
-        select.appendChild(opt);
+    /* MODAL CARTEIRAS */
+    function preencherSelectDonos(selId, padrao) {
+      const sel = document.getElementById(selId); sel.innerHTML = '';
+      ['p1', 'p2'].forEach(k => {
+        const o = document.createElement('option'); o.value = k; o.textContent = `${config[k].icone} ${config[k].nome}`;
+        if (k === padrao) o.selected = true;
+        sel.appendChild(o);
       });
     }
 
     function desenharIconesModal() {
-      const grid = document.getElementById('grid-icones-carteira');
-      grid.innerHTML = '';
+      const g = document.getElementById('grid-icones-carteira'); g.innerHTML = '';
       ICONES_CARTEIRA.forEach(ico => {
-        const btn = document.createElement('button');
-        btn.type = 'button';
-        btn.className = 'ico-opcao' + (iconeSelecionadoModal === ico ? ' selecionado' : '');
-        btn.textContent = ico;
-        btn.onclick = () => {
-          iconeSelecionadoModal = ico;
-          desenharIconesModal();
-        };
-        grid.appendChild(btn);
+        const b = document.createElement('button'); b.type = 'button';
+        b.className = 'ico-opcao' + (iconeSelecionadoModal === ico ? ' selecionado' : '');
+        b.textContent = ico; b.onclick = () => { iconeSelecionadoModal = ico; desenharIconesModal(); };
+        g.appendChild(b);
       });
     }
 
     function abrirModalNovaCarteira() {
       idCarteiraEditando = null;
       document.getElementById('modal-titulo').textContent = '➕ Nova Carteira';
-      preencherSelectDonos(visaoAtual === 'p2' ? 'p2' : 'p1');
+      preencherSelectDonos('select-dono-carteira', visaoAtual === 'p2' ? 'p2' : 'p1');
       document.getElementById('input-nome-carteira').value = '';
       document.getElementById('input-saldo-carteira').value = '0,00';
-      iconeSelecionadoModal = '💳';
-      desenharIconesModal();
+      iconeSelecionadoModal = '💳'; desenharIconesModal();
       document.getElementById('btn-excluir-carteira').classList.add('escondido');
       document.getElementById('modal-carteira').classList.remove('escondido');
     }
 
     function abrirModalEditarCarteira(id) {
-      const cart = carteiras.find(c => c.id === id);
-      if (!cart) return;
-
+      const c = carteiras.find(x => x.id === id); if (!c) return;
       idCarteiraEditando = id;
       document.getElementById('modal-titulo').textContent = '✏️ Editar Carteira';
-      preencherSelectDonos(cart.dono);
-      document.getElementById('input-nome-carteira').value = cart.nome;
-      document.getElementById('input-saldo-carteira').value = Number(cart.saldo || 0).toFixed(2).replace('.', ',');
-      iconeSelecionadoModal = cart.icone || '💳';
-      desenharIconesModal();
+      preencherSelectDonos('select-dono-carteira', c.dono);
+      document.getElementById('input-nome-carteira').value = c.nome;
+      document.getElementById('input-saldo-carteira').value = Number(c.saldo || 0).toFixed(2).replace('.', ',');
+      iconeSelecionadoModal = c.icone || '💳'; desenharIconesModal();
       document.getElementById('btn-excluir-carteira').classList.remove('escondido');
       document.getElementById('modal-carteira').classList.remove('escondido');
     }
 
-    function fecharModalCarteira() {
-      document.getElementById('modal-carteira').classList.add('escondido');
-    }
-
-    function fecharSeClicarFora(evento) {
-      if (evento.target.id === 'modal-carteira') {
-        fecharModalCarteira();
-      }
-    }
+    function fecharModalCarteira() { document.getElementById('modal-carteira').classList.add('escondido'); }
 
     function salvarCarteiraModal() {
       const dono = document.getElementById('select-dono-carteira').value;
       const nome = document.getElementById('input-nome-carteira').value.trim();
-      const saldoTexto = document.getElementById('input-saldo-carteira').value;
-      const saldoNum = lerValorMonetario(saldoTexto);
-
-      if (!nome) {
-        mostrarAviso('Coloque um nome para a carteira 😊');
-        return;
-      }
+      const saldo = lerValorMonetario(document.getElementById('input-saldo-carteira').value);
+      if (!nome) return mostrarAviso('Coloque um nome para a carteira 😊');
 
       if (idCarteiraEditando) {
-        const idx = carteiras.findIndex(c => c.id === idCarteiraEditando);
-        if (idx !== -1) {
-          carteiras[idx] = {
-            ...carteiras[idx],
-            dono: dono,
-            nome: nome,
-            saldo: saldoNum,
-            icone: iconeSelecionadoModal
-          };
-        }
-        mostrarAviso('✅ Saldo atualizado!');
+        const i = carteiras.findIndex(c => c.id === idCarteiraEditando);
+        if (i !== -1) carteiras[i] = { ...carteiras[i], dono, nome, saldo, icone: iconeSelecionadoModal };
+        mostrarAviso('✅ Carteira atualizada!');
       } else {
-        carteiras.push({
-          id: 'c_' + Date.now(),
-          dono: dono,
-          nome: nome,
-          saldo: saldoNum,
-          icone: iconeSelecionadoModal
-        });
-        mostrarAviso('✅ Nova carteira adicionada!');
+        carteiras.push({ id: 'c_' + Date.now(), dono, nome, saldo, icone: iconeSelecionadoModal });
+        mostrarAviso('✅ Nova carteira criada!');
       }
-
-      salvarCarteirasNoAparelho();
-      fecharModalCarteira();
-      mudarVisao(visaoAtual);
+      salvarLocal('ukeah_carteiras', carteiras);
+      fecharModalCarteira(); mudarVisao(visaoAtual);
     }
 
     function excluirCarteiraModal() {
-      if (!idCarteiraEditando) return;
-      if (!confirm('Tem certeza que quer excluir esta carteira?')) return;
-
+      if (!idCarteiraEditando || !confirm('Tem certeza que quer excluir esta carteira?')) return;
       carteiras = carteiras.filter(c => c.id !== idCarteiraEditando);
-      salvarCarteirasNoAparelho();
-      fecharModalCarteira();
-      mudarVisao(visaoAtual);
+      salvarLocal('ukeah_carteiras', carteiras);
+      fecharModalCarteira(); mudarVisao(visaoAtual);
       mostrarAviso('🗑️ Carteira removida.');
+    }
+
+    /* MODAL LANÇAR */
+    function abrirModalLancar() {
+      if (!carteiras.length) return mostrarAviso('Crie pelo menos 1 carteira antes de lançar 😊');
+      preencherSelectDonos('lanc-dono', visaoAtual === 'p2' ? 'p2' : 'p1');
+
+      const selCat = document.getElementById('lanc-categoria'); selCat.innerHTML = '';
+      config.categorias.forEach(cat => {
+        const o = document.createElement('option'); o.value = cat; o.textContent = cat;
+        selCat.appendChild(o);
+      });
+
+      document.getElementById('lanc-valor').value = '';
+      document.getElementById('lanc-desc').value = '';
+      document.getElementById('lanc-data').value = hojeISO();
+
+      mudarTipoLanc('saida');
+      atualizarCarteirasLanc();
+      preencherCarteirasTransf();
+      document.getElementById('modal-lancar').classList.remove('escondido');
+    }
+
+    function fecharModalLancar() { document.getElementById('modal-lancar').classList.add('escondido'); }
+
+    function mudarTipoLanc(tipo) {
+      tipoLancAtual = tipo;
+      document.getElementById('btn-tipo-saida').className = 'btn-tipo-lanc' + (tipo === 'saida' ? ' ativo-saida' : '');
+      document.getElementById('btn-tipo-entrada').className = 'btn-tipo-lanc' + (tipo === 'entrada' ? ' ativo-entrada' : '');
+      document.getElementById('btn-tipo-transferencia').className = 'btn-tipo-lanc' + (tipo === 'transferencia' ? ' ativo-transf' : '');
+
+      const isTransf = tipo === 'transferencia';
+      document.getElementById('grupo-lanc-normal').classList.toggle('escondido', isTransf);
+      document.getElementById('grupo-lanc-transf').classList.toggle('escondido', !isTransf);
+    }
+
+    function atualizarCarteirasLanc() {
+      const dono = document.getElementById('lanc-dono').value;
+      const sel = document.getElementById('lanc-carteira'); sel.innerHTML = '';
+      const lista = carteiras.filter(c => c.dono === dono);
+      if (!lista.length) {
+        const o = document.createElement('option'); o.value = ''; o.textContent = 'Sem carteiras nesse perfil';
+        sel.appendChild(o); return;
+      }
+      lista.forEach(c => {
+        const o = document.createElement('option'); o.value = c.id;
+        o.textContent = `${c.icone} ${c.nome} (${formatarReal(c.saldo)})`;
+        sel.appendChild(o);
+      });
+    }
+
+    function preencherCarteirasTransf() {
+      ['lanc-origem', 'lanc-destino'].forEach((id, idx) => {
+        const sel = document.getElementById(id); sel.innerHTML = '';
+        carteiras.forEach(c => {
+          const o = document.createElement('option'); o.value = c.id;
+          o.textContent = `${c.icone} ${c.nome} — ${config[c.dono].nome} (${formatarReal(c.saldo)})`;
+          sel.appendChild(o);
+        });
+        if (idx === 1 && carteiras.length > 1) sel.selectedIndex = 1;
+      });
+    }
+
+    function salvarLancamento() {
+      const valor = lerValorMonetario(document.getElementById('lanc-valor').value);
+      const desc = document.getElementById('lanc-desc').value.trim();
+      const data = document.getElementById('lanc-data').value || hojeISO();
+
+      if (valor <= 0) return mostrarAviso('Digite um valor maior que zero 💰');
+
+      if (tipoLancAtual === 'transferencia') {
+        const origId = document.getElementById('lanc-origem').value;
+        const destId = document.getElementById('lanc-destino').value;
+        if (origId === destId) return mostrarAviso('Escolha carteiras diferentes para transferir 🔄');
+
+        const orig = carteiras.find(c => c.id === origId), dest = carteiras.find(c => c.id === destId);
+        if (!orig || !dest) return mostrarAviso('Carteiras inválidas.');
+
+        orig.saldo = Number(orig.saldo) - valor;
+        dest.saldo = Number(dest.saldo) + valor;
+
+        movimentacoes.push({
+          id: 'm_' + Date.now(), criadoEm: Date.now(), tipo: 'transferencia',
+          dono: orig.dono, donoDestino: dest.dono,
+          carteiraId: orig.id, carteiraNome: orig.nome,
+          carteiraDestinoId: dest.id, carteiraDestinoNome: dest.nome,
+          categoria: '🔄 Transferência', descricao: desc || `${orig.nome} → ${dest.nome}`, valor, data
+        });
+      } else {
+        const dono = document.getElementById('lanc-dono').value;
+        const cartId = document.getElementById('lanc-carteira').value;
+        const categoria = document.getElementById('lanc-categoria').value;
+        const cart = carteiras.find(c => c.id === cartId);
+        if (!cart) return mostrarAviso('Esse perfil não tem carteira selecionada!');
+
+        cart.saldo = tipoLancAtual === 'entrada' ? Number(cart.saldo) + valor : Number(cart.saldo) - valor;
+
+        movimentacoes.push({
+          id: 'm_' + Date.now(), criadoEm: Date.now(), tipo: tipoLancAtual, dono,
+          carteiraId: cart.id, carteiraNome: cart.nome,
+          categoria, descricao: desc || categoria, valor, data
+        });
+      }
+
+      salvarLocal('ukeah_carteiras', carteiras);
+      salvarLocal('ukeah_movimentacoes', movimentacoes);
+      fecharModalLancar();
+      mudarVisao(visaoAtual);
+      mostrarAviso('✅ Lançamento registrado!');
+    }
+
+    function excluirMovimentacao(id) {
+      if (!confirm('Excluir este lançamento? O valor voltará ao normal na carteira.')) return;
+      const m = movimentacoes.find(x => x.id === id);
+      if (m) {
+        if (m.tipo === 'transferencia') {
+          const orig = carteiras.find(c => c.id === m.carteiraId);
+          const dest = carteiras.find(c => c.id === m.carteiraDestinoId);
+          if (orig) orig.saldo = Number(orig.saldo) + Number(m.valor);
+          if (dest) dest.saldo = Number(dest.saldo) - Number(m.valor);
+        } else {
+          const cart = carteiras.find(c => c.id === m.carteiraId);
+          if (cart) cart.saldo = m.tipo === 'entrada' ? Number(cart.saldo) - Number(m.valor) : Number(cart.saldo) + Number(m.valor);
+        }
+      }
+      movimentacoes = movimentacoes.filter(x => x.id !== id);
+      salvarLocal('ukeah_carteiras', carteiras);
+      salvarLocal('ukeah_movimentacoes', movimentacoes);
+      mudarVisao(visaoAtual);
+      mostrarAviso('🗑️ Lançamento estornado!');
     }
 
     let timerToast;
     function mostrarAviso(msg) {
-      const toast = document.getElementById('toast');
-      toast.textContent = msg;
-      toast.classList.add('visivel');
+      const t = document.getElementById('toast');
+      t.textContent = msg; t.classList.add('visivel');
       clearTimeout(timerToast);
-      timerToast = setTimeout(() => toast.classList.remove('visivel'), 2800);
+      timerToast = setTimeout(() => t.classList.remove('visivel'), 2800);
     }
 
     window.addEventListener('DOMContentLoaded', () => {
       carregarDados();
       montarTelaEntrada();
-
       try {
-        let salvo = localStorage.getItem('ukeah_perfil');
-        if (salvo === 'ministro') salvo = 'p1';
-        if (salvo === 'dona') salvo = 'p2';
-
-        if (salvo === 'p1' || salvo === 'p2' || salvo === 'casal') {
+        let s = localStorage.getItem('ukeah_perfil');
+        if (s === 'ministro') s = 'p1';
+        if (s === 'dona') s = 'p2';
+        if (s === 'p1' || s === 'p2' || s === 'casal') {
           document.getElementById('lembrar-escolha').checked = true;
-          entrarNoPerfil(salvo);
+          entrarNoPerfil(s);
         }
       } catch (e) {}
     });
   </script>
-
 </body>
 </html>
