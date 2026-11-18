@@ -201,7 +201,7 @@
     .tela-painel {
       max-width: 680px;
       margin: 0 auto;
-      padding: 18px 16px 110px;
+      padding: 18px 16px 115px;
     }
 
     .topo-painel {
@@ -341,7 +341,7 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
-      margin-bottom: 22px;
+      margin-bottom: 24px;
     }
 
     .box-resumo {
@@ -370,12 +370,14 @@
       font-weight: 700;
     }
 
+    /* Cabeçalho de seções */
     .secao-cabecalho {
       display: flex;
       justify-content: space-between;
-      align-items: baseline;
+      align-items: center;
       margin-bottom: 12px;
       padding: 0 4px;
+      gap: 10px;
     }
 
     .secao-cabecalho h3 {
@@ -388,6 +390,109 @@
       color: var(--texto-suave);
     }
 
+    .btn-nova-carteira {
+      background-color: var(--lilas-fundo);
+      color: var(--lilas-forte);
+      border: 1px solid var(--lilas-borda);
+      border-radius: 14px;
+      padding: 6px 12px;
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.84rem;
+      font-weight: 700;
+      cursor: pointer;
+      white-space: nowrap;
+    }
+
+    /* Lista de Carteiras */
+    .lista-carteiras {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 26px;
+    }
+
+    .card-carteira {
+      background-color: var(--branco);
+      border-radius: 20px;
+      padding: 14px 16px;
+      box-shadow: var(--sombra);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .carteira-esq {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+    }
+
+    .carteira-ico {
+      width: 44px;
+      height: 44px;
+      border-radius: 15px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 21px;
+      flex-shrink: 0;
+    }
+
+    .carteira-info {
+      min-width: 0;
+    }
+
+    .carteira-nome {
+      font-size: 0.96rem;
+      font-weight: 700;
+      color: var(--texto);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .carteira-dono {
+      display: inline-block;
+      font-size: 0.75rem;
+      padding: 1px 8px;
+      border-radius: 10px;
+      margin-top: 2px;
+    }
+
+    .carteira-dir {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+    }
+
+    .carteira-saldo {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--texto);
+      white-space: nowrap;
+    }
+
+    .btn-lapis {
+      width: 38px;
+      height: 38px;
+      border-radius: 13px;
+      border: 1px solid #EAE6F3;
+      background-color: #FAF8FC;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .btn-lapis:active {
+      transform: scale(0.92);
+    }
+
+    /* Lista de Movimentações */
     .lista-mov {
       display: flex;
       flex-direction: column;
@@ -455,6 +560,143 @@
     .val-pos { color: var(--verde-forte); }
     .val-neg { color: var(--coral-forte); }
 
+    /* ========================
+       MODAL DA CARTEIRA (EDITAR / NOVA)
+       ======================== */
+    .modal-fundo {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(45, 49, 66, 0.45);
+      backdrop-filter: blur(4px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      z-index: 300;
+    }
+
+    .modal-caixa {
+      background-color: var(--branco);
+      width: 100%;
+      max-width: 440px;
+      border-radius: 26px;
+      padding: 22px 20px;
+      box-shadow: 0 20px 50px rgba(45, 49, 66, 0.25);
+    }
+
+    .modal-topo {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .modal-topo h3 {
+      font-size: 1.15rem;
+      font-weight: 800;
+    }
+
+    .btn-fechar-modal {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: none;
+      background-color: #F4F1FA;
+      color: var(--texto);
+      font-size: 1.1rem;
+      cursor: pointer;
+    }
+
+    .campo-modal {
+      margin-bottom: 14px;
+    }
+
+    .campo-modal label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--texto-suave);
+      margin-bottom: 6px;
+    }
+
+    .campo-modal input,
+    .campo-modal select {
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid #DFDAEC;
+      background-color: #FAF9FD;
+      font-family: 'Nunito', sans-serif;
+      font-size: 16px;
+      color: var(--texto);
+      outline: none;
+    }
+
+    .campo-modal input:focus,
+    .campo-modal select:focus {
+      border-color: var(--lilas-forte);
+      background-color: var(--branco);
+    }
+
+    .icones-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .ico-opcao {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      border: 2px solid #EFEBF7;
+      background-color: var(--branco);
+      font-size: 20px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .ico-opcao.selecionado {
+      border-color: var(--lilas-forte);
+      background-color: var(--lilas-fundo);
+    }
+
+    .modal-botoes {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-top: 18px;
+    }
+
+    .btn-modal-salvar {
+      width: 100%;
+      padding: 14px;
+      border: none;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #7C5CE6 0%, #9E7BF5 100%);
+      color: var(--branco);
+      font-family: 'Nunito', sans-serif;
+      font-size: 1rem;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    .btn-modal-excluir {
+      width: 100%;
+      padding: 11px;
+      border: none;
+      border-radius: 16px;
+      background-color: var(--coral-fundo);
+      color: var(--coral-forte);
+      font-family: 'Nunito', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+    }
+
     /* Barra inferior */
     .nav-inferior {
       position: fixed;
@@ -511,7 +753,7 @@
       opacity: 0;
       pointer-events: none;
       transition: all 0.25s ease;
-      z-index: 200;
+      z-index: 400;
       text-align: center;
       max-width: 90%;
     }
@@ -595,37 +837,47 @@
       "O casal está enriquecendo. Ou pelo menos tentando."
     </div>
 
+    <!-- Card Principal de Saldo (agora soma de verdade as carteiras!) -->
     <div class="card-saldo" id="card-saldo">
-      <p class="saldo-titulo" id="saldo-titulo">Saldo atual</p>
+      <p class="saldo-titulo" id="saldo-titulo">Saldo atual nas carteiras</p>
       <p class="saldo-numero" id="saldo-numero">R$ 0,00</p>
       <p class="saldo-sub" id="saldo-sub">Mais um mês sem falir: vitória!</p>
     </div>
 
     <div class="grid-resumo">
       <div class="box-resumo entradas">
-        <p>📈 Entrou</p>
+        <p>📈 Entrou (exemplo)</p>
         <strong id="valor-entradas">R$ 0,00</strong>
       </div>
       <div class="box-resumo saidas">
-        <p>🛍️ Saiu</p>
+        <p>🛍️ Saiu (exemplo)</p>
         <strong id="valor-saidas">R$ 0,00</strong>
       </div>
     </div>
 
+    <!-- SEÇÃO DE CARTEIRAS -->
+    <div class="secao-cabecalho">
+      <h3>💳 Carteiras &amp; Contas</h3>
+      <button type="button" class="btn-nova-carteira" onclick="abrirModalNovaCarteira()">➕ Nova</button>
+    </div>
+
+    <div class="lista-carteiras" id="lista-carteiras"></div>
+
+    <!-- MOVIMENTAÇÕES RECENTES -->
     <div class="secao-cabecalho">
       <h3>Movimentações recentes</h3>
-      <span>Valores de exemplo</span>
+      <span>Em breve reais no Lançar</span>
     </div>
 
     <div class="lista-mov" id="lista-movimentacoes"></div>
 
-    <!-- Barra Inferior já ligada no admin.html -->
+    <!-- Barra Inferior -->
     <nav class="nav-inferior">
       <button class="nav-btn ativo" onclick="mostrarAviso('Você já está no painel principal 💜')">
         <span class="ico">🏠</span>
         <span>Painel</span>
       </button>
-      <button class="nav-btn" onclick="mostrarAviso('Na próxima etapa vamos fazer o Lançar funcionar de verdade! 💸')">
+      <button class="nav-btn" onclick="mostrarAviso('Na próxima etapa vamos ligar o Lançar às suas carteiras! 💸')">
         <span class="ico">➕</span>
         <span>Lançar</span>
       </button>
@@ -637,10 +889,46 @@
 
   </section>
 
+  <!-- =========================
+       MODAL EDITAR / NOVA CARTEIRA
+       ========================= -->
+  <div id="modal-carteira" class="modal-fundo escondido" onclick="fecharSeClicarFora(event)">
+    <div class="modal-caixa">
+      <div class="modal-topo">
+        <h3 id="modal-titulo">Editar Carteira</h3>
+        <button type="button" class="btn-fechar-modal" onclick="fecharModalCarteira()">✕</button>
+      </div>
+
+      <div class="campo-modal" id="campo-dono-carteira">
+        <label for="select-dono-carteira">De quem é essa carteira?</label>
+        <select id="select-dono-carteira"></select>
+      </div>
+
+      <div class="campo-modal">
+        <label for="input-nome-carteira">Nome do banco ou carteira</label>
+        <input type="text" id="input-nome-carteira" placeholder="Ex: Nubank, Cofrinho...">
+      </div>
+
+      <div class="campo-modal">
+        <label for="input-saldo-carteira">Saldo atual (R$)</label>
+        <input type="text" inputmode="decimal" id="input-saldo-carteira" placeholder="Ex: 150,00">
+      </div>
+
+      <div class="campo-modal">
+        <label>Escolha um ícone</label>
+        <div class="icones-grid" id="grid-icones-carteira"></div>
+      </div>
+
+      <div class="modal-botoes">
+        <button type="button" class="btn-modal-salvar" onclick="salvarCarteiraModal()">💾 Salvar Carteira</button>
+        <button type="button" class="btn-modal-excluir escondido" id="btn-excluir-carteira" onclick="excluirCarteiraModal()">🗑️ Excluir esta carteira</button>
+      </div>
+    </div>
+  </div>
+
   <div id="toast" class="toast"></div>
 
   <script>
-    // Mesma paleta do admin.html para tudo combinar perfeito
     const PALETA = {
       azul:    { fundo: '#E6F2FF', borda: '#B8DCFF', texto: '#2B6CB0' },
       rosa:    { fundo: '#FFEAF2', borda: '#FFC2D9', texto: '#B83268' },
@@ -650,24 +938,80 @@
       pessego: { fundo: '#FFF0E5', borda: '#FFD1B3', texto: '#A84B18' }
     };
 
-    const PADRAO = {
+    const PADRAO_CONFIG = {
       p1: { nome: 'Ministro da Economia', subtitulo: 'Fiscal do orçamento', cor: 'azul', icone: '🎩', foto: '' },
       p2: { nome: 'Dona Encrenca', subtitulo: 'Aprovação presidencial', cor: 'rosa', icone: '👑', foto: '' }
     };
 
-    let config = {};
+    // Carteiras iniciais baseadas nas que vocês usam!
+    const CARTEIRAS_PADRAO = [
+      { id: 'c1', dono: 'p1', nome: 'Nubank', icone: '💜', saldo: 1200.00 },
+      { id: 'c2', dono: 'p1', nome: 'Mercado Pago', icone: '💙', saldo: 540.00 },
+      { id: 'c3', dono: 'p1', nome: 'PicPay', icone: '💚', saldo: 300.00 },
+      { id: 'c4', dono: 'p1', nome: 'InfinitePay', icone: '⚡', saldo: 400.00 },
+      { id: 'c5', dono: 'p1', nome: 'Cofrinho físico', icone: '🐷', saldo: 200.00 },
 
-    function carregarConfig() {
-      let salvo = null;
+      { id: 'c6', dono: 'p2', nome: 'Nubank', icone: '💜', saldo: 1100.00 },
+      { id: 'c7', dono: 'p2', nome: 'Banco Inter', icone: '🧡', saldo: 880.50 },
+      { id: 'c8', dono: 'p2', nome: 'Dinheiro físico', icone: '💵', saldo: 200.00 }
+    ];
+
+    const ICONES_CARTEIRA = ['💜', '🧡', '💙', '💚', '⚡', '🐷', '💵', '💳', '🏦', '🪙'];
+
+    let config = {};
+    let carteiras = [];
+    let visaoAtual = 'casal';
+    let idCarteiraEditando = null;
+    let iconeSelecionadoModal = '💳';
+
+    function formatarReal(valor) {
+      return Number(valor || 0).toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      });
+    }
+
+    function lerValorMonetario(texto) {
+      let limpo = String(texto || '').replace(/[^\d.,-]/g, '').trim();
+      if (!limpo) return 0;
+      if (limpo.includes(',') && limpo.includes('.')) {
+        limpo = limpo.replace(/\./g, '').replace(',', '.');
+      } else if (limpo.includes(',')) {
+        limpo = limpo.replace(',', '.');
+      }
+      const num = parseFloat(limpo);
+      return isNaN(num) ? 0 : num;
+    }
+
+    function carregarDados() {
+      // Config (apelidos, fotos, cores do admin.html)
+      let salvoConfig = null;
       try {
-        const texto = localStorage.getItem('ukeah_config');
-        if (texto) salvo = JSON.parse(texto);
+        const txt = localStorage.getItem('ukeah_config');
+        if (txt) salvoConfig = JSON.parse(txt);
       } catch (e) {}
 
       config = {
-        p1: { ...PADRAO.p1, ...(salvo && salvo.p1 ? salvo.p1 : {}) },
-        p2: { ...PADRAO.p2, ...(salvo && salvo.p2 ? salvo.p2 : {}) }
+        p1: { ...PADRAO_CONFIG.p1, ...(salvoConfig && salvoConfig.p1 ? salvoConfig.p1 : {}) },
+        p2: { ...PADRAO_CONFIG.p2, ...(salvoConfig && salvoConfig.p2 ? salvoConfig.p2 : {}) }
       };
+
+      // Carteiras
+      let salvasCarteiras = null;
+      try {
+        const txtC = localStorage.getItem('ukeah_carteiras');
+        if (txtC) salvasCarteiras = JSON.parse(txtC);
+      } catch (e) {}
+
+      carteiras = Array.isArray(salvasCarteiras) && salvasCarteiras.length > 0
+        ? salvasCarteiras
+        : JSON.parse(JSON.stringify(CARTEIRAS_PADRAO));
+    }
+
+    function salvarCarteirasNoAparelho() {
+      try {
+        localStorage.setItem('ukeah_carteiras', JSON.stringify(carteiras));
+      } catch (e) {}
     }
 
     function aplicarAvatar(elemento, perfil) {
@@ -698,19 +1042,15 @@
         document.getElementById(`sub-entrada-${chave}`).textContent = p.subtitulo;
         aplicarAvatar(document.getElementById(`foto-entrada-${chave}`), p);
 
-        // Atualiza também o texto das abas lá dentro
         document.getElementById(`aba-${chave}`).textContent = `${p.icone} ${p.nome}`;
       });
     }
 
-    // Valores fictícios (até conectarmos a planilha/lançamentos)
-    const movimentacoes = [
+    const movimentacoesExemplo = [
       { dono: 'p1', titulo: 'Salário', data: 'Ontem', valor: '+ R$ 5.200,00', tipo: 'entrada', icone: '💼' },
       { dono: 'p2', titulo: 'Salário + Freela', data: 'Ontem', valor: '+ R$ 4.300,00', tipo: 'entrada', icone: '✨' },
       { dono: 'p1', titulo: 'Supermercado', data: 'Hoje', valor: '- R$ 482,30', tipo: 'saida', icone: '🛒' },
-      { dono: 'p2', titulo: 'Cafeteria & Croissant', data: '16/11', valor: '- R$ 64,90', tipo: 'saida', icone: '☕' },
-      { dono: 'p1', titulo: 'Fatura do cartão', data: '14/11', valor: '- R$ 890,00', tipo: 'saida', icone: '💳' },
-      { dono: 'p2', titulo: 'Farmácia & Autocuidado', data: '12/11', valor: '- R$ 215,00', tipo: 'saida', icone: '🧴' }
+      { dono: 'p2', titulo: 'Cafeteria & Croissant', data: '16/11', valor: '- R$ 64,90', tipo: 'saida', icone: '☕' }
     ];
 
     function entrarNoPerfil(perfil) {
@@ -745,10 +1085,11 @@
     }
 
     function mudarVisao(visao) {
+      visaoAtual = visao;
       const temaP1 = PALETA[config.p1.cor] || PALETA.azul;
       const temaP2 = PALETA[config.p2.cor] || PALETA.rosa;
 
-      // Limpa estilo de todas as abas
+      // Atualiza abas
       ['p1', 'p2', 'casal'].forEach(id => {
         const btn = document.getElementById(`aba-${id}`);
         btn.className = 'aba-btn' + (visao === id ? ' ativa' : '');
@@ -756,7 +1097,6 @@
         btn.style.color = '';
       });
 
-      // Colore a aba ativa com a cor escolhida
       const abaAtiva = document.getElementById(`aba-${visao}`);
       if (visao === 'p1') {
         abaAtiva.style.backgroundColor = temaP1.fundo;
@@ -769,42 +1109,116 @@
         abaAtiva.style.color = PALETA.lilas.texto;
       }
 
-      // Atualiza textos e cor do card de saldo
+      // Filtra carteiras e calcula a soma REAL delas!
+      const carteirasFiltradas = visao === 'casal'
+        ? carteiras
+        : carteiras.filter(c => c.dono === visao);
+
+      const saldoTotalReal = carteirasFiltradas.reduce((soma, c) => soma + Number(c.saldo || 0), 0);
+
+      // Atualiza Card de Saldo
       const cardSaldo = document.getElementById('card-saldo');
+      document.getElementById('saldo-numero').textContent = formatarReal(saldoTotalReal);
 
       if (visao === 'p1') {
         document.getElementById('banner-humor').textContent = `"${config.p1.nome}, precisamos conversar sobre esse cartão..."`;
         cardSaldo.style.background = `linear-gradient(135deg, ${temaP1.fundo} 0%, #FFFFFF 100%)`;
         cardSaldo.style.borderColor = temaP1.borda;
-        document.getElementById('saldo-titulo').textContent = `Saldo individual — ${config.p1.nome}`;
-        document.getElementById('saldo-numero').textContent = 'R$ 2.640,00';
-        document.getElementById('saldo-sub').textContent = 'Gestão sob análise do tribunal doméstico.';
+        document.getElementById('saldo-titulo').textContent = `Saldo nas carteiras — ${config.p1.nome}`;
+        document.getElementById('saldo-sub').textContent = `${carteirasFiltradas.length} carteira(s) somada(s). Toque no ✏️ para ajustar.`;
         document.getElementById('valor-entradas').textContent = 'R$ 5.200,00';
         document.getElementById('valor-saidas').textContent = 'R$ 2.560,00';
       } else if (visao === 'p2') {
         document.getElementById('banner-humor').textContent = `"${config.p2.nome}: se estava na promoção, tecnicamente foi economia."`;
         cardSaldo.style.background = `linear-gradient(135deg, ${temaP2.fundo} 0%, #FFFFFF 100%)`;
         cardSaldo.style.borderColor = temaP2.borda;
-        document.getElementById('saldo-titulo').textContent = `Saldo individual — ${config.p2.nome}`;
-        document.getElementById('saldo-numero').textContent = 'R$ 2.180,50';
-        document.getElementById('saldo-sub').textContent = 'Orçamento aprovado por decreto presidencial.';
+        document.getElementById('saldo-titulo').textContent = `Saldo nas carteiras — ${config.p2.nome}`;
+        document.getElementById('saldo-sub').textContent = `${carteirasFiltradas.length} carteira(s) somada(s). Toque no ✏️ para ajustar.`;
         document.getElementById('valor-entradas').textContent = 'R$ 4.300,00';
         document.getElementById('valor-saidas').textContent = 'R$ 2.119,50';
       } else {
         document.getElementById('banner-humor').textContent = '"O casal está enriquecendo. Ou pelo menos tentando."';
         cardSaldo.style.background = `linear-gradient(135deg, ${temaP1.fundo} 0%, #F1EBFF 50%, ${temaP2.fundo} 100%)`;
         cardSaldo.style.borderColor = PALETA.lilas.borda;
-        document.getElementById('saldo-titulo').textContent = `Somatório (${config.p1.nome} + ${config.p2.nome})`;
-        document.getElementById('saldo-numero').textContent = 'R$ 4.820,50';
-        document.getElementById('saldo-sub').textContent = 'Mais um mês sem falir: vitória!';
+        document.getElementById('saldo-titulo').textContent = `Somatório Geral (${config.p1.nome} + ${config.p2.nome})`;
+        document.getElementById('saldo-sub').textContent = `Soma real de todas as ${carteirasFiltradas.length} carteiras do casal!`;
         document.getElementById('valor-entradas').textContent = 'R$ 9.500,00';
         document.getElementById('valor-saidas').textContent = 'R$ 4.679,50';
       }
 
-      // Renderiza movimentações filtradas com segurança
+      desenharCarteiras(carteirasFiltradas);
+      desenharMovimentacoes(visao);
+    }
+
+    function desenharCarteiras(lista) {
+      const container = document.getElementById('lista-carteiras');
+      container.innerHTML = '';
+
+      if (lista.length === 0) {
+        container.innerHTML = '<p style="text-align:center; color:var(--texto-suave); padding:16px;">Nenhuma carteira ainda. Toque em ➕ Nova!</p>';
+        return;
+      }
+
+      lista.forEach(c => {
+        const pDono = config[c.dono] || config.p1;
+        const temaDono = PALETA[pDono.cor] || PALETA.azul;
+
+        const card = document.createElement('div');
+        card.className = 'card-carteira';
+
+        const esq = document.createElement('div');
+        esq.className = 'carteira-esq';
+
+        const ico = document.createElement('div');
+        ico.className = 'carteira-ico';
+        ico.style.backgroundColor = temaDono.fundo;
+        ico.textContent = c.icone || '💳';
+
+        const info = document.createElement('div');
+        info.className = 'carteira-info';
+
+        const nome = document.createElement('p');
+        nome.className = 'carteira-nome';
+        nome.textContent = c.nome;
+
+        const donoTag = document.createElement('span');
+        donoTag.className = 'carteira-dono';
+        donoTag.style.backgroundColor = temaDono.fundo;
+        donoTag.style.color = temaDono.texto;
+        donoTag.textContent = pDono.nome;
+
+        info.appendChild(nome);
+        info.appendChild(donoTag);
+        esq.appendChild(ico);
+        esq.appendChild(info);
+
+        const dir = document.createElement('div');
+        dir.className = 'carteira-dir';
+
+        const saldo = document.createElement('span');
+        saldo.className = 'carteira-saldo';
+        saldo.textContent = formatarReal(c.saldo);
+
+        const btnLapis = document.createElement('button');
+        btnLapis.type = 'button';
+        btnLapis.className = 'btn-lapis';
+        btnLapis.title = 'Editar saldo ou nome';
+        btnLapis.textContent = '✏️';
+        btnLapis.onclick = () => abrirModalEditarCarteira(c.id);
+
+        dir.appendChild(saldo);
+        dir.appendChild(btnLapis);
+
+        card.appendChild(esq);
+        card.appendChild(dir);
+        container.appendChild(card);
+      });
+    }
+
+    function desenharMovimentacoes(visao) {
       const filtradas = visao === 'casal'
-        ? movimentacoes
-        : movimentacoes.filter(item => item.dono === visao);
+        ? movimentacoesExemplo
+        : movimentacoesExemplo.filter(item => item.dono === visao);
 
       const container = document.getElementById('lista-movimentacoes');
       container.innerHTML = '';
@@ -860,6 +1274,124 @@
       });
     }
 
+    /* ========================
+       CONTROLE DO MODAL DA CARTEIRA
+       ======================== */
+    function preencherSelectDonos(donoPadrao) {
+      const select = document.getElementById('select-dono-carteira');
+      select.innerHTML = '';
+      ['p1', 'p2'].forEach(chave => {
+        const opt = document.createElement('option');
+        opt.value = chave;
+        opt.textContent = `${config[chave].icone} ${config[chave].nome}`;
+        if (chave === donoPadrao) opt.selected = true;
+        select.appendChild(opt);
+      });
+    }
+
+    function desenharIconesModal() {
+      const grid = document.getElementById('grid-icones-carteira');
+      grid.innerHTML = '';
+      ICONES_CARTEIRA.forEach(ico => {
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'ico-opcao' + (iconeSelecionadoModal === ico ? ' selecionado' : '');
+        btn.textContent = ico;
+        btn.onclick = () => {
+          iconeSelecionadoModal = ico;
+          desenharIconesModal();
+        };
+        grid.appendChild(btn);
+      });
+    }
+
+    function abrirModalNovaCarteira() {
+      idCarteiraEditando = null;
+      document.getElementById('modal-titulo').textContent = '➕ Nova Carteira';
+      preencherSelectDonos(visaoAtual === 'p2' ? 'p2' : 'p1');
+      document.getElementById('input-nome-carteira').value = '';
+      document.getElementById('input-saldo-carteira').value = '0,00';
+      iconeSelecionadoModal = '💳';
+      desenharIconesModal();
+      document.getElementById('btn-excluir-carteira').classList.add('escondido');
+      document.getElementById('modal-carteira').classList.remove('escondido');
+    }
+
+    function abrirModalEditarCarteira(id) {
+      const cart = carteiras.find(c => c.id === id);
+      if (!cart) return;
+
+      idCarteiraEditando = id;
+      document.getElementById('modal-titulo').textContent = '✏️ Editar Carteira';
+      preencherSelectDonos(cart.dono);
+      document.getElementById('input-nome-carteira').value = cart.nome;
+      document.getElementById('input-saldo-carteira').value = Number(cart.saldo || 0).toFixed(2).replace('.', ',');
+      iconeSelecionadoModal = cart.icone || '💳';
+      desenharIconesModal();
+      document.getElementById('btn-excluir-carteira').classList.remove('escondido');
+      document.getElementById('modal-carteira').classList.remove('escondido');
+    }
+
+    function fecharModalCarteira() {
+      document.getElementById('modal-carteira').classList.add('escondido');
+    }
+
+    function fecharSeClicarFora(evento) {
+      if (evento.target.id === 'modal-carteira') {
+        fecharModalCarteira();
+      }
+    }
+
+    function salvarCarteiraModal() {
+      const dono = document.getElementById('select-dono-carteira').value;
+      const nome = document.getElementById('input-nome-carteira').value.trim();
+      const saldoTexto = document.getElementById('input-saldo-carteira').value;
+      const saldoNum = lerValorMonetario(saldoTexto);
+
+      if (!nome) {
+        mostrarAviso('Coloque um nome para a carteira 😊');
+        return;
+      }
+
+      if (idCarteiraEditando) {
+        const idx = carteiras.findIndex(c => c.id === idCarteiraEditando);
+        if (idx !== -1) {
+          carteiras[idx] = {
+            ...carteiras[idx],
+            dono: dono,
+            nome: nome,
+            saldo: saldoNum,
+            icone: iconeSelecionadoModal
+          };
+        }
+        mostrarAviso('✅ Saldo atualizado!');
+      } else {
+        carteiras.push({
+          id: 'c_' + Date.now(),
+          dono: dono,
+          nome: nome,
+          saldo: saldoNum,
+          icone: iconeSelecionadoModal
+        });
+        mostrarAviso('✅ Nova carteira adicionada!');
+      }
+
+      salvarCarteirasNoAparelho();
+      fecharModalCarteira();
+      mudarVisao(visaoAtual);
+    }
+
+    function excluirCarteiraModal() {
+      if (!idCarteiraEditando) return;
+      if (!confirm('Tem certeza que quer excluir esta carteira?')) return;
+
+      carteiras = carteiras.filter(c => c.id !== idCarteiraEditando);
+      salvarCarteirasNoAparelho();
+      fecharModalCarteira();
+      mudarVisao(visaoAtual);
+      mostrarAviso('🗑️ Carteira removida.');
+    }
+
     let timerToast;
     function mostrarAviso(msg) {
       const toast = document.getElementById('toast');
@@ -870,7 +1402,7 @@
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-      carregarConfig();
+      carregarDados();
       montarTelaEntrada();
 
       try {
