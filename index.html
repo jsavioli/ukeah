@@ -319,16 +319,19 @@
     </div>
   </div>
 
-  <!-- MODAL PAGAR FIXA -->
-  <div id="modal-pagar" class="modal-fundo escondido" onclick="if(event.target===this) fechar('modal-pagar')">
-    <div class="modal-caixa">
-      <div class="modal-topo"><h3 id="tit-pagar">Confirmar</h3><button class="btn-fechar" onclick="fechar('modal-pagar')">✕</button></div>
+<!-- MODAL PAGAR FIXA -->
+<div id="modal-pagar" class="modal-fundo escondido" onclick="if(event.target===this) fechar('modal-pagar')">
+  <div class="modal-caixa">
+    <div class="modal-topo"><h3 id="tit-pagar">Confirmar</h3><button class="btn-fechar" onclick="fechar('modal-pagar')">✕</button></div>
+    <label class="check-linha"><input type="checkbox" id="pagar-sem-saldo" onchange="$('pagar-campos-saldo').classList.toggle('escondido',this.checked)"><span>Apenas marcar como pago (não mexer no saldo)</span></label>
+    <div id="pagar-campos-saldo">
       <div class="campo"><label>Carteira</label><select id="pagar-cart"></select></div>
       <div class="campo"><label>Valor exato (R$)</label><input type="text" inputmode="decimal" id="pagar-val"></div>
-      <button class="btn-salvar" onclick="confirmarPagFixa()">✅ Confirmar</button>
     </div>
+    <button class="btn-salvar" onclick="confirmarPagFixa()">✅ Confirmar</button>
   </div>
-
+</div>
+  
   <!-- MODAL VOZ / IA -->
   <div id="modal-voz" class="modal-fundo escondido" onclick="if(event.target===this) fecharVoz()">
     <div class="modal-caixa">
@@ -795,25 +798,30 @@
       fixas = fixas.filter(x => x.id !== editFixaId);
       salvarLoc('ukeah_fixas', fixas); fechar('modal-fixa'); mudarVisao(visaoAtual); enviarPainel();
     }
-    function abrirModalPagar(id, parc) {
-      const f = fixas.find(x => x.id === id); if (!f) return;
-      const carts = carteiras.filter(c => c.dono === f.dono); if (!carts.length) return toast('Crie uma carteira nesse perfil');
-      pagFixaId = id; pagParc = parc || 0;
-      $('tit-pagar').textContent = (f.tipo === 'entrada' ? 'Receber: ' : 'Pagar: ') + f.titulo;
-      $('pagar-cart').innerHTML = ''; carts.forEach(c => { const o = el('option', '', `${c.icone} ${c.nome} (${fmt(c.saldo)})`); o.value = c.id; $('pagar-cart').appendChild(o); });
-      $('pagar-val').value = Number(f.valor).toFixed(2).replace('.', ','); $('modal-pagar').classList.remove('escondido');
-    }
-    function confirmarPagFixa() {
-      const f = fixas.find(x => x.id === pagFixaId), cart = carteiras.find(c => c.id === $('pagar-cart').value), val = lerVal($('pagar-val').value);
-      if (!f || !cart || val <= 0) return toast('Verifique os dados');
-      cart.saldo = f.tipo === 'entrada' ? Number(cart.saldo) + val : Number(cart.saldo) - val;
-      const hj = hoje(), dataU = hj.startsWith(mesAtual) ? `${hj} ${agora()}` : `${mesAtual}-${String(f.diaVencimento).padStart(2,'0')} ${agora()}`;
-      movs.push({ id: 'm_' + Date.now(), criadoEm: Date.now(), tipo: f.tipo, dono: f.dono, carteiraId: cart.id, carteiraNome: cart.nome, categoria: f.categoria, descricao: f.titulo + (f.parcelaTotal > 0 ? ` (${pagParc}/${f.parcelaTotal})` : ''), valor: val, data: dataU });
-      const ps = String(f.ultimoMesPago || '').split(',').map(x => x.trim()).filter(Boolean);
-      if (!ps.includes(mesAtual)) ps.push(mesAtual); f.ultimoMesPago = ps.join(',');
-      salvarLoc('ukeah_carteiras', carteiras); salvarLoc('ukeah_movimentacoes', movs); salvarLoc('ukeah_fixas', fixas);
-      fechar('modal-pagar'); mudarVisao(visaoAtual); toast('✅ Registrado!'); enviarPainel();
-    }
+function abrirModalPagar(id, parc) {
+   const f = fixas.find(x => x.id === id); if (!f) return;
+   const carts = carteiras.filter(c => c.dono === f.dono);
+   pagFixaId = id; pagParc = parc || 0;
+   $('pagar-sem-saldo').checked = !carts.length;
+   $('pagar-campos-saldo').classList.toggle('escondido', !carts.length);
+   $('tit-pagar').textContent = (f.tipo === 'entrada' ? 'Receber: ' : 'Pagar: ') + f.titulo;
+   $('pagar-cart').innerHTML = ''; carts.forEach(c => { const o = el('option', '', `${c.icone} ${c.nome} (${fmt(c.saldo)})`); o.value = c.id; $('pagar-cart').appendChild(o); });
+   $('pagar-val').value = Number(f.valor).toFixed(2).replace('.', ','); $('modal-pagar').classList.remove('escondido');
+ }
+ function confirmarPagFixa() {
+   const f = fixas.find(x => x.id === pagFixaId); if (!f) return;
+   if (!$('pagar-sem-saldo').checked) {
+     const cart = carteiras.find(c => c.id === $('pagar-cart').value), val = lerVal($('pagar-val').value);
+     if (!cart || val <= 0) return toast('Verifique os dados');
+     cart.saldo = f.tipo === 'entrada' ? Number(cart.saldo) + val : Number(cart.saldo) - val;
+     const hj = hoje(), dataU = hj.startsWith(mesAtual) ? `${hj} ${agora()}` : `${mesAtual}-${String(f.diaVencimento).padStart(2,'0')} ${agora()}`;
+     movs.push({ id: 'm_' + Date.now(), criadoEm: Date.now(), tipo: f.tipo, dono: f.dono, carteiraId: cart.id, carteiraNome: cart.nome, categoria: f.categoria, descricao: f.titulo + (f.parcelaTotal > 0 ? ` (${pagParc}/${f.parcelaTotal})` : ''), valor: val, data: dataU });
+   }
+   const ps = String(f.ultimoMesPago || '').split(',').map(x => x.trim()).filter(Boolean);
+   if (!ps.includes(mesAtual)) ps.push(mesAtual); f.ultimoMesPago = ps.join(',');
+   salvarLoc('ukeah_carteiras', carteiras); salvarLoc('ukeah_movimentacoes', movs); salvarLoc('ukeah_fixas', fixas);
+   fechar('modal-pagar'); mudarVisao(visaoAtual); toast('✅ Marcado!'); enviarPainel();
+ }
 
     /* VOZ / IA */
     function abrirModalVoz() { $('voz-txt').value = ''; $('modal-voz').classList.remove('escondido'); }
